@@ -4,3 +4,11 @@ export interface UserInput {
   dokladnosc: number;
   maxIter: number;
 }
+
+export type InputChangeEvent = React.ChangeEvent<HTMLInputElement>;
+
+export type BisectionResult = {
+  root: number;
+  iterations: number;
+  success: boolean;
+};
