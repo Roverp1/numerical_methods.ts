@@ -1,11 +1,12 @@
-import PageBisection from "../pages/PageBisection/PageBisection";
+import { Outlet } from "react-router-dom";
 
 import "./App.scss";
 
 const App = () => {
   return (
     <>
-      <PageBisection />
+      <header>header</header>
+      <Outlet />
     </>
   );
 };
