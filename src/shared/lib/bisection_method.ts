@@ -6,7 +6,9 @@ const func = (x: number) => {
 };
 
 const bisection_method = (userInput: UserInput): BisectionResult => {
-  let { xp, xk, dokladnosc, maxIter } = userInput;
+  let { xp, xk } = userInput;
+  const { dokladnosc, maxIter } = userInput;
+
   let fp = func(xp);
   let x0: number = 0;
   let f0: number;

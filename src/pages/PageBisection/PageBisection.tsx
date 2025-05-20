@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 
+import SectionResults from "./SectionResults/SectionResults";
+
 import bisection_method from "../../shared/lib/bisection_method";
 
 import type { UserInput } from "../../shared/types";
@@ -60,6 +62,8 @@ const PageBisection = () => {
           <input onChange={onHandleChange} name="maxIter" type="number" />
         </fieldset>
       </form>
+
+      <SectionResults result={result} />
     </main>
   );
 };
