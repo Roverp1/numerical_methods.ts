@@ -32,25 +32,27 @@ const Header = () => {
   const location = useLocation();
 
   const itemClassName = (item: NavItem) => {
-    return classNames("nav__list-item", location.pathname === item.path ? "active" : "");
+    return classNames("item", location.pathname === item.path ? "active" : "");
   };
   return (
     <header className="header">
-      <nav className="header__nav nav">
-        <ul className="nav__list">
-          {navItems.map((item, index) => (
-            <li className={itemClassName(item)} key={index}>
-              <Link className="nav__list-item-link" to={item.path}>
-                {item.text}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </nav>
+      <div className="header__wrapper container">
+        <nav className="header__nav">
+          <ul className="list">
+            {navItems.map((item, index) => (
+              <li className={itemClassName(item)} key={index}>
+                <Link className="link" to={item.path}>
+                  {item.text}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
 
-      <div className="header__language-switching">
-        <button>PL</button>
-        <button>UK</button>
+        <div className="header__language-switching">
+          <button>PL</button>
+          <button>EN</button>
+        </div>
       </div>
     </header>
   );
