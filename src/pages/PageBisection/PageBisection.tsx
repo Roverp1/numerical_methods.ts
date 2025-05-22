@@ -46,36 +46,34 @@ const PageBisection = () => {
 
   return (
     <main className="page-bisection">
-      <div className="grid-layout">
-        <div className="col col-1">
-          <div className="box box-1">test1</div>
-          <div className="box box-3">test3</div>
-        </div>
-        <div className="col col-2">
-          <div className="box box-2">test2</div>
-          <div className="box box-4">test4</div>
-        </div>
+      <div className="col col-1">
+        <div className="box box-1">test1</div>
+        <div className="box box-3">test3</div>
+      </div>
+      <div className="col col-2">
+        <div className="box box-2">test2</div>
+        <div className="box box-4">test4</div>
       </div>
 
       {/* <form action="" className="page-bisection__function"></form> */}
 
-      {/* <form className="page-bisection__given-data"> */}
-      {/* <fieldset> */}
-      {/*   <legend>Wprowadź swoje dane</legend> */}
-      {/**/}
-      {/*   <label>x początkowy:</label> */}
-      {/*   <input onChange={onHandleChange} name="xp" type="number" /> */}
-      {/**/}
-      {/*   <label>x końcowy:</label> */}
-      {/*   <input onChange={onHandleChange} name="xk" type="number" /> */}
-      {/**/}
-      {/*   <label>dokładność:</label> */}
-      {/*   <input onChange={onHandleChange} name="dokladnosc" type="number" /> */}
-      {/**/}
-      {/*   <label>Maksymalna liczba iteracji:</label> */}
-      {/*   <input onChange={onHandleChange} name="maxIter" type="number" /> */}
-      {/* </fieldset> */}
-      {/* </form> */}
+      <form className="page-bisection__given-data">
+        <fieldset>
+          <legend>Wprowadź swoje dane</legend>
+
+          <label>x początkowy:</label>
+          <input onChange={onHandleChange} name="xp" type="number" />
+
+          <label>x końcowy:</label>
+          <input onChange={onHandleChange} name="xk" type="number" />
+
+          <label>dokładność:</label>
+          <input onChange={onHandleChange} name="dokladnosc" type="number" />
+
+          <label>Maksymalna liczba iteracji:</label>
+          <input onChange={onHandleChange} name="maxIter" type="number" />
+        </fieldset>
+      </form>
 
       <SectionResults result={result} />
     </main>
