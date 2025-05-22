@@ -2,34 +2,56 @@
   background-color: #94a3b8;
   background: linear-gradient(245deg, #d1d5db, #a1a1aa);
 
-  display: flex;
-  justify-content: space-between;
+  position: relative;
+  left: 50%;
+  width: 100vw;
 
+  margin-left: -50vw;
   padding: 1.5rem 0;
-  &__nav {
+
+  &__wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
   }
 
-  .nav {
-    &__list {
+  &__nav {
+    .list {
       display: flex;
       gap: 2.5rem;
 
-      &-item {
-        // transition: transform 0.1s ease;
-        color: rgba(0, 0, 0, 0.6);
-        // transition: scale 0.1s ease;/
+      .item {
+        color: rgba(0, 0, 0, 0.9);
+        padding: 0.3rem 0.5rem;
+        border: 8px double #71717a;
+        border-radius: 0.8rem;
+
         transition: color 0.1s ease;
 
         &:hover {
-          // transform: scale(1.05);
-          scale: 1.02;
           color: rgba(0, 0, 0, 1);
         }
 
-        &:focus {
-          color: rgba(0, 0, 0, 1);
+        &.active {
+          border: 8px solid #71717a;
+          background-color: #71717a;
         }
       }
+    }
+  }
+
+  &__language-switching {
+    display: flex;
+    gap: 2rem;
+    width: auto;
+
+    button {
+      height: 100%;
+      aspect-ratio: 1 / 1;
+      font-size: 1.6rem;
+
+      border: 8px double #71717a;
+      border-radius: 0.8rem;
     }
   }
 }
