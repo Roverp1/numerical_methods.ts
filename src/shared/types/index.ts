@@ -1,4 +1,4 @@
-export interface UserInput {
+export interface BisectionUserInput {
   xp: number;
   xk: number;
   dokladnosc: number;

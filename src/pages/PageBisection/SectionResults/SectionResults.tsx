@@ -9,7 +9,7 @@ const SectionResults = ({ result }: { result: BisectionResult | null }) => {
 
   return (
     <section className="section-results">
-      <div>{success}</div>
+      {/* <div>{success}</div> */}
       <div>{root}</div>
       <div>{iterations}</div>
     </section>

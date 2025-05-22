@@ -2,16 +2,16 @@ import { useState, useEffect } from "react";
 
 import SectionResults from "./SectionResults/SectionResults";
 
-import bisection_method from "../../shared/lib/bisection_method";
+import bisectionMethod from "../../shared/lib/bisection_method";
 
-import type { UserInput } from "../../shared/types";
+import type { BisectionUserInput } from "../../shared/types";
 import type { InputChangeEvent } from "../../shared/types";
 import type { BisectionResult } from "../../shared/types";
 
 import "./PageBisection.scss";
 
 const PageBisection = () => {
-  const [userInput, setUserInput] = useState<UserInput>({
+  const [userInput, setUserInput] = useState<BisectionUserInput>({
     xp: 0,
     xk: 0,
     dokladnosc: 0,
@@ -22,7 +22,7 @@ const PageBisection = () => {
 
   useEffect(() => {
     if (userInput.dokladnosc > 0 && userInput.maxIter > 0) {
-      const res = bisection_method(userInput);
+      const res = bisectionMethod(userInput);
       setResult(res);
     }
   }, [userInput]);
@@ -34,6 +34,7 @@ const PageBisection = () => {
   const onHandleChange = (e: InputChangeEvent) => {
     const changedField = e.target.name; // data from attribute name in input
     const value = e.target.value;
+    console.log("value:", value);
 
     setUserInput((prev) => ({
       ...prev,

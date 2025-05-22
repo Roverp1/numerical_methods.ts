@@ -1,11 +1,11 @@
-import type { UserInput } from "../types";
+import type { BisectionUserInput } from "../types";
 import type { BisectionResult } from "../types";
 
 const func = (x: number) => {
   return 7 - x * x;
 };
 
-const bisection_method = (userInput: UserInput): BisectionResult => {
+const bisectionMethod = (userInput: BisectionUserInput): BisectionResult => {
   let { xp, xk } = userInput;
   const { dokladnosc, maxIter } = userInput;
 
@@ -36,4 +36,4 @@ const bisection_method = (userInput: UserInput): BisectionResult => {
   return { root: x0, iterations: maxIter, success: true };
 };
 
-export default bisection_method;
+export default bisectionMethod;
