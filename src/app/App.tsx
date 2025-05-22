@@ -6,10 +6,10 @@ import "./App.scss";
 
 const App = () => {
   return (
-    <>
+    <div className="container">
       <Header />
       <Outlet />
-    </>
+    </div>
   );
 };
 
