@@ -1,0 +1,35 @@
+.header {
+  background-color: #94a3b8;
+  background: linear-gradient(245deg, #d1d5db, #a1a1aa);
+
+  display: flex;
+  justify-content: space-between;
+
+  padding: 1.5rem 0;
+  &__nav {
+  }
+
+  .nav {
+    &__list {
+      display: flex;
+      gap: 2.5rem;
+
+      &-item {
+        // transition: transform 0.1s ease;
+        color: rgba(0, 0, 0, 0.6);
+        // transition: scale 0.1s ease;/
+        transition: color 0.1s ease;
+
+        &:hover {
+          // transform: scale(1.05);
+          scale: 1.02;
+          color: rgba(0, 0, 0, 1);
+        }
+
+        &:focus {
+          color: rgba(0, 0, 0, 1);
+        }
+      }
+    }
+  }
+}
