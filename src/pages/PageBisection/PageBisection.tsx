@@ -57,7 +57,7 @@ const PageBisection = () => {
 
       {/* <form action="" className="page-bisection__function"></form> */}
 
-      <form className="page-bisection__given-data">
+      {/* <form className="page-bisection__given-data">
         <fieldset>
           <legend>Wprowadź swoje dane</legend>
 
@@ -73,7 +73,7 @@ const PageBisection = () => {
           <label>Maksymalna liczba iteracji:</label>
           <input onChange={onHandleChange} name="maxIter" type="number" />
         </fieldset>
-      </form>
+      </form> */}
 
       <SectionResults result={result} />
     </main>

@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import classNames from "classnames";
 
+import ButtonDescription from "../../shared/buttons/ButtonDescription/ButtonDescription";
+
 import "./Header.scss";
 
 type NavItem = {
@@ -48,6 +50,8 @@ const Header = () => {
             ))}
           </ul>
         </nav>
+
+        <ButtonDescription />
 
         <div className="header__language-switching">
           <button>PL</button>
