@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import classNames from "classnames";
 
-import ButtonDescription from "../../shared/buttons/ButtonDescription/ButtonDescription";
+import ButtonDescription from "../../entities/modal/ui/ButtonDescription/ButtonDescription";
 
 import "./Header.scss";
 
