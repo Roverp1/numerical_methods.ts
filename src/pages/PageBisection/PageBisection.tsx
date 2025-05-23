@@ -1,48 +1,48 @@
-import { useState, useEffect } from "react";
+// import { useState, useEffect } from "react";
 
-import SectionResults from "./SectionResults/SectionResults";
+// import SectionResults from "./SectionResults/SectionResults";
 
-import bisectionMethod from "../../shared/lib/bisection_method";
+// import bisectionMethod from "../../shared/lib/bisection_method";
 
-import type { BisectionUserInput } from "../../shared/types";
-import type { InputChangeEvent } from "../../shared/types";
-import type { BisectionResult } from "../../shared/types";
+// import type { BisectionUserInput } from "../../shared/types";
+// import type { InputChangeEvent } from "../../shared/types";
+// import type { BisectionResult } from "../../shared/types";
 
 import "./PageBisection.scss";
 
 const PageBisection = () => {
-  const [userInput, setUserInput] = useState<BisectionUserInput>({
-    xp: 0,
-    xk: 0,
-    dokladnosc: 0,
-    maxIter: 0,
-  });
+  // const [userInput, setUserInput] = useState<BisectionUserInput>({
+  //   xp: 0,
+  //   xk: 0,
+  //   dokladnosc: 0,
+  //   maxIter: 0,
+  // });
 
-  const [result, setResult] = useState<BisectionResult | null>(null);
+  // const [result, setResult] = useState<BisectionResult | null>(null);
 
-  useEffect(() => {
-    if (userInput.dokladnosc > 0 && userInput.maxIter > 0) {
-      const res = bisectionMethod(userInput);
-      setResult(res);
-    }
-  }, [userInput]);
+  // useEffect(() => {
+  //   if (userInput.dokladnosc > 0 && userInput.maxIter > 0) {
+  //     const res = bisectionMethod(userInput);
+  //     setResult(res);
+  //   }
+  // }, [userInput]);
 
-  console.log("result: " + result?.success);
-  console.log("result: " + result?.root);
-  console.log("result: " + result?.iterations);
+  // console.log("result: " + result?.success);
+  // console.log("result: " + result?.root);
+  // console.log("result: " + result?.iterations);
 
-  const onHandleChange = (e: InputChangeEvent) => {
-    const changedField = e.target.name; // data from attribute name in input
-    const value = e.target.value;
-    console.log("value:", value);
+  // const onHandleChange = (e: InputChangeEvent) => {
+  //   const changedField = e.target.name; // data from attribute name in input
+  //   const value = e.target.value;
+  //   console.log("value:", value);
 
-    setUserInput((prev) => ({
-      ...prev,
-      [changedField]: value,
-    }));
-  };
+  //   setUserInput((prev) => ({
+  //     ...prev,
+  //     [changedField]: value,
+  //   }));
+  // };
 
-  console.log(userInput);
+  // console.log(userInput);
 
   return (
     <main className="page-bisection">
@@ -107,7 +107,9 @@ const PageBisection = () => {
 
       {/* <form action="" className="page-bisection__function"></form> */}
 
+
       <SectionResults result={result} />
+
     </main>
   );
 };

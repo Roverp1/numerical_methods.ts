@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import classNames from "classnames";
 
+import ButtonDescription from "../../entities/modal/ui/ButtonDescription/ButtonDescription";
+
 import "./Header.scss";
 
 type NavItem = {
@@ -36,7 +38,7 @@ const Header = () => {
   };
   return (
     <header className="header">
-      <div className="header__wrapper container">
+      <div className="header__wrapper">
         <nav className="header__nav">
           <ul className="list">
             {navItems.map((item, index) => (
@@ -48,6 +50,8 @@ const Header = () => {
             ))}
           </ul>
         </nav>
+
+        <ButtonDescription />
 
         <div className="header__language-switching">
           <button>PL</button>
