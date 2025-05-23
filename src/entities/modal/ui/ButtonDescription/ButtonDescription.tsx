@@ -1,5 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
+import classNames from "classnames";
 
 import { closeModal, openModal } from "../../model/slice";
 import { selectIsModalOpen } from "../../model/selectors";
@@ -25,10 +26,12 @@ const ButtonDescription = () => {
     }
   };
 
+  const buttonClassName = classNames("button-description", isModalOpen ? "active" : "");
+
   return (
     <>
-      <button className="button-description" onClick={toggleModal}>
-        button
+      <button className={buttonClassName} onClick={toggleModal}>
+        Jak to działa?
       </button>
     </>
   );
