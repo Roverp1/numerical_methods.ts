@@ -36,7 +36,7 @@ const Header = () => {
   };
   return (
     <header className="header">
-      <div className="header__wrapper container">
+      <div className="header__wrapper">
         <nav className="header__nav">
           <ul className="list">
             {navItems.map((item, index) => (
