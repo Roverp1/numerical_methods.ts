@@ -14,16 +14,75 @@
 
     &.col-2 {
       grid-template-rows: 25% 75%;
+
+      .box-2 {
+        padding: 1rem;
+
+        form {
+
+          fieldset {
+            $input-min-width: 21rem;
+
+            display: grid;
+            align-items: end;
+            grid-template-columns: repeat(auto-fit, minmax($input-min-width, 1fr));
+            gap: 2rem 1.2rem;
+
+            padding: 2rem 1rem;
+
+            label {
+              position: relative;
+
+              display: flex;
+              flex-direction: column;
+              gap: 0.2rem;
+
+              span {
+                position: absolute;
+                left: 1rem;
+                top: -1rem;
+
+                font-size: 1.5rem;
+                padding: 0 .3rem;
+                z-index: 2222;
+
+                color: #1f2937;
+                background-color: #e4e4e7;
+              }
+
+              input {
+                font-size: 1.8rem;
+                width: 100%;
+                aspect-ratio: 7 / 1;
+                padding: 0 .5rem;
+                z-index: 1111;
+                border: .1rem solid #374151;
+                outline: none;
+
+                background-color: #e4e4e7;
+
+                &:user-invalid {
+                  border: .2rem solid #9f1239;
+                }
+              }
+            }
+          }
+        }
+      }
     }
 
     .box {
-      background: peru;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      // background: peru;
+      // display: flex;
+      // align-items: center;
+      // justify-content: center;
 
       &.box-1 {
         background-color: powderblue;
+      }
+
+      &.box-3 {
+        background-color: peru;
       }
 
       &.box-4 {
