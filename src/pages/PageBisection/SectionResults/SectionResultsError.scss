@@ -1,0 +1,13 @@
+.section-results-error {
+  color: red;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .icon {
+    width: 7rem;
+    height: 7rem;
+  }
+}

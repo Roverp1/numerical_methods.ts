@@ -63,7 +63,9 @@ const PageBisection = () => {
           <FunctionEditor value={formula} onChange={setFormula} />
           test1
         </div>
-        <div className="box box-3">test3</div>
+        <div className="box box-3">
+          <SectionResults result={result} />
+        </div>
       </div>
       <div className="col col-2">
         <div className="box box-2">
@@ -73,8 +75,6 @@ const PageBisection = () => {
       </div>
 
       {/* <form action="" className="page-bisection__function"></form> */}
-
-      <SectionResults result={result} />
     </main>
   );
 };
