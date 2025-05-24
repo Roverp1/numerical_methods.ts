@@ -9,6 +9,7 @@ import type { InputChangeEvent } from "../../shared/types";
 import type { BisectionResult } from "../../shared/types";
 
 import "./PageBisection.scss";
+import FunctionGraph from "../../shared/components/FunctionGraph/FunctionGraph";
 
 const PageBisection = () => {
   const [userInput, setUserInput] = useState<BisectionUserInput>({
@@ -102,7 +103,9 @@ const PageBisection = () => {
             </fieldset>
           </form>
         </div>
-        <div className="box box-4">test4</div>
+        <div className="box box-4">
+          <FunctionGraph fn="x^2" />
+        </div>
       </div>
 
       {/* <form action="" className="page-bisection__function"></form> */}
