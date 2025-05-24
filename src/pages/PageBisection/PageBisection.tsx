@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 
 import SectionResults from "./SectionResults/SectionResults";
+import FormInputBisection from "../../widgets/forms/FormInputBisection/FormInputBisection";
 
 import bisectionMethod from "../../shared/lib/bisection_method";
 
@@ -52,55 +53,7 @@ const PageBisection = () => {
       </div>
       <div className="col col-2">
         <div className="box box-2">
-          <form className="page-bisection__given-data">
-            <fieldset>
-              <legend>Wprowadź swoje dane</legend>
-
-              <label>
-                <span>x początkowy:</span>
-                <input
-                  onChange={onHandleChange}
-                  name="xp"
-                  type="text"
-                  inputMode="numeric"
-                  pattern="[0-9]*"
-                />
-              </label>
-
-              <label>
-                <span>x końcowy:</span>
-                <input
-                  onChange={onHandleChange}
-                  name="xk"
-                  type="text"
-                  inputMode="numeric"
-                  pattern="[0-9]*"
-                />
-              </label>
-
-              <label>
-                <span>dokładność:</span>
-                <input
-                  onChange={onHandleChange}
-                  name="dokladnosc"
-                  type="text"
-                  inputMode="numeric"
-                  pattern="[0-9]*"
-                />
-              </label>
-
-              <label>
-                <span>Maksymalna liczba iteracji:</span>
-                <input
-                  onChange={onHandleChange}
-                  name="maxIter"
-                  type="text"
-                  inputMode="numeric"
-                  pattern="[0-9]*"
-                />
-              </label>
-            </fieldset>
-          </form>
+          <FormInputBisection onHandleChange={onHandleChange} />
         </div>
         <div className="box box-4">test4</div>
       </div>
