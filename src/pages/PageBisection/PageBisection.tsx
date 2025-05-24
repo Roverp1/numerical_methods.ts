@@ -17,12 +17,11 @@ const PageBisection = () => {
     xp: 0,
     xk: 0,
     dokladnosc: 0,
-    maxIter: 0,
+    maxIter: 10000,
   });
 
   // for FunctionEditor
   const [formula, setFormula] = useState<string>("");
-  console.log("formula: " + formula);
 
   const [result, setResult] = useState<BisectionResult | null>(null);
 
@@ -33,28 +32,25 @@ const PageBisection = () => {
     }
   }, [userInput]);
 
-  console.log("result: " + result?.success);
-  console.log("result: " + result?.root);
-  console.log("result: " + result?.iterations);
-
   const onHandleChange = (e: InputChangeEvent) => {
     const changedField = e.target.name; // data from attribute name in input
     const value = e.target.value;
-    console.log("value:", value);
 
-    setUserInput((prev) => ({
-      ...prev,
-      [changedField]: value,
-    }));
+    setUserInput((prev) => {
+      let parsedValue: number;
+
+      if (changedField === "maxIter") {
+        parsedValue = parseInt(value);
+      } else {
+        parsedValue = parseFloat(value);
+      }
+
+      return {
+        ...prev,
+        [changedField]: parsedValue,
+      };
+    });
   };
-
-  console.log(userInput);
-
-  // for Calrulator
-
-  // const handleInsertSymbol = (symbol: string) => {
-  //   setFormula((prev) => prev + symbol)
-  // }
 
   return (
     <main className="page-bisection">
@@ -73,8 +69,6 @@ const PageBisection = () => {
         </div>
         <div className="box box-4">test4</div>
       </div>
-
-      {/* <form action="" className="page-bisection__function"></form> */}
     </main>
   );
 };

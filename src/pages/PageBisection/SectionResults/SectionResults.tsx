@@ -8,7 +8,7 @@ import type { BisectionResult } from "../../../shared/types";
 const SectionResults = ({ result }: { result: BisectionResult | null }) => {
   if (!result) return null;
 
-  const { success, root, iterations } = result;
+  const { success, root, iterations, steps } = result;
 
   if (!success) {
     return (
@@ -20,10 +20,15 @@ const SectionResults = ({ result }: { result: BisectionResult | null }) => {
     );
   }
 
+  console.log(steps);
+
   return (
     <section className="section-results">
-      <div>{iterations}</div>
-      <div>{root}</div>
+      <div className="section-results__last-iterations"></div>
+      <div className="section-results__answer">
+        <div>Кількість ітерацій: {iterations}</div>
+        <div>Результат: {root}</div>
+      </div>
     </section>
   );
 };

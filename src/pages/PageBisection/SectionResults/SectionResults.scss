@@ -1,0 +1,10 @@
+.section-results {
+  display: flex;
+  padding: 1rem;
+
+  &__answer {
+    div {
+      white-space: nowrap;
+    }
+  }
+}
