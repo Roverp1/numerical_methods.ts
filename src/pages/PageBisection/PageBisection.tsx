@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 
 import SectionResults from "./SectionResults/SectionResults";
 import FormInputBisection from "../../widgets/forms/FormInputBisection/FormInputBisection";
+import FunctionEditor from "../../shared/ui/textarea/FunctionEditor/FunctionEditor";
 
 import bisectionMethod from "../../shared/lib/bisection_method";
 
@@ -18,6 +19,10 @@ const PageBisection = () => {
     dokladnosc: 0,
     maxIter: 0,
   });
+
+  // for FunctionEditor
+  const [formula, setFormula] = useState<string>("");
+  console.log("formula: " + formula);
 
   const [result, setResult] = useState<BisectionResult | null>(null);
 
@@ -45,10 +50,19 @@ const PageBisection = () => {
 
   console.log(userInput);
 
+  // for Calrulator
+
+  // const handleInsertSymbol = (symbol: string) => {
+  //   setFormula((prev) => prev + symbol)
+  // }
+
   return (
     <main className="page-bisection">
       <div className="col col-1">
-        <div className="box box-1">test1</div>
+        <div className="box box-1">
+          <FunctionEditor value={formula} onChange={setFormula} />
+          test1
+        </div>
         <div className="box box-3">test3</div>
       </div>
       <div className="col col-2">
