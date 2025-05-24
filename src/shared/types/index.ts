@@ -11,4 +11,8 @@ export type BisectionResult = {
   root: number;
   iterations: number;
   success: boolean;
+  steps?: {
+    iteration: number;
+    f0: number;
+  }[];
 };

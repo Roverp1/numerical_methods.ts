@@ -1,0 +1,17 @@
+.button-description {
+  color: rgba(0, 0, 0, 0.9);
+  padding: 0.3rem 0.5rem;
+  border: 8px double #71717a;
+  border-radius: 0.8rem;
+
+  transition: color 0.1s ease;
+
+  &:hover {
+    color: rgba(0, 0, 0, 1);
+  }
+
+  &.active {
+    border: 8px solid #71717a;
+    background-color: #71717a;
+  }
+}

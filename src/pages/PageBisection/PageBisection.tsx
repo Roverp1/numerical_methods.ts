@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 
 import SectionResults from "./SectionResults/SectionResults";
+import FormInputBisection from "../../widgets/forms/FormInputBisection/FormInputBisection";
+import FunctionEditor from "../../shared/ui/textarea/FunctionEditor/FunctionEditor";
 
 import bisectionMethod from "../../shared/lib/bisection_method";
 
@@ -16,8 +18,11 @@ const PageBisection = () => {
     xp: 0,
     xk: 0,
     dokladnosc: 0,
-    maxIter: 0,
+    maxIter: 10000,
   });
+
+  // for FunctionEditor
+  const [formula, setFormula] = useState<string>("");
 
   const [result, setResult] = useState<BisectionResult | null>(null);
 
@@ -28,89 +33,45 @@ const PageBisection = () => {
     }
   }, [userInput]);
 
-  console.log("result: " + result?.success);
-  console.log("result: " + result?.root);
-  console.log("result: " + result?.iterations);
-
   const onHandleChange = (e: InputChangeEvent) => {
     const changedField = e.target.name; // data from attribute name in input
     const value = e.target.value;
-    console.log("value:", value);
 
-    setUserInput((prev) => ({
-      ...prev,
-      [changedField]: value,
-    }));
+    setUserInput((prev) => {
+      let parsedValue: number;
+
+      if (changedField === "maxIter") {
+        parsedValue = parseInt(value);
+      } else {
+        parsedValue = parseFloat(value);
+      }
+
+      return {
+        ...prev,
+        [changedField]: parsedValue,
+      };
+    });
   };
-
-  console.log(userInput);
 
   return (
     <main className="page-bisection">
       <div className="col col-1">
-        <div className="box box-1">test1</div>
-        <div className="box box-3">test3</div>
+        <div className="box box-1">
+          <FunctionEditor value={formula} onChange={setFormula} />
+          test1
+        </div>
+        <div className="box box-3">
+          <SectionResults result={result} />
+        </div>
       </div>
       <div className="col col-2">
         <div className="box box-2">
-          <form className="page-bisection__given-data">
-            <fieldset>
-              <legend>Wprowadź swoje dane</legend>
-
-              <label>
-                <span>x początkowy:</span>
-                <input
-                  onChange={onHandleChange}
-                  name="xp"
-                  type="text"
-                  inputMode="numeric"
-                  pattern="[0-9]*"
-                />
-              </label>
-
-              <label>
-                <span>x końcowy:</span>
-                <input
-                  onChange={onHandleChange}
-                  name="xk"
-                  type="text"
-                  inputMode="numeric"
-                  pattern="[0-9]*"
-                />
-              </label>
-
-              <label>
-                <span>dokładność:</span>
-                <input
-                  onChange={onHandleChange}
-                  name="dokladnosc"
-                  type="text"
-                  inputMode="numeric"
-                  pattern="[0-9]*"
-                />
-              </label>
-
-              <label>
-                <span>Maksymalna liczba iteracji:</span>
-                <input
-                  onChange={onHandleChange}
-                  name="maxIter"
-                  type="text"
-                  inputMode="numeric"
-                  pattern="[0-9]*"
-                />
-              </label>
-            </fieldset>
-          </form>
+          <FormInputBisection onHandleChange={onHandleChange} />
         </div>
         <div className="box box-4">
           <FunctionGraph fn="x^2" />
         </div>
       </div>
-
-      {/* <form action="" className="page-bisection__function"></form> */}
-
-      <SectionResults result={result} />
     </main>
   );
 };

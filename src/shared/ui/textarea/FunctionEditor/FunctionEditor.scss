@@ -1,0 +1,26 @@
+.function-editor {
+  display: flex;
+  gap: 1rem;
+
+  width: 100%;
+  border: 2px solid #71717a;
+  line-height: 1.8;
+  padding-left: 0.8rem;
+
+  margin: 1.8rem 0 0 0;
+
+  span {
+    white-space: nowrap;
+  }
+
+  input {
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    font-size: 1.8rem;
+
+    &:focus-visible {
+      box-shadow: none;
+    }
+  }
+}
