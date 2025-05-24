@@ -7,10 +7,17 @@ type FunctionEditorProps = {
 
 const FunctionEditor: React.FC<FunctionEditorProps> = ({ value, onChange }) => {
   return (
-    <textarea
-      value={value}
-      onChange={(e) => onChange(e.target.value)}
-      placeholder="Wprowadź funkcję, np. x^2 - 4"></textarea>
+    <>
+      <div className="function-editor">
+        <span>f(x) = </span>
+        <input
+          type="text"
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          placeholder="Wprowadź funkcję, np. x^2 - 4"
+        />
+      </div>
+    </>
   );
 };
 
