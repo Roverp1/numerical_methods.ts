@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 import SectionResults from "./SectionResults/SectionResults";
 import FormInputBisection from "../../widgets/forms/FormInputBisection/FormInputBisection";
-import FunctionEditor from "../../shared/ui/textarea/FunctionEditor/FunctionEditor";
+import FunctionEditor from "../../shared/ui/inputs/FunctionEditor/FunctionEditor";
 
 import bisectionMethod from "../../shared/lib/bisection_method";
 
