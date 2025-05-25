@@ -4,6 +4,7 @@ import "./SectionResults.scss";
 import "./SectionResultsError.scss";
 
 import type { BisectionResult } from "../../../shared/types";
+import { Fragment } from "react/jsx-runtime";
 
 const SectionResults = ({ result }: { result: BisectionResult | null }) => {
   if (!result) return null;
@@ -24,10 +25,16 @@ const SectionResults = ({ result }: { result: BisectionResult | null }) => {
 
   return (
     <section className="section-results">
-      <div className="section-results__last-iterations"></div>
-      <div className="section-results__answer">
-        <div>Кількість ітерацій: {iterations}</div>
-        <div>Результат: {root}</div>
+      <ul className="last-iterations">
+        {steps.slice(-7, -1).map((step) => (
+          <li className="iteration" key={step.iteration}>
+            x0 = {step.x0.toFixed(3)}, after {step.iteration} iterations.
+          </li>
+        ))}
+      </ul>
+      <div className="answer">
+        <div>Number of iterations: {iterations}</div>
+        <div>Root: {root}</div>
       </div>
     </section>
   );
