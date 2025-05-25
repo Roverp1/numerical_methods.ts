@@ -13,6 +13,6 @@ export type BisectionResult = {
   success: boolean;
   steps?: {
     iteration: number;
-    f0: number;
+    x0: number;
   }[];
 };

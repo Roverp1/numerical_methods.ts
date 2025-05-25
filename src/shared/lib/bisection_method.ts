@@ -20,7 +20,7 @@ const bisectionMethod = (userInput: BisectionUserInput): BisectionResult => {
   }
 
   // Bisection method must have different signs on the xp and xk
-  if (func(xp) * func(xk) >= 0) {
+  if (xp * xk >= 0) {
     return {
       root: NaN,
       iterations: 0,
@@ -35,22 +35,20 @@ const bisectionMethod = (userInput: BisectionUserInput): BisectionResult => {
 
   const steps: {
     iteration: number;
-    f0: number;
+    x0: number;
   }[] = [];
 
-  for (let i = 0; i < maxIter; i++) {
+  for (let i = 1; i <= maxIter; i++) {
     x0 = (xp + xk) / 2;
     f0 = func(x0);
 
     steps.push({
-      iteration: i + 1,
-      f0: f0,
+      iteration: i,
+      x0: x0,
     });
 
     if (Math.abs(f0) < dokladnosc || Math.abs(xk - xp) < dokladnosc) {
-      // console.log("x0:", x0);
-      // console.log(`Found root after ${i} number of iterations`);
-      return { root: x0, iterations: i + 1, success: true, steps };
+      return { root: x0, iterations: i, success: true, steps };
     }
 
     if (f0 * fp < 0) {
@@ -60,8 +58,6 @@ const bisectionMethod = (userInput: BisectionUserInput): BisectionResult => {
       fp = f0;
     }
   }
-  // console.error("x0:", x0);
-  // console.log(`Root not found after ${maxIter} number of iterations`);
 
   return {
     root: x0,
