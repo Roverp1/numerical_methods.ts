@@ -13,14 +13,54 @@
     white-space: nowrap;
   }
 
-  input {
+  .mathfield-wrapper {
     width: 100%;
     background-color: transparent;
     border: none;
     font-size: 1.8rem;
 
+    // width: 100%;
+    // background-color: white;
+    // border: 1px solid #ccc;
+    // padding: 6px 10px;
+    // border-radius: 6px;
+    // font-size: 1.8rem;
+    // min-height: 44px;
+
     &:focus-visible {
       box-shadow: none;
     }
   }
+
+  math-field {
+    background-color: transparent;
+    border: none;
+  }
+
+  #keyboard-slot {
+    margin-top: 12px;
+  }
+
+  math-field::part(virtual-keyboard-toggle)::after {
+    display: none;
+  }
 }
+
+// .function-editor {
+//   display: flex;
+//   gap: 0.8rem;
+//   align-items: flex-start;
+
+//   .mathfield-wrapper {
+//     width: 100%;
+//     border: 1px solid #aaa;
+//     border-radius: 6px;
+//     padding: 6px 10px;
+//     min-height: 40px;
+//   }
+
+//   #keyboard-slot {
+//     margin-top: 10px;
+//     width: 100%;
+//   }
+// }

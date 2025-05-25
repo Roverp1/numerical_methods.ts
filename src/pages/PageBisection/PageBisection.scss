@@ -70,7 +70,7 @@
       }
 
       .box-4 {
-        z-index: 10000;
+        z-index: 10;
       }
     }
 
@@ -88,7 +88,8 @@
         // background-color: peru;
       }
 
-      &.box-4 {}
+      &.box-4 {
+      }
     }
   }
 

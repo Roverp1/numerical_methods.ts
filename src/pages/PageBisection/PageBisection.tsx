@@ -1,17 +1,19 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import SectionResults from "./SectionResults/SectionResults";
 import FormInputBisection from "../../widgets/forms/FormInputBisection/FormInputBisection";
 import FunctionEditor from "../../shared/ui/inputs/FunctionEditor/FunctionEditor";
+// import Keyboard from "../../widgets/Keyboard/Keyboard";
+import FunctionGraph from "../../shared/components/FunctionGraph/FunctionGraph";
 
 import bisectionMethod from "../../shared/lib/bisection_method";
 
+// import type { FunctionEditorHandle } from "../../shared/ui/inputs/FunctionEditor/FunctionEditor";
 import type { BisectionUserInput } from "../../shared/types";
 import type { InputChangeEvent } from "../../shared/types";
 import type { BisectionResult } from "../../shared/types";
 
 import "./PageBisection.scss";
-import FunctionGraph from "../../shared/components/FunctionGraph/FunctionGraph";
 
 const PageBisection = () => {
   const [userInput, setUserInput] = useState<BisectionUserInput>({
@@ -23,6 +25,11 @@ const PageBisection = () => {
 
   // for FunctionEditor
   const [formula, setFormula] = useState<string>("");
+
+  // const mathRef = useRef<FunctionEditorHandle>(null);
+  // const handleInsert = (latex: string) => {
+  //   mathRef.current?.insertSymbol(latex);
+  // };
 
   const [result, setResult] = useState<BisectionResult | null>(null);
 
@@ -58,7 +65,9 @@ const PageBisection = () => {
       <div className="col col-1">
         <div className="box box-1">
           <FunctionEditor value={formula} onChange={setFormula} />
-          test1
+
+          {/* <Keyboard onInsert={handleInsert} />
+          test1 */}
         </div>
         <div className="box box-3">
           <SectionResults result={result} />

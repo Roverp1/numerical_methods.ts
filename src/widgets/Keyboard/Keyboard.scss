@@ -1,0 +1,19 @@
+.keyboard {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 200px;
+  gap: 6px;
+
+  button {
+    padding: 6px 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #f0f0f0;
+    cursor: pointer;
+
+    &:hover {
+      background: #ddd;
+    }
+  }
+}
