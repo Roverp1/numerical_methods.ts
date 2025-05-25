@@ -1,4 +1,4 @@
-import type { BisectionUserInput } from "../types";
+import type { BisectionUserInput, Steps } from "../types";
 import type { BisectionResult } from "../types";
 
 const func = (x: number) => {
@@ -9,7 +9,7 @@ const bisectionMethod = (userInput: BisectionUserInput): BisectionResult => {
   let { xp, xk } = userInput;
   const { dokladnosc, maxIter } = userInput;
 
-  // 1. Валідація
+  // Input validation
   if (isNaN(xp) || isNaN(xk) || isNaN(dokladnosc) || isNaN(maxIter)) {
     return {
       root: NaN,
@@ -19,8 +19,8 @@ const bisectionMethod = (userInput: BisectionUserInput): BisectionResult => {
     };
   }
 
-  // 2. Перевірка знаку на кінцях інтервалу
-  if (func(xp) * func(xk) >= 0) {
+  // Bisection method must have different signs on the xp and xk
+  if (xp * xk >= 0) {
     return {
       root: NaN,
       iterations: 0,
@@ -33,24 +33,19 @@ const bisectionMethod = (userInput: BisectionUserInput): BisectionResult => {
   let x0: number = 0;
   let f0: number;
 
-  const steps: {
-    iteration: number;
-    f0: number;
-  }[] = [];
+  const steps: Steps = [];
 
-  for (let i = 0; i < maxIter; i++) {
+  for (let i = 1; i <= maxIter; i++) {
     x0 = (xp + xk) / 2;
     f0 = func(x0);
 
     steps.push({
-      iteration: i + 1,
-      f0: f0,
+      iteration: i,
+      x0: x0,
     });
 
     if (Math.abs(f0) < dokladnosc || Math.abs(xk - xp) < dokladnosc) {
-      // console.log("x0:", x0);
-      // console.log(`Found root after ${i} number of iterations`);
-      return { root: x0, iterations: i + 1, success: true, steps };
+      return { root: x0, iterations: i, success: true, steps };
     }
 
     if (f0 * fp < 0) {
@@ -60,8 +55,6 @@ const bisectionMethod = (userInput: BisectionUserInput): BisectionResult => {
       fp = f0;
     }
   }
-  // console.error("x0:", x0);
-  // console.log(`Root not found after ${maxIter} number of iterations`);
 
   return {
     root: x0,

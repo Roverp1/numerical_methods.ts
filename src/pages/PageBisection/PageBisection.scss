@@ -10,6 +10,10 @@
 
     &.col-1 {
       grid-template-rows: 75% 25%;
+
+      .box-3 {
+        padding: 1rem 0;
+      }
     }
 
     &.col-2 {
@@ -70,25 +74,8 @@
       }
 
       .box-4 {
-        z-index: 10000;
+        // z-index: 10000;
       }
-    }
-
-    .box {
-      // background: peru;
-      // display: flex;
-      // align-items: center;
-      // justify-content: center;
-
-      &.box-1 {
-        // background-color: powderblue;
-      }
-
-      &.box-3 {
-        // background-color: peru;
-      }
-
-      &.box-4 {}
     }
   }
 

@@ -1,8 +1,6 @@
 import { useEffect, useRef } from "react";
 import functionPlot from "function-plot";
 
-import "./FunctionGraph.scss";
-
 type FunctionGraphProps = {
   fn: string;
 };

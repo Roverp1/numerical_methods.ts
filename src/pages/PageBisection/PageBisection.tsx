@@ -58,7 +58,6 @@ const PageBisection = () => {
       <div className="col col-1">
         <div className="box box-1">
           <FunctionEditor value={formula} onChange={setFormula} />
-          test1
         </div>
         <div className="box box-3">
           <SectionResults result={result} />
@@ -69,7 +68,7 @@ const PageBisection = () => {
           <FormInputBisection onHandleChange={onHandleChange} />
         </div>
         <div className="box box-4">
-          <FunctionGraph fn="x^2" />
+          <FunctionGraph fn="7-x^2" />
         </div>
       </div>
     </main>
