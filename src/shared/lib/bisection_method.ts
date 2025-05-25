@@ -9,7 +9,7 @@ const bisectionMethod = (userInput: BisectionUserInput): BisectionResult => {
   let { xp, xk } = userInput;
   const { dokladnosc, maxIter } = userInput;
 
-  // 1. Валідація
+  // Input validation
   if (isNaN(xp) || isNaN(xk) || isNaN(dokladnosc) || isNaN(maxIter)) {
     return {
       root: NaN,
@@ -19,7 +19,7 @@ const bisectionMethod = (userInput: BisectionUserInput): BisectionResult => {
     };
   }
 
-  // 2. Перевірка знаку на кінцях інтервалу
+  // Bisection method must have different signs on the xp and xk
   if (func(xp) * func(xk) >= 0) {
     return {
       root: NaN,
