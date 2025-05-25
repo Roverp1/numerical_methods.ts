@@ -1,5 +1,5 @@
-import { useEffect, useRef } from "react";
-import functionPlot from "function-plot";
+import { useCallback, useEffect, useRef } from "react";
+import functionPlot, { Chart } from "function-plot";
 
 import "./FunctionGraph.scss";
 
@@ -10,14 +10,19 @@ type FunctionGraphProps = {
 const FunctionGraph = ({ fn }: FunctionGraphProps) => {
   const graphRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
+  const drawGraph = useCallback(() => {
     if (!graphRef.current) return;
+
+    graphRef.current.innerHTML = "";
+
+    const width = graphRef.current.offsetWidth;
+    const height = graphRef.current.offsetHeight;
 
     try {
       functionPlot({
         target: graphRef.current,
-        width: graphRef.current.offsetWidth,
-        height: graphRef.current.offsetHeight,
+        width,
+        height,
         grid: true,
 
         data: fn
@@ -32,6 +37,15 @@ const FunctionGraph = ({ fn }: FunctionGraphProps) => {
       console.error(err);
     }
   }, [fn]);
+
+  useEffect(() => {
+    drawGraph();
+    window.addEventListener("resize", drawGraph);
+
+    return () => {
+      window.removeEventListener("resize", drawGraph);
+    };
+  }, [drawGraph]);
 
   return <div className="function-graph" ref={graphRef}></div>;
 };
