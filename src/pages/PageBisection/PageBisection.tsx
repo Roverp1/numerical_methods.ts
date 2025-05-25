@@ -33,11 +33,10 @@ const PageBisection = () => {
     try {
       const compiledFunc = compile(formula);
       const wrapperFunc = (x: number) => compiledFunc.evaluate({ x });
-      console.log("wrapperFunc:", wrapperFunc(2));
 
       setCompiledEvaluatedFn(() => wrapperFunc);
     } catch (err) {
-      console.error(err);
+      // console.error(err);
       setCompiledEvaluatedFn(null);
     }
   }, [formula]);

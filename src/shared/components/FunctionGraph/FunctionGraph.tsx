@@ -1,5 +1,7 @@
-import { useEffect, useRef } from "react";
-import functionPlot from "function-plot";
+import { useCallback, useEffect, useRef } from "react";
+import functionPlot, { Chart } from "function-plot";
+
+import "./FunctionGraph.scss";
 
 type FunctionGraphProps = {
   fn: string;
@@ -8,38 +10,44 @@ type FunctionGraphProps = {
 const FunctionGraph = ({ fn }: FunctionGraphProps) => {
   const graphRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
+  const drawGraph = useCallback(() => {
     if (!graphRef.current) return;
 
-    // FIX: parse fn before drawing graph, to fix console error
+    graphRef.current.innerHTML = "";
+
+    const width = graphRef.current.offsetWidth;
+    const height = graphRef.current.offsetHeight;
+
     try {
       functionPlot({
         target: graphRef.current,
-        width: graphRef.current.offsetWidth,
-        // FIX: cutted out numbers in top of the graph
-        height: graphRef.current.offsetHeight,
+        width,
+        height,
         grid: true,
 
-        data: [
-          {
-            fn,
-          },
-        ],
+        data: fn
+          ? [
+              {
+                fn,
+              },
+            ]
+          : [],
       });
     } catch (err) {
-      // console.error(err);
+      console.error(err);
     }
   }, [fn]);
 
-  return (
-    <div
-      ref={graphRef}
-      style={{
-        width: "100%",
-        height: "100%",
-      }}
-    ></div>
-  );
+  useEffect(() => {
+    drawGraph();
+    window.addEventListener("resize", drawGraph);
+
+    return () => {
+      window.removeEventListener("resize", drawGraph);
+    };
+  }, [drawGraph]);
+
+  return <div className="function-graph" ref={graphRef}></div>;
 };
 
 export default FunctionGraph;

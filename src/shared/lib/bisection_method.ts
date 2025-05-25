@@ -1,10 +1,6 @@
 import type { BisectionUserInput, InputFunction, Steps } from "../types";
 import type { BisectionResult } from "../types";
 
-// const fn = (x: number) => {
-//   return 7 - x * x;
-// };
-
 const bisectionMethod = (
   fn: InputFunction | null,
   userInput: BisectionUserInput,
