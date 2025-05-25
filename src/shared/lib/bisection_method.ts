@@ -1,4 +1,4 @@
-import type { BisectionUserInput } from "../types";
+import type { BisectionUserInput, Steps } from "../types";
 import type { BisectionResult } from "../types";
 
 const func = (x: number) => {
@@ -33,10 +33,7 @@ const bisectionMethod = (userInput: BisectionUserInput): BisectionResult => {
   let x0: number = 0;
   let f0: number;
 
-  const steps: {
-    iteration: number;
-    x0: number;
-  }[] = [];
+  const steps: Steps = [];
 
   for (let i = 1; i <= maxIter; i++) {
     x0 = (xp + xk) / 2;
