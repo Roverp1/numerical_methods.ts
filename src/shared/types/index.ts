@@ -18,3 +18,5 @@ export type BisectionResult = {
   success: boolean;
   steps: Steps;
 };
+
+export type InputFunction = (x: nubmer) => number;

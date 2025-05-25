@@ -27,7 +27,7 @@ const FunctionGraph = ({ fn }: FunctionGraphProps) => {
         ],
       });
     } catch (err) {
-      console.error(err);
+      // console.error(err);
     }
   }, [fn]);
 

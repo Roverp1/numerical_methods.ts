@@ -1,11 +1,22 @@
-import type { BisectionUserInput, Steps } from "../types";
+import type { BisectionUserInput, InputFunction, Steps } from "../types";
 import type { BisectionResult } from "../types";
 
-const func = (x: number) => {
-  return 7 - x * x;
-};
+// const fn = (x: number) => {
+//   return 7 - x * x;
+// };
 
-const bisectionMethod = (userInput: BisectionUserInput): BisectionResult => {
+const bisectionMethod = (
+  fn: InputFunction | null,
+  userInput: BisectionUserInput,
+): BisectionResult => {
+  if (!fn)
+    return {
+      root: NaN,
+      iterations: 0,
+      success: false,
+      steps: [],
+    };
+
   let { xp, xk } = userInput;
   const { dokladnosc, maxIter } = userInput;
 
@@ -29,7 +40,7 @@ const bisectionMethod = (userInput: BisectionUserInput): BisectionResult => {
     };
   }
 
-  let fp = func(xp);
+  let fp = fn(xp)!;
   let x0: number = 0;
   let f0: number;
 
@@ -37,8 +48,11 @@ const bisectionMethod = (userInput: BisectionUserInput): BisectionResult => {
 
   for (let i = 1; i <= maxIter; i++) {
     x0 = (xp + xk) / 2;
-    f0 = func(x0);
+    f0 = fn(x0)!;
 
+    if (typeof f0 !== "number" || isNaN(f0)) {
+      break; // or return failure
+    }
     steps.push({
       iteration: i,
       x0: x0,
