@@ -1,6 +1,8 @@
 import { useEffect, useRef } from "react";
 import functionPlot from "function-plot";
 
+import "./FunctionGraph.scss";
+
 type FunctionGraphProps = {
   fn: string;
 };
@@ -31,15 +33,7 @@ const FunctionGraph = ({ fn }: FunctionGraphProps) => {
     }
   }, [fn]);
 
-  return (
-    <div
-      ref={graphRef}
-      style={{
-        width: "100%",
-        height: "100%",
-      }}
-    ></div>
-  );
+  return <div className="function-graph" ref={graphRef}></div>;
 };
 
 export default FunctionGraph;
