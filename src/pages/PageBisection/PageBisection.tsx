@@ -1,17 +1,18 @@
 import { useState, useEffect } from "react";
+import { compile, evaluate } from "mathjs";
 
 import SectionResults from "./SectionResults/SectionResults";
 import FormInputBisection from "../../widgets/forms/FormInputBisection/FormInputBisection";
 import FunctionEditor from "../../shared/ui/textarea/FunctionEditor/FunctionEditor";
+import FunctionGraph from "../../shared/components/FunctionGraph/FunctionGraph";
 
 import bisectionMethod from "../../shared/lib/bisection_method";
 
-import type { BisectionUserInput } from "../../shared/types";
+import type { BisectionUserInput, InputFunction } from "../../shared/types";
 import type { InputChangeEvent } from "../../shared/types";
 import type { BisectionResult } from "../../shared/types";
 
 import "./PageBisection.scss";
-import FunctionGraph from "../../shared/components/FunctionGraph/FunctionGraph";
 
 const PageBisection = () => {
   const [userInput, setUserInput] = useState<BisectionUserInput>({
@@ -23,15 +24,34 @@ const PageBisection = () => {
 
   // for FunctionEditor
   const [formula, setFormula] = useState<string>("");
+  const [compiledEvaluatedFn, setCompiledEvaluatedFn] =
+    useState<InputFunction | null>(null);
 
   const [result, setResult] = useState<BisectionResult | null>(null);
 
   useEffect(() => {
-    if (userInput.dokladnosc > 0 && userInput.maxIter > 0) {
-      const res = bisectionMethod(userInput);
+    try {
+      const compiledFunc = compile(formula);
+      const wrapperFunc = (x: number) => compiledFunc.evaluate({ x });
+      console.log("wrapperFunc:", wrapperFunc(2));
+
+      setCompiledEvaluatedFn(() => wrapperFunc);
+    } catch (err) {
+      console.error(err);
+      setCompiledEvaluatedFn(null);
+    }
+  }, [formula]);
+
+  useEffect(() => {
+    if (
+      userInput.dokladnosc > 0 &&
+      userInput.maxIter > 0 &&
+      compiledEvaluatedFn
+    ) {
+      const res = bisectionMethod(compiledEvaluatedFn, userInput);
       setResult(res);
     }
-  }, [userInput]);
+  }, [userInput, compiledEvaluatedFn]);
 
   const onHandleChange = (e: InputChangeEvent) => {
     const changedField = e.target.name; // data from attribute name in input
@@ -68,7 +88,7 @@ const PageBisection = () => {
           <FormInputBisection onHandleChange={onHandleChange} />
         </div>
         <div className="box box-4">
-          <FunctionGraph fn="7-x^2" />
+          <FunctionGraph fn={formula} />
         </div>
       </div>
     </main>
