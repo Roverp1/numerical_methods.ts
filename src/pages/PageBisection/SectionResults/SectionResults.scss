@@ -1,11 +1,15 @@
-.section-results {
-  display: flex;
-  justify-content: space-between;
-
+@mixin section_results_skeleton {
   width: 100%;
   height: 100%;
   padding: 1rem;
   border: .1rem solid #374151;
+}
+
+.section-results {
+  @include section_results_skeleton;
+
+  display: flex;
+  justify-content: space-between;
 
   .last-iterations {
     display: flex;
@@ -18,4 +22,12 @@
       // white-space: nowrap;
     }
   }
+}
+
+.section-results-skeleton {
+  @include section_results_skeleton;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

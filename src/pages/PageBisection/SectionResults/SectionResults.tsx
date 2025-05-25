@@ -4,10 +4,14 @@ import "./SectionResults.scss";
 import "./SectionResultsError.scss";
 
 import type { BisectionResult } from "../../../shared/types";
-import { Fragment } from "react/jsx-runtime";
 
 const SectionResults = ({ result }: { result: BisectionResult | null }) => {
-  if (!result) return null;
+  if (!result)
+    return (
+      <section className="section-results-skeleton">
+        Provide data to see results
+      </section>
+    );
 
   const { success, root, iterations, steps } = result;
 
