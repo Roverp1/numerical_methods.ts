@@ -23,6 +23,7 @@ const PageBisection = () => {
 
   // for FunctionEditor
   const [formula, setFormula] = useState<string>("");
+  console.log("formula:", formula);
 
   const [result, setResult] = useState<BisectionResult | null>(null);
 
@@ -68,7 +69,7 @@ const PageBisection = () => {
           <FormInputBisection onHandleChange={onHandleChange} />
         </div>
         <div className="box box-4">
-          <FunctionGraph fn="7-x^2" />
+          <FunctionGraph fn={formula} />
         </div>
       </div>
     </main>
