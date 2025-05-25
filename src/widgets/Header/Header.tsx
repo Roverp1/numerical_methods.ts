@@ -21,11 +21,11 @@ const navItems = [
     path: "/interpolation",
   },
   {
-    text: "tralalelo tralala",
+    text: "Lagrange Interpolation",
     path: "/temp",
   },
   {
-    text: "bobrito kurvito",
+    text: "Approximation",
     path: "/temp",
   },
 ];

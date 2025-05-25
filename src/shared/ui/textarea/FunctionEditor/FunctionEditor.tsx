@@ -14,7 +14,7 @@ const FunctionEditor: React.FC<FunctionEditorProps> = ({ value, onChange }) => {
           type="text"
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          placeholder="Wprowadź funkcję, np. x^2 - 4"
+          placeholder="Wprowadź funkcję, np. 1 - nthRoot(x, 3)^2"
         />
       </div>
     </>
