@@ -1,8 +1,15 @@
-@mixin section_results_skeleton {
+@mixin section_results_skeleton($center: "false", $bdr-color: #374151) {
+  @if $center =="true" {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
   width: 100%;
   height: 100%;
   padding: 1rem;
-  border: .1rem solid #374151;
+  border: .1rem solid $bdr-color;
 }
 
 .section-results {
@@ -18,16 +25,37 @@
   }
 
   .answer {
-    div {
-      // white-space: nowrap;
+    // margin-right: 10%;
+
+    .root {
+      position: relative;
+
+      display: flex;
+
+      .icon {
+        position: absolute;
+        left: -2rem;
+        top: 0;
+      }
     }
   }
 }
 
 .section-results-skeleton {
-  @include section_results_skeleton;
+  @include section_results_skeleton("true");
 
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.section-results-error {
+  @include section_results_skeleton("true", darkred);
+
+  color: darkred;
+
+  .icon {
+    width: 7rem;
+    height: 7rem;
+  }
 }

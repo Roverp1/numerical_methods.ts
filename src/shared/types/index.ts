@@ -17,6 +17,7 @@ export type BisectionResult = {
   iterations: number;
   success: boolean;
   steps: Steps;
+  error?: string;
 };
 
-export type InputFunction = (x: nubmer) => number;
+export type InputFunction = (x: number) => number;

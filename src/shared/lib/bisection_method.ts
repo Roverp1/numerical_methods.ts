@@ -5,12 +5,13 @@ const bisectionMethod = (
   fn: InputFunction | null,
   userInput: BisectionUserInput,
 ): BisectionResult => {
-  if (!fn)
+  if (!fn || fn.length === 0 || typeof fn(1) !== "number" || isNaN(fn(1)))
     return {
       root: NaN,
       iterations: 0,
       success: false,
       steps: [],
+      error: "No function provided",
     };
 
   let { xp, xk } = userInput;
@@ -23,16 +24,18 @@ const bisectionMethod = (
       iterations: 0,
       success: false,
       steps: [],
+      error: "Invalid numeric input",
     };
   }
 
   // Bisection method must have different signs on the xp and xk
-  if (xp * xk >= 0) {
+  if (fn(xp) * fn(xk) >= 0) {
     return {
       root: NaN,
       iterations: 0,
       success: false,
       steps: [],
+      error: "Initial values must bracket a root (function signs must differ)",
     };
   }
 
@@ -44,10 +47,18 @@ const bisectionMethod = (
 
   for (let i = 1; i <= maxIter; i++) {
     x0 = (xp + xk) / 2;
-    f0 = fn(x0)!;
 
-    if (typeof f0 !== "number" || isNaN(f0)) {
-      break; // or return failure
+    try {
+      f0 = fn(x0)!;
+      if (typeof f0 !== "number" || isNaN(f0)) throw new Error();
+    } catch (err) {
+      return {
+        root: NaN,
+        iterations: i,
+        success: false,
+        steps,
+        error: `Function returned NaN or threw an error at x = ${x0}`,
+      };
     }
     steps.push({
       iteration: i,
@@ -71,6 +82,7 @@ const bisectionMethod = (
     iterations: maxIter,
     success: false,
     steps,
+    error: `Root not found in ${maxIter} iterations`,
   };
 };
 
