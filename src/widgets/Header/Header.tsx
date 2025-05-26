@@ -22,7 +22,7 @@ const navItems = [
   },
   {
     text: "Lagrange Interpolation",
-    path: "/temp",
+    path: "/lagrange-interpolation",
   },
   {
     text: "Approximation",
