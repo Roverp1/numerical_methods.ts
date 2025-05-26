@@ -25,7 +25,19 @@
   }
 
   .answer {
-    div {}
+    // margin-right: 10%;
+
+    .root {
+      position: relative;
+
+      display: flex;
+
+      .icon {
+        position: absolute;
+        left: -2rem;
+        top: 0;
+      }
+    }
   }
 }
 
