@@ -1,4 +1,4 @@
-import { TbFaceIdError } from "react-icons/tb";
+import { LiaDAndD } from "react-icons/lia";
 
 import "./SectionResults.scss";
 import "./SectionResultsError.scss";
@@ -13,19 +13,17 @@ const SectionResults = ({ result }: { result: BisectionResult | null }) => {
       </section>
     );
 
-  const { success, root, iterations, steps } = result;
+  const { success, root, iterations, steps, error } = result;
 
   if (!success) {
     return (
       <section className="section-results-error">
-        <TbFaceIdError className="icon" />
-        <p>Nieprawidłowe dane do obliczenia formuły</p>
-        <p>Spróbuj wprowadzić inne dane</p>
+        <LiaDAndD className="icon" />
+        <p>{error || "Wrong input data"}</p>
+        <p>Try inputing different set of data</p>
       </section>
     );
   }
-
-  console.log(steps);
 
   return (
     <section className="section-results">
