@@ -27,3 +27,20 @@ const lagrangeBasis = (
   //   return product;
   // };
 };
+
+// P(x) = Σ [ Li(x) * yi ] for i = 0 to n
+// higher order function
+const lagrangePolynomial = (
+  points: [number, number][],
+): ((x: number) => number) => {
+  const xValues = points.map(([x]) => x);
+  const yValues = points.map(([, y]) => y);
+
+  // closure
+  return (x: number) =>
+    xValues
+      .map((_, i) => lagrangeBasis(i, xValues)(x) * yValues[i])
+      .reduce((sum, currentValue) => sum + currentValue, 0);
+};
+
+export default lagrangePolynomial;
