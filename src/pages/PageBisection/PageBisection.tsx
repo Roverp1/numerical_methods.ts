@@ -32,11 +32,13 @@ const PageBisection = () => {
   useEffect(() => {
     try {
       const compiledFunc = compile(formula);
-      const wrapperFunc = (x: number) => compiledFunc.evaluate({ x });
 
+      // needed to throw an error if evaluate fails while in try block
+      const testValue = compiledFunc.evaluate({ x: 1 });
+
+      const wrapperFunc = (x: number) => compiledFunc.evaluate({ x });
       setCompiledEvaluatedFn(() => wrapperFunc);
     } catch (err) {
-      // console.error(err);
       setCompiledEvaluatedFn(null);
     }
   }, [formula]);
