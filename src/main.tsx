@@ -9,6 +9,7 @@ import PageBisection from "./pages/PageBisection/PageBisection.tsx";
 import PageInterpolation from "./pages/PageInterpolation/PageInterpolation.tsx";
 
 import "./main.scss";
+import PageLagrangeInterpolation from "./pages/PageLagrangeInterpolation/PageLagrangeInterpolation.tsx";
 
 const router = createBrowserRouter([
   {
@@ -17,6 +18,10 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <PageBisection /> },
       { path: "interpolation", element: <PageInterpolation /> },
+      {
+        path: "lagrange-interpolation",
+        element: <PageLagrangeInterpolation />,
+      },
     ],
   },
 ]);
@@ -28,5 +33,5 @@ ReactDOM.createRoot(root!).render(
     <Provider store={store}>
       <RouterProvider router={router} />
     </Provider>
-  </StrictMode>
+  </StrictMode>,
 );
