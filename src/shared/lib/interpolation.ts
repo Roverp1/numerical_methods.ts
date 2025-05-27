@@ -5,8 +5,11 @@ const interpolation = () => {
   const fx1 = 16;
   const x = 7.5;
 
-  const res = x0 + x1 + fx0 + fx1 + x;
-  console.log(res);
+  const fx = fx0 + ((x - x0) / (x1 - x0)) * (fx1 - fx0);
+
+  return {
+    fx,
+  };
 };
 
 export default interpolation;
