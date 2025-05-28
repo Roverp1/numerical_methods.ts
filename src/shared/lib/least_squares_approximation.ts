@@ -30,3 +30,14 @@ export const buildVectorB = (points: xyPoints, degree: number): number[] => {
 
   return vector;
 };
+
+export const buildAugumentedMatrix = (
+  matrixA: number[][],
+  vectorB: number[],
+): number[][] => {
+  const augumentedMatrix = Array.from(matrixA, (rowA, i) => [
+    ...rowA,
+    vectorB[i],
+  ]);
+  return augumentedMatrix;
+};
