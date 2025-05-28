@@ -1,3 +1,4 @@
+import { multiplyDependencies } from "mathjs";
 import type { xyPoints } from "../types";
 
 export const buildMatrixA = (points: xyPoints, degree: number): number[][] => {
@@ -43,6 +44,18 @@ export const buildAugumentedMatrix = (
   return augumentedMatrix;
 };
 
+const updateRow = (
+  row: number[],
+  pivotRow: number[],
+  multiplier: number,
+  j: number,
+) => {
+  if (j >= row.length) return row;
+
+  row[j] -= multiplier * pivotRow[j];
+  return updateRow(row, pivotRow, multiplier, j + 1);
+};
+
 export const forwardElimination = (augMatrix: number[][]): number[][] => {
   const matrixCp = Array.from(augMatrix, (row) =>
     Array.from(row, (cell) => cell),
@@ -52,9 +65,13 @@ export const forwardElimination = (augMatrix: number[][]): number[][] => {
     for (let i = pivot + 1; i < matrixCp.length; i++) {
       const multiplier = matrixCp[i][pivot] / matrixCp[pivot][pivot];
 
-      for (let j = pivot; j < matrixCp[i].length; j++) {
-        matrixCp[i][j] -= multiplier * matrixCp[pivot][j];
-      }
+      // tail recursion
+      updateRow(matrixCp[i], matrixCp[pivot], multiplier, 0);
+
+      // imperative analog
+      // for (let j = pivot; j < matrixCp[i].length; j++) {
+      //   matrixCp[i][j] -= multiplier * matrixCp[pivot][j];
+      // }
     }
   }
 
