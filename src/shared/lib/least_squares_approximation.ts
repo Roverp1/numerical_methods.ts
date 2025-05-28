@@ -39,5 +39,24 @@ export const buildAugumentedMatrix = (
     ...rowA,
     vectorB[i],
   ]);
+
   return augumentedMatrix;
+};
+
+export const forwardElimination = (augMatrix: number[][]): number[][] => {
+  const matrixCp = Array.from(augMatrix, (row) =>
+    Array.from(row, (cell) => cell),
+  );
+
+  for (let pivot = 0; pivot < matrixCp.length; pivot++) {
+    for (let i = pivot + 1; i < matrixCp.length; i++) {
+      const multiplier = matrixCp[i][pivot] / matrixCp[pivot][pivot];
+
+      for (let j = pivot; j < matrixCp[i].length; j++) {
+        matrixCp[i][j] -= multiplier * matrixCp[pivot][j];
+      }
+    }
+  }
+
+  return matrixCp;
 };
