@@ -21,3 +21,5 @@ export type BisectionResult = {
 };
 
 export type InputFunction = (x: number) => number;
+
+export type xyPoints = [number, number][];
