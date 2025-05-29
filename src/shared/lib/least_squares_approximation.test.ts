@@ -1,6 +1,7 @@
 import type { xyPoints } from "../types";
 import {
-  buildAugumentedMatrix,
+  backSubstitution,
+  buildAugmentedMatrix,
   buildMatrixA,
   buildVectorB,
   forwardElimination,
@@ -90,7 +91,7 @@ test("build augumented matrix from matrixA and vectorB", () => {
     [18, 28, 114, 12],
   ];
 
-  const result = buildAugumentedMatrix(matrixA, vectorB);
+  const result = buildAugmentedMatrix(matrixA, vectorB);
 
   expect(result).toEqual(expected);
 });
@@ -123,4 +124,50 @@ test("apply forward elimination on augumented matrix", () => {
 
   // expect(result1).toEqual(expected1);
   expect(result2).toEqual(expected2);
+});
+
+test("solve system of equestions for 2nd degree polynomial", () => {
+  const matrixA = [
+    [5, 4, 18],
+    [4, 18, 28],
+    [18, 28, 114],
+  ];
+
+  const vectorB = [3, 0, 12];
+
+  const augMatrix = buildAugmentedMatrix(matrixA, vectorB);
+  const upperTriMatrix = forwardElimination(augMatrix);
+
+  const expected = [0.464, -0.247, 0.093];
+
+  const result = backSubstitution(upperTriMatrix);
+
+  expected.forEach((value, i) => expect(result[i]).toBeCloseTo(value));
+});
+
+test("solves simple 2x2 upper triangular system", () => {
+  const upperTriMatrix = [
+    [2, 3, 8],
+    [0, 1, 2],
+  ];
+
+  const expected = [1, 2];
+
+  expected.forEach((val, i) => {
+    expect(backSubstitution(upperTriMatrix)[i]).toBeCloseTo(val, 5);
+  });
+});
+
+test("solves 3x3 upper triangular system", () => {
+  const upperTriMatrix = [
+    [1, 2, -1, 2],
+    [0, 1, 1, 3],
+    [0, 0, 1, 1],
+  ];
+
+  const expected = [-1, 2, 1];
+
+  expected.forEach((val, i) => {
+    expect(backSubstitution(upperTriMatrix)[i]).toBeCloseTo(val, 5);
+  });
 });
