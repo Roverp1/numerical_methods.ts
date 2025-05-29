@@ -13,7 +13,10 @@
     white-space: nowrap;
   }
 
-  input {
+  .mq-editable-field {
+    display: flex;
+    align-items: center;
+
     width: 100%;
     background-color: transparent;
     border: none;
@@ -21,6 +24,11 @@
 
     &:focus-visible {
       box-shadow: none;
+    }
+
+    &.mq-focused {
+      box-shadow: none;
+      border: none;
     }
   }
 }
