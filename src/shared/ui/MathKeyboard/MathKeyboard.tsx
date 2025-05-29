@@ -22,7 +22,7 @@ const MathKeyboard: React.FC<Props> = ({ onInsert }) => {
   return (
     <div className="math-keyboard">
       {buttons.map((btn, index) => (
-        <button className="math-keyboard__button" key={index}>
+        <button className="math-keyboard__button" key={index} onClick={() => onInsert(btn.cmd)}>
           {btn.label}
         </button>
       ))}

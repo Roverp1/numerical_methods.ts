@@ -4,6 +4,7 @@ import { compile, evaluate } from "mathjs";
 import SectionResults from "./SectionResults/SectionResults";
 import FormInputBisection from "../../widgets/forms/FormInputBisection/FormInputBisection";
 import FunctionEditor from "../../shared/ui/textarea/FunctionEditor/FunctionEditor";
+import { Calculator } from "../../features/calculator";
 import FunctionGraph from "../../shared/components/FunctionGraph/FunctionGraph";
 
 import bisectionMethod from "../../shared/lib/bisection_method";
@@ -73,7 +74,8 @@ const PageBisection = () => {
     <main className="page-bisection">
       <div className="col col-1">
         <div className="box box-1">
-          <FunctionEditor value={formula} onChange={setFormula} />
+          {/* <FunctionEditor value={formula} onChange={setFormula} /> */}
+          <Calculator />
         </div>
         <div className="box box-3">
           <SectionResults result={result} />
