@@ -17,8 +17,8 @@ const navItems = [
     path: "/",
   },
   {
-    text: "Interpolation",
-    path: "/interpolation",
+    text: "Newton Method",
+    path: "/newton-method",
   },
   {
     text: "Lagrange Interpolation",

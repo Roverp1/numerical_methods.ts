@@ -1,4 +1,4 @@
-import "./PageInterpolation.scss";
+import "./PageNewton.scss";
 
 const PageInterpolation = () => {
   return (
