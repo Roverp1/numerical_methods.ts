@@ -1,4 +1,3 @@
-import { multiplyDependencies } from "mathjs";
 import type { xyPoints } from "../types";
 
 export const buildMatrixA = (points: xyPoints, degree: number): number[][] => {

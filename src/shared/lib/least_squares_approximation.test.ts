@@ -121,9 +121,6 @@ test("apply forward elimination on augumented matrix", () => {
   const result1 = forwardElimination(augMatrix1);
   const result2 = forwardElimination(augMatrix2);
 
-  console.log("expected1:", expected1);
-  console.log("result1:", result1);
-
   // expect(result1).toEqual(expected1);
   expect(result2).toEqual(expected2);
 });
