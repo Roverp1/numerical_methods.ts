@@ -24,8 +24,7 @@ const PageBisection = () => {
 
   // for FunctionEditor
   const [formula, setFormula] = useState<string>("");
-  const [compiledEvaluatedFn, setCompiledEvaluatedFn] =
-    useState<InputFunction | null>(null);
+  const [compiledEvaluatedFn, setCompiledEvaluatedFn] = useState<InputFunction | null>(null);
 
   const [result, setResult] = useState<BisectionResult | null>(null);
 
@@ -44,11 +43,7 @@ const PageBisection = () => {
   }, [formula]);
 
   useEffect(() => {
-    if (
-      userInput.dokladnosc > 0 &&
-      userInput.maxIter > 0 &&
-      compiledEvaluatedFn
-    ) {
+    if (userInput.dokladnosc > 0 && userInput.maxIter > 0 && compiledEvaluatedFn) {
       const res = bisectionMethod(compiledEvaluatedFn, userInput);
       setResult(res);
     }
