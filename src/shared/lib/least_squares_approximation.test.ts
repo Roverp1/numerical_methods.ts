@@ -1,5 +1,5 @@
 import type { xyPoints } from "../types";
-import {
+import leastSquaresApproximation, {
   backSubstitution,
   buildAugmentedMatrix,
   buildMatrixA,
@@ -170,4 +170,27 @@ test("solves 3x3 upper triangular system", () => {
   expected.forEach((val, i) => {
     expect(backSubstitution(upperTriMatrix)[i]).toBeCloseTo(val, 5);
   });
+});
+
+test("approximates a known quadratic function", () => {
+  // Points from y = 2x^2 + 3x + 1
+  const points: xyPoints = [
+    [-2, 3],
+    [-1, 0],
+    [0, 1],
+    [1, 6],
+    [2, 15],
+  ];
+
+  const degree = 2;
+
+  const approxFn = leastSquaresApproximation(points, degree);
+
+  // Check the function output is close to expected values
+  const expectedYs = points.map(([x]) => approxFn(x));
+  const trueYs = points.map(([, y]) => y);
+
+  for (let i = 0; i < expectedYs.length; i++) {
+    expect(expectedYs[i]).toBeCloseTo(trueYs[i], 5);
+  }
 });
