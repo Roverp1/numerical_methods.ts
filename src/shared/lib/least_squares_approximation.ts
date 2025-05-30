@@ -110,12 +110,12 @@ const computeResults = (
     row + 1,
   );
 
-  // functional, with higher order functions ->
+  // functional, with closure functions ->
   // const sumOfComputedValues = augMatrix[row]
   //   .slice(row + 1, augMatrix[row].length - 1)
   //   .reduce((acc, cur, j) => acc + cur * results[row + 1 + j], 0);
 
-  // imperical ->
+  // imperative ->
   // let sumOfComputedValues = 0;
   // for (let j = row + 1; j < matrix[row].length - 1; j++) {
   //   const xValue = results[j];
@@ -143,3 +143,34 @@ export const backSubstitution = (upperTriMatrix: number[][]): number[] => {
     initialResults,
   );
 };
+
+// A * c = B
+const leastSquaresApproximation = (
+  points: xyPoints,
+  degree: number,
+): ((x: number) => number) => {
+  const matrixA = buildMatrixA(points, degree);
+  const vectorB = buildVectorB(points, degree);
+
+  const augmentedMatrix = buildAugmentedMatrix(matrixA, vectorB);
+
+  const upperTriMatrix = forwardElimination(augmentedMatrix);
+  const coefficients = backSubstitution(upperTriMatrix);
+
+  // functional
+  return (x) =>
+    coefficients
+      .map((coef, i) => coef * x ** i)
+      .reduce((acc, cur) => acc + cur);
+
+  // imperative
+  // return (x) => {
+  //   let sum = 0;
+  //   for (let i = 0; i <= degree; i++) {
+  //     sum += coefficients[i] * x ** i;
+  //   }
+  //   return sum;
+  // };
+};
+
+export default leastSquaresApproximation;
