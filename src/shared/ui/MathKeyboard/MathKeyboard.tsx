@@ -15,8 +15,8 @@ const MathKeyboard: React.FC<Props> = ({ onInsert }) => {
     { label: "α", cmd: "\\alpha" },
     { label: "π", cmd: "\\pi" },
     { label: "∫", cmd: "\\int" },
-    { label: "lim", cmd: "\\lim_{n\\to\\infty}" },
-    { label: "[Matrix]", cmd: "\\begin{bmatrix}a & b \\\\ c & d\\end{bmatrix}" },
+    // { label: "lim", cmd: "\\lim_{n\\to\\infty}" },
+    // { label: "[Matrix]", cmd: "\\begin{bmatrix}a & b \\\\ c & d\\end{bmatrix}" },
   ];
 
   return (

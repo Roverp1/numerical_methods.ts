@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
-import { compile, evaluate } from "mathjs";
+import { compile } from "mathjs";
 
 import SectionResults from "./SectionResults/SectionResults";
 import FormInputBisection from "../../widgets/forms/FormInputBisection/FormInputBisection";
-import FunctionEditor from "../../shared/ui/textarea/FunctionEditor/FunctionEditor";
 import { Calculator } from "../../features/calculator";
 import FunctionGraph from "../../shared/components/FunctionGraph/FunctionGraph";
 
@@ -14,6 +13,7 @@ import type { InputChangeEvent } from "../../shared/types";
 import type { BisectionResult } from "../../shared/types";
 
 import "./PageBisection.scss";
+import { convertLatexToExpression } from "../../shared/lib/latex/convertLatexToExpression";
 
 const PageBisection = () => {
   const [userInput, setUserInput] = useState<BisectionUserInput>({
@@ -70,12 +70,18 @@ const PageBisection = () => {
     });
   };
 
+  // for Calculator
+  const onChangeLatex = (latex: string) => {
+    const parsed = convertLatexToExpression(latex);
+    console.log("Parsed Expression:", parsed);
+    setFormula(parsed);
+  };
+
   return (
     <main className="page-bisection">
       <div className="col col-1">
         <div className="box box-1">
-          {/* <FunctionEditor value={formula} onChange={setFormula} /> */}
-          <Calculator />
+          <Calculator onChangeLatex={onChangeLatex} />
         </div>
         <div className="box box-3">
           <SectionResults result={result} />
