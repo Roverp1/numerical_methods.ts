@@ -77,26 +77,42 @@ export const forwardElimination = (augMatrix: number[][]): number[][] => {
   return matrixCp;
 };
 
+const computeResults = (
+  augMatrix: number[][],
+  row: number,
+  results: number[],
+) => {
+  if (row < 0) return results;
+
+  const y = augMatrix[row][augMatrix[row].length - 1];
+  const coefficient = augMatrix[row][row];
+
+  const sumOfComputedValues = augMatrix[row]
+    .slice(row + 1, augMatrix[row].length - 1)
+    .reduce((acc, cur, j) => acc + cur * results[row + 1 + j], 0);
+
+  // for (let j = row + 1; j < matrix[row].length - 1; j++) {
+  //   const xValue = results[j];
+  //   const xCoefficientValue = matrix[row][j];
+  //
+  //   sumOfKnownValues += xValue * xCoefficientValue;
+  // }
+
+  const x_i = (y - sumOfComputedValues) / coefficient;
+
+  const resultsCp = [...results];
+  resultsCp[row] = x_i;
+
+  // tail recursion
+  return computeResults(augMatrix, row - 1, resultsCp);
+};
+
 export const backSubstitution = (upperTriMatrix: number[][]): number[] => {
-  const COEFFICIENT_MATRIX_LEN = upperTriMatrix[0].length - 2;
-  const AUG_COLUMN_INDEX = upperTriMatrix[0].length - 1;
+  const initialResults: number[] = Array(upperTriMatrix.length).fill(0);
 
-  const results: number[] = Array(COEFFICIENT_MATRIX_LEN).fill(0);
-
-  for (let i = upperTriMatrix.length - 1; i >= 0; i--) {
-    let sumOfKnownValues = 0;
-
-    for (let j = i + 1; j <= COEFFICIENT_MATRIX_LEN; j++) {
-      const xValue = results[j];
-      const xCoefficientValue = upperTriMatrix[i][j];
-
-      sumOfKnownValues += xValue * xCoefficientValue;
-    }
-
-    results[i] =
-      (upperTriMatrix[i][AUG_COLUMN_INDEX] - sumOfKnownValues) /
-      upperTriMatrix[i][i];
-  }
-
-  return results;
+  return computeResults(
+    upperTriMatrix,
+    upperTriMatrix.length - 1,
+    initialResults,
+  );
 };
