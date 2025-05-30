@@ -72,3 +72,26 @@ export const forwardElimination = (augMatrix: number[][]): number[][] => {
 
   return matrixCp;
 };
+
+export const backSubstitution = (upperTriMatrix: number[][]): number[] => {
+  const AUG_COLUMN_INDEX = upperTriMatrix[0].length - 1;
+
+  const results: number[] = Array(upperTriMatrix.length).fill(0);
+
+  for (let i = upperTriMatrix.length - 1; i >= 0; i--) {
+    let sumOfKnownValues = 0;
+
+    for (let j = i + 1; j < upperTriMatrix.length - 1; j++) {
+      const xValue = results[j];
+      const xCoefficientValue = upperTriMatrix[i][j];
+
+      sumOfKnownValues += xValue * xCoefficientValue;
+    }
+
+    results[i] =
+      (upperTriMatrix[i][AUG_COLUMN_INDEX] - sumOfKnownValues) /
+      upperTriMatrix[i][i];
+  }
+
+  return results;
+};
