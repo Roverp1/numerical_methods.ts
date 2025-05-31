@@ -1,13 +1,19 @@
 import { useCallback, useEffect, useRef } from "react";
 import functionPlot from "function-plot";
+import type { FunctionPlotDatum } from "function-plot";
 
 import "./FunctionGraphInterpolation.scss";
+import type { xyPoints } from "../../../shared/types";
 
 type FunctionGraphProps = {
-  fn: string;
+  points: xyPoints;
+  approximatedFn: string;
 };
 
-const FunctionGraphInterpolation = ({ fn }: FunctionGraphProps) => {
+const FunctionGraphInterpolation = ({
+  points,
+  approximatedFn,
+}: FunctionGraphProps) => {
   const graphRef = useRef<HTMLDivElement>(null);
 
   const drawGraph = useCallback(() => {
@@ -25,18 +31,24 @@ const FunctionGraphInterpolation = ({ fn }: FunctionGraphProps) => {
         height,
         grid: true,
 
-        data: fn
-          ? [
-              {
-                fn,
-              },
-            ]
-          : [],
+        data: [
+          points.length > 0 && {
+            points,
+            fnType: "points",
+            graphType: "scatter",
+            attr: {
+              r: 3,
+            },
+          },
+          approximatedFn && {
+            fn: approximatedFn,
+          },
+        ].filter(Boolean) as FunctionPlotDatum[],
       });
     } catch (err) {
       console.error(err);
     }
-  }, [fn]);
+  }, [points, approximatedFn]);
 
   useEffect(() => {
     drawGraph();
