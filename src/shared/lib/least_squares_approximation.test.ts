@@ -1,10 +1,12 @@
 import type { xyPoints } from "../types";
 import leastSquaresApproximation, {
+  approximatedPolynomialString,
   backSubstitution,
   buildAugmentedMatrix,
   buildMatrixA,
   buildVectorB,
   forwardElimination,
+  getCoefficients,
 } from "./least_squares_approximation";
 
 test("build matrixA for 1st degree polynomial", () => {
@@ -170,6 +172,42 @@ test("solves 3x3 upper triangular system", () => {
   expected.forEach((val, i) => {
     expect(backSubstitution(upperTriMatrix)[i]).toBeCloseTo(val, 5);
   });
+});
+
+test("get coefficients from approximated polynomial", () => {
+  const points: xyPoints = [
+    [-2, 1],
+    [0, 2],
+    [1, -1],
+    [3, 1],
+    [2, 0],
+  ];
+
+  const expected = [0.464, -0.247, 0.093];
+
+  const result = getCoefficients(points, 2);
+
+  expected.forEach((value, i) => expect(result[i]).toBeCloseTo(value));
+});
+
+test("construct a string from approximated polynomial", () => {
+  const points: xyPoints = [
+    [-2, 1],
+    [0, 2],
+    [1, -1],
+    [3, 1],
+    [2, 0],
+  ];
+
+  const coefficients = [0.464, -0.247, 0.093];
+  const expected = `0.464 * x^0 + (-0.247) * x^1 + 0.093 * x^2`;
+
+  const result = approximatedPolynomialString(points, 2);
+  console.log("result:", result);
+
+  expect(result).toContain("x^0");
+  expect(result).toContain("x^1");
+  expect(result).toContain("x^2");
 });
 
 test("approximates a known quadratic function", () => {
