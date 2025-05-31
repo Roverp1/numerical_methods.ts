@@ -1,6 +1,6 @@
 import type { xyPoints } from "../types";
 import {
-  buildAugumentedMatrix,
+  buildAugmentedMatrix,
   buildMatrixA,
   buildVectorB,
   forwardElimination,
@@ -90,7 +90,7 @@ test("build augumented matrix from matrixA and vectorB", () => {
     [18, 28, 114, 12],
   ];
 
-  const result = buildAugumentedMatrix(matrixA, vectorB);
+  const result = buildAugmentedMatrix(matrixA, vectorB);
 
   expect(result).toEqual(expected);
 });

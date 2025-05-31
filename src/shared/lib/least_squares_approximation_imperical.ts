@@ -43,7 +43,7 @@ export const buildVectorB = (points: xyPoints, degree: number): number[] => {
   return vector;
 };
 
-export const buildAugumentedMatrix = (
+export const buildAugmentedMatrix = (
   matrixA: number[][],
   vectorB: number[],
 ): number[][] => {
@@ -94,4 +94,27 @@ export const backSubstitution = (upperTriMatrix: number[][]): number[] => {
   }
 
   return results;
+};
+
+const leastSquaresApproximation = (
+  points: xyPoints,
+  degree: number,
+): ((x: number) => number) => {
+  const matrixA = buildMatrixA(points, degree);
+  const vectorB = buildVectorB(points, degree);
+
+  const augmentedMatrix = buildAugmentedMatrix(matrixA, vectorB);
+
+  const upperTriMatrix = forwardElimination(augmentedMatrix);
+  const coefficients = backSubstitution(upperTriMatrix);
+
+  return (x) => {
+    let sum = 0;
+
+    for (let i = 0; i <= degree; i++) {
+      sum += coefficients[i] * x ** i;
+    }
+
+    return sum;
+  };
 };

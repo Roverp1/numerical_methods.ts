@@ -7,9 +7,10 @@ import { store } from "./app/store/store.ts";
 import App from "./app/App.tsx";
 import PageBisection from "./pages/PageBisection/PageBisection.tsx";
 import PageInterpolation from "./pages/PageNewton/PageNewton.tsx";
+import PageLagrangeInterpolation from "./pages/PageLagrangeInterpolation/PageLagrangeInterpolation.tsx";
+import PageLeastSquaresApproximation from "./pages/PageLeastSquaresApproximation/PageLeastSquaresApproximation.tsx";
 
 import "./main.scss";
-import PageLagrangeInterpolation from "./pages/PageLagrangeInterpolation/PageLagrangeInterpolation.tsx";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
         path: "lagrange-interpolation",
         element: <PageLagrangeInterpolation />,
       },
+      {
+        path: "least-squares-approximation",
+        element: <PageLeastSquaresApproximation />,
+      },
     ],
   },
 ]);
@@ -33,5 +38,5 @@ ReactDOM.createRoot(root!).render(
     <Provider store={store}>
       <RouterProvider router={router} />
     </Provider>
-  </StrictMode>
+  </StrictMode>,
 );

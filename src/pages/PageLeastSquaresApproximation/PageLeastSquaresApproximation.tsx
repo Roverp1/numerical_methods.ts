@@ -1,42 +1,53 @@
 import { useEffect, useState } from "react";
 
 import PointsAndFunctionGraph from "../../shared/components/PointsAndFunctionGraph/PointsAndFunctionGraph";
+import leastSquaresApproximation, {
+  approximatedPolynomialString,
+} from "../../shared/lib/least_squares_approximation";
 
 import type { xyPoints } from "../../shared/types";
 
-import "./PageLagrangeInterpolation.scss";
+import "./PageLeastSquaresApproximation.scss";
 
 type UserInput = {
   points: xyPoints;
   degree: number;
 };
 
-const PageLagrangeInterpolation = () => {
+const PageLeastSquaresApproximation = () => {
   const [userInput, setUserInput] = useState<UserInput>({
     points: [],
-    degree: 1,
+    degree: 2,
   });
-  const [interpolatedFnString, setInterpolatedFnString] = useState<string>("");
+  const [approximatedFnString, setApproximatedFnString] = useState<string>("");
 
   useEffect(() => {
     setUserInput((prev) => ({
       points: [
-        [-2, 1],
-        [0, 2],
-        [1, -1],
-        [3, 1],
-        [2, 0],
-      ],
+        [1, 5],
+        [2, 3],
+        [3, 6],
+        [4, 3.5],
+        [5, 4.5],
+        [6, 7],
+        [7, 5.5],
+      ] as xyPoints,
       degree: prev.degree,
     }));
   }, []);
 
   useEffect(() => {
-    setInterpolatedFnString("x^2");
+    const polynomialString = approximatedPolynomialString(
+      userInput.points,
+      userInput.degree,
+    );
+    console.log("polynomialString:", polynomialString);
+
+    setApproximatedFnString(polynomialString);
   }, [userInput]);
 
   return (
-    <main className="page-lagrange-interpolation">
+    <main className="page-least-squares-approximation">
       <div className="col col-1">
         <div className="box box-1">Input for graph points / calculator</div>
         <div className="box box-3">Results</div>
@@ -45,7 +56,7 @@ const PageLagrangeInterpolation = () => {
         <div className="box box-4">
           <PointsAndFunctionGraph
             points={userInput.points}
-            fn={interpolatedFnString}
+            fn={approximatedFnString}
           />
         </div>
       </div>
@@ -53,4 +64,4 @@ const PageLagrangeInterpolation = () => {
   );
 };
 
-export default PageLagrangeInterpolation;
+export default PageLeastSquaresApproximation;

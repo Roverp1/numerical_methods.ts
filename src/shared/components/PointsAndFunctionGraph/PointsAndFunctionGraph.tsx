@@ -1,13 +1,19 @@
 import { useCallback, useEffect, useRef } from "react";
 import functionPlot from "function-plot";
+import type { FunctionPlotDatum } from "function-plot";
 
-import "./FunctionGraph.scss";
+import "./PointsAndFunctionGraph.scss";
+import type { xyPoints } from "../../types";
 
-type FunctionGraphProps = {
+type PointsAndFunctionGraphProps = {
+  points: xyPoints;
   fn: string;
 };
 
-const FunctionGraph = ({ fn }: FunctionGraphProps) => {
+const PointsAndFunctionGraph = ({
+  points,
+  fn,
+}: PointsAndFunctionGraphProps) => {
   const graphRef = useRef<HTMLDivElement>(null);
 
   const drawGraph = useCallback(() => {
@@ -25,22 +31,24 @@ const FunctionGraph = ({ fn }: FunctionGraphProps) => {
         height,
         grid: true,
 
-        data: fn
-          ? [
-              {
-                fn,
-                scope: {
-                  pi: Math.PI,
-                  e: Math.E,
-                },
-              },
-            ]
-          : [],
+        data: [
+          points.length > 0 && {
+            points,
+            fnType: "points",
+            graphType: "scatter",
+            attr: {
+              r: 3,
+            },
+          },
+          fn && {
+            fn: fn,
+          },
+        ].filter(Boolean) as FunctionPlotDatum[],
       });
     } catch (err) {
       console.error(err);
     }
-  }, [fn]);
+  }, [points, fn]);
 
   useEffect(() => {
     drawGraph();
@@ -51,7 +59,7 @@ const FunctionGraph = ({ fn }: FunctionGraphProps) => {
     };
   }, [drawGraph]);
 
-  return <div className="function-graph" ref={graphRef}></div>;
+  return <div className="points-and-function-graph" ref={graphRef}></div>;
 };
 
-export default FunctionGraph;
+export default PointsAndFunctionGraph;

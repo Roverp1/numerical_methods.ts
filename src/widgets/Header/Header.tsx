@@ -26,7 +26,7 @@ const navItems = [
   },
   {
     text: "Approximation",
-    path: "/temp",
+    path: "/least-squares-approximation",
   },
 ];
 

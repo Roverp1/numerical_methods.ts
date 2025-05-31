@@ -110,7 +110,7 @@ const computeResults = (
     row + 1,
   );
 
-  // functional, with closure functions ->
+  // functional, with pure helpers ->
   // const sumOfComputedValues = augMatrix[row]
   //   .slice(row + 1, augMatrix[row].length - 1)
   //   .reduce((acc, cur, j) => acc + cur * results[row + 1 + j], 0);
@@ -142,6 +142,31 @@ export const backSubstitution = (upperTriMatrix: number[][]): number[] => {
     upperTriMatrix.length - 1,
     initialResults,
   );
+};
+
+export const getCoefficients = (points: xyPoints, degree: number): number[] => {
+  const matrixA = buildMatrixA(points, degree);
+  const vectorB = buildVectorB(points, degree);
+
+  const augmentedMatrix = buildAugmentedMatrix(matrixA, vectorB);
+
+  const upperTriMatrix = forwardElimination(augmentedMatrix);
+  const coefficients = backSubstitution(upperTriMatrix);
+
+  return coefficients;
+};
+
+export const approximatedPolynomialString = (
+  points: xyPoints,
+  degree: number,
+): string => {
+  const coefficients = getCoefficients(points, degree);
+
+  const polynomialString = coefficients
+    .map((coef, i) => `${coef.toFixed(3)} * x^${i}`)
+    .join(" + ");
+
+  return polynomialString;
 };
 
 // A * c = B
