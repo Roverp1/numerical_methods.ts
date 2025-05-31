@@ -73,7 +73,6 @@ const PageBisection = () => {
   // for Calculator
   const onChangeLatex = (latex: string) => {
     const parsed = convertLatexToExpression(latex);
-    console.log("Parsed Expression:", parsed);
     setFormula(parsed);
   };
 
