@@ -156,6 +156,19 @@ export const getCoefficients = (points: xyPoints, degree: number): number[] => {
   return coefficients;
 };
 
+export const approximatedPolynomialString = (
+  points: xyPoints,
+  degree: number,
+): string => {
+  const coefficients = getCoefficients(points, degree);
+
+  const polynomialString = coefficients
+    .map((coef, i) => `${coef.toFixed(3)} * x^${i}`)
+    .join(" + ");
+
+  return polynomialString;
+};
+
 // A * c = B
 const leastSquaresApproximation = (
   points: xyPoints,
