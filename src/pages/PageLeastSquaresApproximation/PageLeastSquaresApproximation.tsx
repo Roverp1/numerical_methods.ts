@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 
 import PointsAndFunctionGraph from "../../shared/components/PointsAndFunctionGraph/PointsAndFunctionGraph";
-import leastSquaresApproximation from "../../shared/lib/least_squares_approximation";
+import leastSquaresApproximation, {
+  approximatedPolynomialString,
+} from "../../shared/lib/least_squares_approximation";
 
 import type { xyPoints } from "../../shared/types";
 
@@ -15,27 +17,33 @@ type UserInput = {
 const PageLeastSquaresApproximation = () => {
   const [userInput, setUserInput] = useState<UserInput>({
     points: [],
-    degree: 1,
+    degree: 2,
   });
-  const [approximatedFn, setApproximatedFn] = useState<string>("");
+  const [approximatedFnString, setApproximatedFnString] = useState<string>("");
 
   useEffect(() => {
     setUserInput((prev) => ({
       points: [
-        [-2, 1],
-        [0, 2],
-        [1, -1],
-        [3, 1],
-        [2, 0],
-      ],
+        [1, 5],
+        [2, 3],
+        [3, 6],
+        [4, 3.5],
+        [5, 4.5],
+        [6, 7],
+        [7, 5.5],
+      ] as xyPoints,
       degree: prev.degree,
     }));
   }, []);
 
   useEffect(() => {
-    const P = leastSquaresApproximation(userInput.points, userInput.degree);
+    const polynomialString = approximatedPolynomialString(
+      userInput.points,
+      userInput.degree,
+    );
+    console.log("polynomialString:", polynomialString);
 
-    setApproximatedFn("7-1/sqrt(x)");
+    setApproximatedFnString(polynomialString);
   }, [userInput]);
 
   return (
@@ -48,7 +56,7 @@ const PageLeastSquaresApproximation = () => {
         <div className="box box-4">
           <PointsAndFunctionGraph
             points={userInput.points}
-            fn={approximatedFn}
+            fn={approximatedFnString}
           />
         </div>
       </div>
