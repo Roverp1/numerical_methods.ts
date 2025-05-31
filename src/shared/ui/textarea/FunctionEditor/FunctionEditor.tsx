@@ -1,24 +1,47 @@
+import { useRef, forwardRef, useImperativeHandle } from "react";
+import { EditableMathField, addStyles } from "react-mathquill";
+
+import type { MathQuillField } from "../../../types/typesFunctionEditor";
+
 import "./FunctionEditor.scss";
+
+addStyles();
+
+export type FunctionEditorHandle = {
+  insert: (cmd: string) => void;
+};
 
 type FunctionEditorProps = {
   value: string;
   onChange: (newValue: string) => void;
 };
 
-const FunctionEditor: React.FC<FunctionEditorProps> = ({ value, onChange }) => {
-  return (
-    <>
+const FunctionEditor = forwardRef<FunctionEditorHandle, FunctionEditorProps>(
+  ({ value, onChange }, ref) => {
+    const mathFieldRef = useRef<MathQuillField | null>(null);
+
+    useImperativeHandle(ref, () => ({
+      insert: (cmd: string) => {
+        if (mathFieldRef.current) {
+          mathFieldRef.current.cmd(cmd);
+          mathFieldRef.current.focus();
+        }
+      },
+    }));
+
+    return (
       <div className="function-editor">
         <span>f(x) = </span>
-        <input
-          type="text"
-          value={value}
-          onChange={(e) => onChange(e.target.value)}
-          placeholder="Wprowadź funkcję, np. 1 - nthRoot(x, 3)^2"
+        <EditableMathField
+          latex={value}
+          onChange={(mathField) => onChange(mathField.latex())}
+          mathquillDidMount={(mf) => {
+            mathFieldRef.current = mf;
+          }}
         />
       </div>
-    </>
-  );
-};
+    );
+  }
+);
 
 export default FunctionEditor;

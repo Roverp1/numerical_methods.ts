@@ -29,6 +29,10 @@ const FunctionGraph = ({ fn }: FunctionGraphProps) => {
           ? [
               {
                 fn,
+                scope: {
+                  pi: Math.PI,
+                  e: Math.E,
+                },
               },
             ]
           : [],

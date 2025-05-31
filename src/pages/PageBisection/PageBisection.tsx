@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import { compile, evaluate } from "mathjs";
+import { compile } from "mathjs";
 
 import SectionResults from "./SectionResults/SectionResults";
 import FormInputBisection from "../../widgets/forms/FormInputBisection/FormInputBisection";
-import FunctionEditor from "../../shared/ui/textarea/FunctionEditor/FunctionEditor";
+import Calculator from "../../features/calculator/Calculator";
 import FunctionGraph from "../../shared/components/FunctionGraph/FunctionGraph";
 
 import bisectionMethod from "../../shared/lib/bisection_method";
@@ -13,6 +13,7 @@ import type { InputChangeEvent } from "../../shared/types";
 import type { BisectionResult } from "../../shared/types";
 
 import "./PageBisection.scss";
+import { convertLatexToExpression } from "../../shared/lib/latex/convertLatexToExpression";
 
 const PageBisection = () => {
   const [userInput, setUserInput] = useState<BisectionUserInput>({
@@ -24,8 +25,7 @@ const PageBisection = () => {
 
   // for FunctionEditor
   const [formula, setFormula] = useState<string>("");
-  const [compiledEvaluatedFn, setCompiledEvaluatedFn] =
-    useState<InputFunction | null>(null);
+  const [compiledEvaluatedFn, setCompiledEvaluatedFn] = useState<InputFunction | null>(null);
 
   const [result, setResult] = useState<BisectionResult | null>(null);
 
@@ -44,11 +44,7 @@ const PageBisection = () => {
   }, [formula]);
 
   useEffect(() => {
-    if (
-      userInput.dokladnosc > 0 &&
-      userInput.maxIter > 0 &&
-      compiledEvaluatedFn
-    ) {
+    if (userInput.dokladnosc > 0 && userInput.maxIter > 0 && compiledEvaluatedFn) {
       const res = bisectionMethod(compiledEvaluatedFn, userInput);
       setResult(res);
     }
@@ -74,11 +70,17 @@ const PageBisection = () => {
     });
   };
 
+  // for Calculator
+  const onChangeLatex = (latex: string) => {
+    const parsed = convertLatexToExpression(latex);
+    setFormula(parsed);
+  };
+
   return (
     <main className="page-bisection">
       <div className="col col-1">
         <div className="box box-1">
-          <FunctionEditor value={formula} onChange={setFormula} />
+          <Calculator onChangeLatex={onChangeLatex} />
         </div>
         <div className="box box-3">
           <SectionResults result={result} />
