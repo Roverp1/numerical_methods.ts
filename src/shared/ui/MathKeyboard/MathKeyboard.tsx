@@ -15,11 +15,36 @@ const MathKeyboard: React.FC<Props> = ({ onInsert }) => {
 
   return (
     <div className="math-keyboard">
-      {buttons.map((btn, index) => (
-        <button className="math-keyboard__button" key={index} onClick={() => onInsert(btn.cmd)}>
-          {btn.label}
-        </button>
-      ))}
+      <div className="math-keyboard__scientific-panel">
+        {buttons.map((btn, index) => (
+          <button className="button" key={index} onClick={() => onInsert(btn.cmd)}>
+            {btn.label}
+          </button>
+        ))}
+      </div>
+      <div className="math-keyboard__numeric-keypad">
+        <button className="button">7</button>
+        <button className="button">8</button>
+        <button className="button">9</button>
+        <button className="button">/</button>
+        <button className="button">4</button>
+        <button className="button">5</button>
+        <button className="button">6</button>
+        <button className="button">x</button>
+        <button className="button">1</button>
+        <button className="button">2</button>
+        <button className="button">3</button>
+        <button className="button">-</button>
+        <button className="button">0</button>
+        <button className="button">.</button>
+        <button className="button">ans</button>
+        <button className="button">+</button>
+      </div>
+      <div className="math-keyboard__control-panel">
+        <button className="button">{"-->"}</button>
+        <button className="button">{"-->"}</button>
+        <button className="button">delete</button>
+      </div>
     </div>
   );
 };
