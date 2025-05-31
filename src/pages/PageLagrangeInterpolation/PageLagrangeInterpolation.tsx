@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 
 import PointsAndFunctionGraph from "../../shared/components/PointsAndFunctionGraph/PointsAndFunctionGraph";
-import leastSquaresApproximation from "../../shared/lib/least_squares_approximation";
 
 import type { xyPoints } from "../../shared/types";
 
@@ -17,7 +16,7 @@ const PageLagrangeInterpolation = () => {
     points: [],
     degree: 1,
   });
-  const [approximatedFn, setApproximatedFn] = useState<string>("");
+  const [interpolatedFnString, setInterpolatedFnString] = useState<string>("");
 
   useEffect(() => {
     setUserInput((prev) => ({
@@ -33,10 +32,7 @@ const PageLagrangeInterpolation = () => {
   }, []);
 
   useEffect(() => {
-    // should be iterpolation not approximation
-    const P = leastSquaresApproximation(userInput.points, userInput.degree);
-
-    setApproximatedFn("x^2");
+    setInterpolatedFnString("x^2");
   }, [userInput]);
 
   return (
@@ -49,7 +45,7 @@ const PageLagrangeInterpolation = () => {
         <div className="box box-4">
           <PointsAndFunctionGraph
             points={userInput.points}
-            fn={approximatedFn}
+            fn={interpolatedFnString}
           />
         </div>
       </div>
