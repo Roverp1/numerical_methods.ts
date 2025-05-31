@@ -19,7 +19,7 @@ const Calculator = ({ onChangeLatex }: Props) => {
 
   const handleChangeLatex = (newLatex: string) => {
     setLatex(newLatex);
-    onChangeLatex(newLatex); // prokyduvannya do PageBisection
+    onChangeLatex(newLatex); // lifting up to PageBisection
   };
 
   return (
