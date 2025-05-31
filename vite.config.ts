@@ -20,7 +20,6 @@ export default defineConfig({
 
   optimizeDeps: {
     esbuildOptions: {
-      // 👉 поліфіл для "global"
       define: {
         global: "globalThis",
       },
