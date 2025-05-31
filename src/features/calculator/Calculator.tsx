@@ -1,8 +1,8 @@
 import { useRef, useState } from "react";
-import FunctionEditor from "../../../../shared/ui/textarea/FunctionEditor/FunctionEditor";
-import MathKeyboard from "../../../../shared/ui/MathKeyboard/MathKeyboard";
+import FunctionEditor from "../../shared/ui/textarea/FunctionEditor/FunctionEditor";
+import MathKeyboard from "../../shared/ui/MathKeyboard/MathKeyboard";
 
-import type { FunctionEditorHandle } from "../../../../shared/types/typesFunctionEditor";
+import type { FunctionEditorHandle } from "../../shared/types/typesFunctionEditor";
 
 type Props = {
   onChangeLatex: (latex: string) => void;

@@ -3,7 +3,7 @@ import { compile } from "mathjs";
 
 import SectionResults from "./SectionResults/SectionResults";
 import FormInputBisection from "../../widgets/forms/FormInputBisection/FormInputBisection";
-import { Calculator } from "../../features/calculator";
+import Calculator from "../../features/calculator/Calculator";
 import FunctionGraph from "../../shared/components/FunctionGraph/FunctionGraph";
 
 import bisectionMethod from "../../shared/lib/bisection_method";
