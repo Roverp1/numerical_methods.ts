@@ -110,7 +110,7 @@ const computeResults = (
     row + 1,
   );
 
-  // functional, with closure functions ->
+  // functional, with pure helpers ->
   // const sumOfComputedValues = augMatrix[row]
   //   .slice(row + 1, augMatrix[row].length - 1)
   //   .reduce((acc, cur, j) => acc + cur * results[row + 1 + j], 0);
