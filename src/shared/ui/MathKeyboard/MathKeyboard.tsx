@@ -9,14 +9,8 @@ const MathKeyboard: React.FC<Props> = ({ onInsert }) => {
     { label: "√", cmd: "\\sqrt" },
     { label: "x²", cmd: "^2" },
     { label: "a⁄b", cmd: "\\frac" },
-    { label: "≤", cmd: "\\le" },
-    { label: "≥", cmd: "\\ge" },
-    { label: "≠", cmd: "\\neq" },
-    { label: "α", cmd: "\\alpha" },
     { label: "π", cmd: "\\pi" },
     { label: "∫", cmd: "\\int" },
-    // { label: "lim", cmd: "\\lim_{n\\to\\infty}" },
-    // { label: "[Matrix]", cmd: "\\begin{bmatrix}a & b \\\\ c & d\\end{bmatrix}" },
   ];
 
   return (
