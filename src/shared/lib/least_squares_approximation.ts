@@ -144,6 +144,18 @@ export const backSubstitution = (upperTriMatrix: number[][]): number[] => {
   );
 };
 
+export const getCoefficients = (points: xyPoints, degree: number): number[] => {
+  const matrixA = buildMatrixA(points, degree);
+  const vectorB = buildVectorB(points, degree);
+
+  const augmentedMatrix = buildAugmentedMatrix(matrixA, vectorB);
+
+  const upperTriMatrix = forwardElimination(augmentedMatrix);
+  const coefficients = backSubstitution(upperTriMatrix);
+
+  return coefficients;
+};
+
 // A * c = B
 const leastSquaresApproximation = (
   points: xyPoints,
