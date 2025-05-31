@@ -2,18 +2,18 @@ import { useCallback, useEffect, useRef } from "react";
 import functionPlot from "function-plot";
 import type { FunctionPlotDatum } from "function-plot";
 
-import "./FunctionGraphInterpolation.scss";
-import type { xyPoints } from "../../../shared/types";
+import "./PointsAndFunctionGraph.scss";
+import type { xyPoints } from "../../types";
 
-type FunctionGraphProps = {
+type PointsAndFunctionGraphProps = {
   points: xyPoints;
-  approximatedFn: string;
+  fn: string;
 };
 
-const FunctionGraphInterpolation = ({
+const PointsAndFunctionGraph = ({
   points,
-  approximatedFn,
-}: FunctionGraphProps) => {
+  fn,
+}: PointsAndFunctionGraphProps) => {
   const graphRef = useRef<HTMLDivElement>(null);
 
   const drawGraph = useCallback(() => {
@@ -40,15 +40,15 @@ const FunctionGraphInterpolation = ({
               r: 3,
             },
           },
-          approximatedFn && {
-            fn: approximatedFn,
+          fn && {
+            fn: fn,
           },
         ].filter(Boolean) as FunctionPlotDatum[],
       });
     } catch (err) {
       console.error(err);
     }
-  }, [points, approximatedFn]);
+  }, [points, fn]);
 
   useEffect(() => {
     drawGraph();
@@ -59,7 +59,7 @@ const FunctionGraphInterpolation = ({
     };
   }, [drawGraph]);
 
-  return <div className="function-graph-interpolation" ref={graphRef}></div>;
+  return <div className="points-and-function-graph" ref={graphRef}></div>;
 };
 
-export default FunctionGraphInterpolation;
+export default PointsAndFunctionGraph;
