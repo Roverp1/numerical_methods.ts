@@ -1,13 +1,13 @@
 import { useCallback, useEffect, useRef } from "react";
 import functionPlot from "function-plot";
 
-import "./FunctionGraph.scss";
+import "./FunctionGraphInterpolation.scss";
 
 type FunctionGraphProps = {
   fn: string;
 };
 
-const FunctionGraph = ({ fn }: FunctionGraphProps) => {
+const FunctionGraphInterpolation = ({ fn }: FunctionGraphProps) => {
   const graphRef = useRef<HTMLDivElement>(null);
 
   const drawGraph = useCallback(() => {
@@ -47,7 +47,7 @@ const FunctionGraph = ({ fn }: FunctionGraphProps) => {
     };
   }, [drawGraph]);
 
-  return <div className="function-graph" ref={graphRef}></div>;
+  return <div className="function-graph-interpolation" ref={graphRef}></div>;
 };
 
-export default FunctionGraph;
+export default FunctionGraphInterpolation;

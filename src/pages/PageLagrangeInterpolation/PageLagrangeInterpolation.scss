@@ -1,4 +1,4 @@
-.page-interpolation {
+.page-lagrange-interpolation {
   flex: 1;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -13,21 +13,21 @@
     }
 
     &.col-2 {
-      grid-template-rows: 25% 75%;
+      grid-template-rows: 100%;
     }
 
     .box {
-      background: peru;
+      // background: peru;
       display: flex;
       align-items: center;
       justify-content: center;
 
-      &.box-1 {
+      &.box-3 {
         background-color: powderblue;
       }
 
       &.box-4 {
-        background-color: firebrick;
+        // background-color: firebrick;
       }
     }
   }
