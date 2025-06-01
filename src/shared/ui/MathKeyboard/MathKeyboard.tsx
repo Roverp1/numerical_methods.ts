@@ -1,13 +1,29 @@
+import type { FunctionEditorHandle } from "../../types/typesFunctionEditor";
 import "./MathKeyboard.scss";
+
+type ScientificButton = {
+  label: string;
+  cmd?: string;
+  custom?: () => void;
+};
 
 type Props = {
   onInsert: (cmd: string) => void;
+  editorRef: React.RefObject<FunctionEditorHandle | null>;
 };
 
-const MathKeyboard: React.FC<Props> = ({ onInsert }) => {
-  const buttonsScientificPanel = [
+const MathKeyboard: React.FC<Props> = ({ onInsert, editorRef }) => {
+  const buttonsScientificPanel: ScientificButton[] = [
     { label: "√", cmd: "\\sqrt" },
-    { label: "x²", cmd: "^2" },
+    {
+      label: "x²",
+      custom: () => {
+        editorRef.current?.insert("x");
+        editorRef.current?.insert("^");
+        editorRef.current?.insert("2");
+        editorRef.current?.keystroke?.("Right");
+      },
+    },
     { label: "a⁄b", cmd: "\\frac" },
     { label: "π", cmd: "\\pi" },
     { label: "∫", cmd: "\\int" },
@@ -36,7 +52,16 @@ const MathKeyboard: React.FC<Props> = ({ onInsert }) => {
     <div className="math-keyboard">
       <div className="math-keyboard__scientific-panel">
         {buttonsScientificPanel.map((btn, index) => (
-          <button className="button" key={index} onClick={() => onInsert(btn.cmd)}>
+          <button
+            className="button"
+            key={index}
+            onClick={() => {
+              if (btn.custom) {
+                btn.custom();
+              } else if (btn.cmd) {
+                onInsert(btn.cmd);
+              }
+            }}>
             {btn.label}
           </button>
         ))}

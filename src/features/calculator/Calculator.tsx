@@ -25,7 +25,7 @@ const Calculator = ({ onChangeLatex }: Props) => {
   return (
     <div className="calculator">
       <FunctionEditor value={latex} onChange={handleChangeLatex} ref={editorRef} />
-      <MathKeyboard onInsert={handleInsert} />
+      <MathKeyboard onInsert={handleInsert} editorRef={editorRef} />
     </div>
   );
 };

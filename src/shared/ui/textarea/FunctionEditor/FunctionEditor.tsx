@@ -27,6 +27,18 @@ const FunctionEditor = forwardRef<FunctionEditorHandle, FunctionEditorProps>(
           mathFieldRef.current.focus();
         }
       },
+      write: (text: string) => {
+        if (mathFieldRef.current) {
+          mathFieldRef.current.write(text);
+          mathFieldRef.current.focus();
+        }
+      },
+      keystroke: (key: string) => {
+        if (mathFieldRef.current) {
+          mathFieldRef.current.keystroke(key);
+          mathFieldRef.current.focus();
+        }
+      },
     }));
 
     return (
