@@ -3,9 +3,10 @@ import { useEffect, useState } from "react";
 import PointsAndFunctionGraph from "../../shared/components/PointsAndFunctionGraph/PointsAndFunctionGraph";
 import leastSquaresApproximation, {
   approximatedPolynomialString,
+  getCoefficients,
 } from "../../shared/lib/least_squares_approximation";
 
-import type { xyPoints } from "../../shared/types";
+import type { LeastSquaresApproxResult, xyPoints } from "../../shared/types";
 
 import "./PageLeastSquaresApproximation.scss";
 import SectionResults from "./SectionResults/SectionResults";
@@ -18,9 +19,9 @@ type UserInput = {
 const PageLeastSquaresApproximation = () => {
   const [userInput, setUserInput] = useState<UserInput>({
     points: [],
-    degree: 2,
+    degree: 8,
   });
-  const [approximatedFnString, setApproximatedFnString] = useState<string>("");
+  const [result, setResult] = useState<LeastSquaresApproxResult | null>(null);
 
   useEffect(() => {
     setUserInput((prev) => ({
@@ -38,13 +39,22 @@ const PageLeastSquaresApproximation = () => {
   }, []);
 
   useEffect(() => {
-    const polynomialString = approximatedPolynomialString(
-      userInput.points,
-      userInput.degree,
-    );
-    console.log("polynomialString:", polynomialString);
+    try {
+      const coefficients = getCoefficients(userInput.points, userInput.degree);
+      const polynomialString = approximatedPolynomialString(
+        userInput.points,
+        userInput.degree,
+      );
+      console.log("polynomialString:", polynomialString);
 
-    setApproximatedFnString(polynomialString);
+      setResult({
+        polynomialString,
+        coefficients,
+        success: true,
+      });
+    } catch (err) {
+      console.log("err:", err);
+    }
   }, [userInput]);
 
   return (
@@ -52,14 +62,14 @@ const PageLeastSquaresApproximation = () => {
       <div className="col col-1">
         <div className="box box-1">Input for graph points / calculator</div>
         <div className="box box-3">
-          <SectionResults />
+          <SectionResults result={result} />
         </div>
       </div>
       <div className="col col-2">
         <div className="box box-4">
           <PointsAndFunctionGraph
             points={userInput.points}
-            fn={approximatedFnString}
+            fn={result?.polynomialString}
           />
         </div>
       </div>

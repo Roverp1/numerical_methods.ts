@@ -1,10 +1,15 @@
-import { LiaDAndD, LiaAtomSolid } from "react-icons/lia";
+import { LiaDAndD } from "react-icons/lia";
 
 import "./SectionResults.scss";
 
-import type { BisectionResult } from "../../../shared/types";
+import type { LeastSquaresApproxResult } from "../../../shared/types";
+import { StaticMathField } from "react-mathquill";
 
-const SectionResults = ({ result }: { result: BisectionResult | null }) => {
+const SectionResults = ({
+  result,
+}: {
+  result: LeastSquaresApproxResult | null;
+}) => {
   if (!result)
     return (
       <section className="section-results-skeleton">
@@ -12,7 +17,7 @@ const SectionResults = ({ result }: { result: BisectionResult | null }) => {
       </section>
     );
 
-  const { success, root, iterations, steps, error } = result;
+  const { polynomialString, coefficients, success, error } = result;
 
   if (!success) {
     return (
@@ -24,22 +29,31 @@ const SectionResults = ({ result }: { result: BisectionResult | null }) => {
     );
   }
 
+  const polynomialStringToLatex = (polynomialString: string): string => {
+    const latexString = polynomialString.replace(/\*/g, "\\cdot");
+
+    return latexString;
+  };
+
   return (
     <section className="section-results">
-      <ul className="last-iterations">
-        {steps.slice(-8, -1).map((step) => (
-          <li className="iteration" key={step.iteration}>
-            x0 = {step.x0.toFixed(3)}, after {step.iteration} iterations.
-          </li>
-        ))}
-      </ul>
-      <div className="answer">
-        <p className="number-of-iter">Number of iterations: {iterations}</p>
-        <p className="root">
-          <LiaAtomSolid className="icon" />
-          Root: {root}
+      <div className="polynomial-string">
+        <h3 className="title">Polynomial String:</h3>
+        <p className="polynomial">
+          <StaticMathField>
+            {polynomialStringToLatex(polynomialString)}
+          </StaticMathField>
         </p>
       </div>
+      <p className="coefficients">
+        {coefficients.map((coef, i) => (
+          <>
+            <span className="coefficient">
+              a{i}: {coef.toFixed(3)}
+            </span>
+          </>
+        ))}
+      </p>
     </section>
   );
 };

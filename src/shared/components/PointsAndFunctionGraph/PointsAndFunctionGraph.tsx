@@ -7,7 +7,7 @@ import type { xyPoints } from "../../types";
 
 type PointsAndFunctionGraphProps = {
   points: xyPoints;
-  fn: string;
+  fn?: string;
 };
 
 const PointsAndFunctionGraph = ({
