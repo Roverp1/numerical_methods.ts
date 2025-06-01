@@ -26,6 +26,14 @@ const MathKeyboard: React.FC<Props> = ({ onInsert, editorRef }) => {
     },
     { label: "a⁄b", cmd: "\\frac" },
     { label: "π", cmd: "\\pi" },
+    {
+      label: "ⁿ√",
+      custom: () => {
+        editorRef.current?.write("\\sqrt[]{}");
+        editorRef.current?.keystroke("Left");
+      },
+    },
+
     { label: "∫", cmd: "\\int" },
   ];
 

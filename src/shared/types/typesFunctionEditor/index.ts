@@ -2,6 +2,7 @@ export type FunctionEditorHandle = {
   insert: (cmd: string) => void;
   write: (text: string) => void;
   keystroke: (key: string) => void;
+  cmd: (cmd: string) => void;
 };
 
 export interface MathQuillField {
