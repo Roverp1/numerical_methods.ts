@@ -33,7 +33,14 @@ const MathKeyboard: React.FC<Props> = ({ onInsert, editorRef }) => {
         editorRef.current?.keystroke("Left");
       },
     },
-
+    {
+      label: "xⁿ",
+      custom: () => {
+        editorRef.current?.insert("x");
+        editorRef.current?.insert("^");
+        editorRef.current?.insert("");
+      },
+    },
     { label: "∫", cmd: "\\int" },
   ];
 
