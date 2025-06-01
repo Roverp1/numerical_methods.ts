@@ -5,7 +5,7 @@ type Props = {
 };
 
 const MathKeyboard: React.FC<Props> = ({ onInsert }) => {
-  const buttons = [
+  const buttonsScientificPanel = [
     { label: "√", cmd: "\\sqrt" },
     { label: "x²", cmd: "^2" },
     { label: "a⁄b", cmd: "\\frac" },
@@ -13,32 +13,40 @@ const MathKeyboard: React.FC<Props> = ({ onInsert }) => {
     { label: "∫", cmd: "\\int" },
   ];
 
+  const buttonsNumericKeypad = [
+    { label: "7", cmd: "7" },
+    { label: "8", cmd: "8" },
+    { label: "9", cmd: "9" },
+    { label: "/", cmd: "/" },
+    { label: "4", cmd: "4" },
+    { label: "5", cmd: "5" },
+    { label: "6", cmd: "6" },
+    { label: "x", cmd: "*" },
+    { label: "1", cmd: "1" },
+    { label: "2", cmd: "2" },
+    { label: "3", cmd: "3" },
+    { label: "-", cmd: "-" },
+    { label: "0", cmd: "0" },
+    { label: ".", cmd: "." },
+    { label: "anc", cmd: "anc" },
+    { label: "+", cmd: "+" },
+  ];
+
   return (
     <div className="math-keyboard">
       <div className="math-keyboard__scientific-panel">
-        {buttons.map((btn, index) => (
+        {buttonsScientificPanel.map((btn, index) => (
           <button className="button" key={index} onClick={() => onInsert(btn.cmd)}>
             {btn.label}
           </button>
         ))}
       </div>
       <div className="math-keyboard__numeric-keypad">
-        <button className="button">7</button>
-        <button className="button">8</button>
-        <button className="button">9</button>
-        <button className="button">/</button>
-        <button className="button">4</button>
-        <button className="button">5</button>
-        <button className="button">6</button>
-        <button className="button">x</button>
-        <button className="button">1</button>
-        <button className="button">2</button>
-        <button className="button">3</button>
-        <button className="button">-</button>
-        <button className="button">0</button>
-        <button className="button">.</button>
-        <button className="button">ans</button>
-        <button className="button">+</button>
+        {buttonsNumericKeypad.map((btn, index) => (
+          <button className="button" key={index} onClick={() => onInsert(btn.cmd)}>
+            {btn.label}
+          </button>
+        ))}
       </div>
       <div className="math-keyboard__control-panel">
         <button className="button">{"-->"}</button>
