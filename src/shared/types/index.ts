@@ -20,6 +20,13 @@ export type BisectionResult = {
   error?: string;
 };
 
+export type LeastSquaresApproxResult = {
+  polynomialString: string;
+  coefficients: number[];
+  success: boolean;
+  error?: string;
+};
+
 export type InputFunction = (x: number) => number;
 
 export type xyPoints = [number, number][];
