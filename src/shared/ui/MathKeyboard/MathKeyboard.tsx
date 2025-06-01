@@ -51,7 +51,7 @@ const MathKeyboard: React.FC<Props> = ({ onInsert, editorRef }) => {
     { label: "3", cmd: "3" },
     { label: "-", cmd: "-" },
     { label: "0", cmd: "0" },
-    { label: ".", cmd: "." },
+    { label: ",", cmd: "." },
     { label: "anc", cmd: "anc" },
     { label: "+", cmd: "+" },
   ];
