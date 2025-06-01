@@ -8,6 +8,7 @@ import leastSquaresApproximation, {
 import type { xyPoints } from "../../shared/types";
 
 import "./PageLeastSquaresApproximation.scss";
+import SectionResults from "./SectionResults/SectionResults";
 
 type UserInput = {
   points: xyPoints;
@@ -50,7 +51,9 @@ const PageLeastSquaresApproximation = () => {
     <main className="page-least-squares-approximation">
       <div className="col col-1">
         <div className="box box-1">Input for graph points / calculator</div>
-        <div className="box box-3">Results</div>
+        <div className="box box-3">
+          <SectionResults />
+        </div>
       </div>
       <div className="col col-2">
         <div className="box box-4">
