@@ -2,14 +2,11 @@ import { useRef, forwardRef, useImperativeHandle } from "react";
 import { EditableMathField, addStyles } from "react-mathquill";
 
 import type { MathQuillField } from "../../../types/typesFunctionEditor";
+import type { FunctionEditorHandle } from "../../../types/typesFunctionEditor";
 
 import "./FunctionEditor.scss";
 
 addStyles();
-
-export type FunctionEditorHandle = {
-  insert: (cmd: string) => void;
-};
 
 type FunctionEditorProps = {
   value: string;
@@ -22,6 +19,24 @@ const FunctionEditor = forwardRef<FunctionEditorHandle, FunctionEditorProps>(
 
     useImperativeHandle(ref, () => ({
       insert: (cmd: string) => {
+        if (mathFieldRef.current) {
+          mathFieldRef.current.cmd(cmd);
+          mathFieldRef.current.focus();
+        }
+      },
+      write: (text: string) => {
+        if (mathFieldRef.current) {
+          mathFieldRef.current.write(text);
+          mathFieldRef.current.focus();
+        }
+      },
+      keystroke: (key: string) => {
+        if (mathFieldRef.current) {
+          mathFieldRef.current.keystroke(key);
+          mathFieldRef.current.focus();
+        }
+      },
+      cmd: (cmd: string) => {
         if (mathFieldRef.current) {
           mathFieldRef.current.cmd(cmd);
           mathFieldRef.current.focus();
