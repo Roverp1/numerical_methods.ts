@@ -21,7 +21,7 @@ const PageLeastSquaresApproximation = () => {
 
   const [userInput, setUserInput] = useState<UserInput>({
     points: [],
-    degree: 3,
+    degree: 1,
   });
   const [result, setResult] = useState<LeastSquaresApproxResult | null>(null);
 
@@ -61,19 +61,6 @@ const PageLeastSquaresApproximation = () => {
       points: parsedInput,
       degree: prev.degree,
     }));
-
-    // setUserInput((prev) => ({
-    //   points: [
-    //     [1, 5],
-    //     [2, 3],
-    //     [3, 6],
-    //     [4, 3.5],
-    //     [5, 4.5],
-    //     [6, 7],
-    //     [7, 5.5],
-    //   ] as xyPoints,
-    //   degree: prev.degree,
-    // }));
   }, [pointsInput]);
 
   useEffect(() => {
@@ -144,12 +131,17 @@ const PageLeastSquaresApproximation = () => {
               type="number"
               className="degree-input"
               value={userInput.degree}
-              onChange={(e) =>
+              onChange={(e) => {
+                let newDegree: number = 1;
+                if (e.target.value) {
+                  newDegree = Math.min(parseInt(e.target.value), 100);
+                }
+
                 setUserInput((prev) => ({
                   points: prev.points,
-                  degree: parseInt(e.target.value),
-                }))
-              }
+                  degree: newDegree,
+                }));
+              }}
             />
           </div>
 
