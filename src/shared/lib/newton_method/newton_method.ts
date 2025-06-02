@@ -1,9 +1,17 @@
-const newtonMethod = () => {
+import type { NewtonUserInput } from "../../types";
+
+const newtonMethod = (userInput: NewtonUserInput) => {
+  if (!userInput || userInput.dokladnosc <= 0) {
+    return {
+      result: NaN,
+      iterations: [],
+    };
+  }
+  // console.log(userInput);
+  const { dokladnosc, maxIterations } = userInput;
+
   const f = (x: number): number => x * x - 2;
-  const dokladnosc = 0.002;
   let x = 2; // початкове наближення
-  const maxIterations = 100;
-  let currentIteration = 1; // один, тому що ми вже один раз знайшли x_new до циклу
 
   const f_pochodna = (x: number): number => {
     const h = 0.0001; // крок вліво і вправо
@@ -16,16 +24,18 @@ const newtonMethod = () => {
   let x_new = x - f(x) / f_pochodna(x);
   console.log("x after 1 step: ", x_new);
 
+  let currentIteration = 1; // один, тому що ми вже один раз знайшли x_new до циклу
+
   while (Math.abs(x - x_new) > dokladnosc && currentIteration <= maxIterations) {
     x = x_new;
     x_new = x - f(x) / f_pochodna(x);
     currentIteration = currentIteration + 1;
     iterations.push({ x, y: f(x) });
-    console.log(`x after ${currentIteration} steps: ${x_new}`);
+    // console.log(`x after ${currentIteration} steps: ${x_new}`);
   }
 
   return { result: x_new, iterations };
 };
 
-newtonMethod();
+// newtonMethod();
 export default newtonMethod;

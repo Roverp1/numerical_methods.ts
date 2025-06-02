@@ -3,13 +3,19 @@ import functionPlot from "function-plot";
 
 import newtonMethod from "../../lib/newton_method/newton_method";
 
+import type { NewtonUserInput } from "../../types";
+
 import "./GraphNewton.scss";
 
-const GraphNewton = () => {
+type Props = {
+  userInput: NewtonUserInput;
+};
+
+const GraphNewton = ({ userInput }: Props) => {
   const graphRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    const { iterations } = newtonMethod();
+    const { iterations } = newtonMethod(userInput);
 
     if (!graphRef.current) return;
 
@@ -32,7 +38,7 @@ const GraphNewton = () => {
         },
       ],
     });
-  }, []);
+  }, [userInput]);
 
   return <div className="graph-newton" ref={graphRef} />;
 };
