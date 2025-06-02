@@ -12,6 +12,7 @@ const newtonMethod = () => {
     // 2 * h --> це ширина між двома точками
   };
 
+  const iterations = [{ x, y: f(x) }]; // iterations[].png
   let x_new = x - f(x) / f_pochodna(x);
   console.log("x after 1 step: ", x_new);
 
@@ -19,10 +20,11 @@ const newtonMethod = () => {
     x = x_new;
     x_new = x - f(x) / f_pochodna(x);
     currentIteration = currentIteration + 1;
+    iterations.push({ x, currentIteration });
     console.log(`x after ${currentIteration} steps: ${x_new}`);
   }
 
-  return x_new;
+  return { result: x_new, iterations };
 };
 
 newtonMethod();
