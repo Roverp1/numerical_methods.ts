@@ -17,7 +17,7 @@ type UserInput = {
 };
 
 const PageLeastSquaresApproximation = () => {
-  const [pointsInput, setPointsInput] = useState();
+  const [pointsInput, setPointsInput] = useState<string>("");
 
   const [userInput, setUserInput] = useState<UserInput>({
     points: [],
@@ -25,20 +25,56 @@ const PageLeastSquaresApproximation = () => {
   });
   const [result, setResult] = useState<LeastSquaresApproxResult | null>(null);
 
+  const parsePoints = (input: string): xyPoints | null => {
+    try {
+      const wrapped = `[${input}]`;
+
+      const parsed = JSON.parse(wrapped);
+
+      if (
+        Array.isArray(parsed) &&
+        parsed.every(
+          (point) =>
+            Array.isArray(point) &&
+            point.length === 2 &&
+            point.every((n) => typeof n === "number"),
+        )
+      ) {
+        return parsed as xyPoints;
+      }
+
+      return null;
+    } catch (err) {
+      console.log("err:", err);
+      return null;
+    }
+  };
+
   useEffect(() => {
+    console.log("parsePoints:", parsePoints(pointsInput));
+
+    const parsedInput = parsePoints(pointsInput);
+
+    if (!parsedInput) return;
+
     setUserInput((prev) => ({
-      points: [
-        [1, 5],
-        [2, 3],
-        [3, 6],
-        [4, 3.5],
-        [5, 4.5],
-        [6, 7],
-        [7, 5.5],
-      ] as xyPoints,
+      points: parsedInput,
       degree: prev.degree,
     }));
-  }, []);
+
+    // setUserInput((prev) => ({
+    //   points: [
+    //     [1, 5],
+    //     [2, 3],
+    //     [3, 6],
+    //     [4, 3.5],
+    //     [5, 4.5],
+    //     [6, 7],
+    //     [7, 5.5],
+    //   ] as xyPoints,
+    //   degree: prev.degree,
+    // }));
+  }, [pointsInput]);
 
   useEffect(() => {
     try {
@@ -99,7 +135,7 @@ const PageLeastSquaresApproximation = () => {
             className="points-input"
             type="text"
             value={pointsInput}
-            onChange={(e) => e.target.value}
+            onChange={(e) => setPointsInput(e.target.value)}
             placeholder="Input points, eg: [1, 5], [2, 3], [3, 6]"
           />
         </div>
