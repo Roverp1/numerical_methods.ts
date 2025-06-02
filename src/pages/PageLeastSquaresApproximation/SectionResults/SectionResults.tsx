@@ -30,29 +30,40 @@ const SectionResults = ({
     );
   }
 
-  const polynomialStringToLatex = (polynomialString: string): string => {
-    const latexString = polynomialString.replace(/\*/g, "\\cdot");
+  const polynomialStringToLatex = (polynomialString: string): string[] => {
+    const latexString = polynomialString
+      .replace(/\*/g, "\\cdot")
+      .replace(/x\^([0-9]+)/g, (_, power) => `x^{${power}}`);
 
-    return latexString;
+    const term = latexString.split(" + ");
+
+    return term;
   };
+
+  const polynomialTerms = polynomialStringToLatex(polynomialString);
 
   return (
     <section className="section-results">
       <div className="polynomial-string">
         <h3 className="title">Polynomial String:</h3>
         <p className="polynomial">
-          <StaticMathField>
-            {polynomialStringToLatex(polynomialString)}
-          </StaticMathField>
+          {/* cause mathquill string do not wrap */}
+          {/* string needs to be split into an array */}
+          {/* and then rendered by mapping throu that array */}
+          {polynomialTerms.map((term, i) =>
+            i < polynomialTerms.length - 1 ? (
+              <StaticMathField>{`${term} + `}</StaticMathField>
+            ) : (
+              <StaticMathField>{term}</StaticMathField>
+            ),
+          )}
         </p>
       </div>
       <p className="coefficients">
         {coefficients.map((coef, i) => (
-          <>
-            <span className="coefficient">
-              a{i}: {coef.toFixed(3)}
-            </span>
-          </>
+          <span className="coefficient">
+            <StaticMathField>{`a_{${i}} = ${coef.toFixed(3)}`}</StaticMathField>
+          </span>
         ))}
       </p>
     </section>

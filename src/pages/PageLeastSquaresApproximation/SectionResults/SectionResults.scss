@@ -35,16 +35,12 @@
   }
 
   .coefficients {
-    display: flex;
-    justify-content: center;
-    gap: .4rem;
-    flex-wrap: wrap;
+    // flex-box wraping creates to much vertical spacing
+    // this is workaround to center and create gaps
+    text-align: center;
 
-    .coefficient {
-
-      &:not(:last-child)::after {
-        content: "|";
-      }
+    .coefficient:not(:last-child) {
+      margin-right: .9rem;
     }
   }
 }
