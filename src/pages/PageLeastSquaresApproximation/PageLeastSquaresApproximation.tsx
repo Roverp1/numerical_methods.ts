@@ -19,7 +19,7 @@ type UserInput = {
 const PageLeastSquaresApproximation = () => {
   const [userInput, setUserInput] = useState<UserInput>({
     points: [],
-    degree: 8,
+    degree: 3,
   });
   const [result, setResult] = useState<LeastSquaresApproxResult | null>(null);
 
@@ -40,12 +40,44 @@ const PageLeastSquaresApproximation = () => {
 
   useEffect(() => {
     try {
+      if (userInput.points.length <= 0) {
+        setResult({
+          polynomialString: "",
+          coefficients: [],
+          success: false,
+          error: "No points provided",
+        });
+
+        return;
+      }
+
+      if (userInput.points.length < 3) {
+        setResult({
+          polynomialString: "",
+          coefficients: [],
+          success: false,
+          error: "You need at least 3 points for approximation",
+        });
+
+        return;
+      }
+
       const coefficients = getCoefficients(userInput.points, userInput.degree);
       const polynomialString = approximatedPolynomialString(
         userInput.points,
         userInput.degree,
       );
-      console.log("polynomialString:", polynomialString);
+
+      if (coefficients.some(Number.isNaN)) {
+        setResult({
+          polynomialString: "",
+          coefficients: [],
+          success: false,
+          error: "Coefficients contains NaN, input is incorrect",
+        });
+
+        return;
+      }
 
       setResult({
         polynomialString,

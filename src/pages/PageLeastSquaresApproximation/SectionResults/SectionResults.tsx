@@ -3,6 +3,7 @@ import { LiaDAndD } from "react-icons/lia";
 import "./SectionResults.scss";
 
 import type { LeastSquaresApproxResult } from "../../../shared/types";
+
 import { StaticMathField } from "react-mathquill";
 
 const SectionResults = ({
