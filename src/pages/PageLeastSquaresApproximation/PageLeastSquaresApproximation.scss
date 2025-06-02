@@ -11,6 +11,23 @@
     &.col-1 {
       grid-template-rows: 75% 25%;
 
+      .box-1 {
+
+        .points-input {
+          display: flex;
+          gap: 1rem;
+
+          width: 100%;
+          height: 3.64rem;
+          font-size: 1.8rem;
+          line-height: 1.8;
+          padding-left: 0.8rem;
+          border: 2px solid #71717a;
+
+          margin: 1.8rem 0 0 0;
+        }
+      }
+
       .box-3 {
         padding: 1rem 0;
       }
@@ -18,21 +35,6 @@
 
     &.col-2 {
       grid-template-rows: 100%;
-    }
-
-    .box {
-      // background: peru;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      &.box-3 {
-        // background-color: powderblue;
-      }
-
-      &.box-4 {
-        // background-color: firebrick;
-      }
     }
   }
 }

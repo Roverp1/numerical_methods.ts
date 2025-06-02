@@ -17,6 +17,8 @@ type UserInput = {
 };
 
 const PageLeastSquaresApproximation = () => {
+  const [pointsInput, setPointsInput] = useState();
+
   const [userInput, setUserInput] = useState<UserInput>({
     points: [],
     degree: 3,
@@ -92,7 +94,15 @@ const PageLeastSquaresApproximation = () => {
   return (
     <main className="page-least-squares-approximation">
       <div className="col col-1">
-        <div className="box box-1">Input for graph points / calculator</div>
+        <div className="box box-1">
+          <input
+            className="points-input"
+            type="text"
+            value={pointsInput}
+            onChange={(e) => e.target.value}
+            placeholder="Input points, eg: [1, 5], [2, 3], [3, 6]"
+          />
+        </div>
         <div className="box box-3">
           <SectionResults result={result} />
         </div>
