@@ -8,7 +8,7 @@ type FormInputBisectionProps = {
 
 const FormInputBisection: React.FC<FormInputBisectionProps> = ({ onHandleChange }) => {
   return (
-    <form className="page-bisection__given-data">
+    <form className="form-input-bisection">
       <fieldset>
         <legend>Wprowadź swoje dane</legend>
 
