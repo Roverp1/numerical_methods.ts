@@ -18,18 +18,15 @@
 
         .inputs-container {
           @mixin input-style {
-            display: flex;
-            gap: 1rem;
-
             height: 3.64rem;
             font-size: 1.8rem;
             line-height: 1.8;
-            padding-left: 0.8rem;
             border: 2px solid #71717a;
+            padding: 0 0.8rem;
           }
 
           display: grid;
-          grid-template-columns: 95% 5%;
+          grid-template-columns: 1fr auto;
           gap: 0 1.4rem;
 
           margin: 1.8rem 0 0 0;
@@ -40,7 +37,8 @@
 
           .degree-input {
             @include input-style();
-
+            width: fit-content;
+            max-width: 5rem;
           }
         }
 
