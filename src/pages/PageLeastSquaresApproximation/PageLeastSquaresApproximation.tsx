@@ -17,26 +17,51 @@ type UserInput = {
 };
 
 const PageLeastSquaresApproximation = () => {
+  const [pointsInput, setPointsInput] = useState<string>("");
+
   const [userInput, setUserInput] = useState<UserInput>({
     points: [],
-    degree: 3,
+    degree: 1,
   });
   const [result, setResult] = useState<LeastSquaresApproxResult | null>(null);
 
+  const parsePoints = (input: string): xyPoints | null => {
+    try {
+      const wrapped = `[${input}]`;
+
+      const parsed = JSON.parse(wrapped);
+
+      if (
+        Array.isArray(parsed) &&
+        parsed.every(
+          (point) =>
+            Array.isArray(point) &&
+            point.length === 2 &&
+            point.every((n) => typeof n === "number"),
+        )
+      ) {
+        return parsed as xyPoints;
+      }
+
+      return null;
+    } catch (err) {
+      console.log("err:", err);
+      return null;
+    }
+  };
+
   useEffect(() => {
+    console.log("parsePoints:", parsePoints(pointsInput));
+
+    const parsedInput = parsePoints(pointsInput);
+
+    if (!parsedInput) return;
+
     setUserInput((prev) => ({
-      points: [
-        [1, 5],
-        [2, 3],
-        [3, 6],
-        [4, 3.5],
-        [5, 4.5],
-        [6, 7],
-        [7, 5.5],
-      ] as xyPoints,
+      points: parsedInput,
       degree: prev.degree,
     }));
-  }, []);
+  }, [pointsInput]);
 
   useEffect(() => {
     try {
@@ -92,7 +117,48 @@ const PageLeastSquaresApproximation = () => {
   return (
     <main className="page-least-squares-approximation">
       <div className="col col-1">
-        <div className="box box-1">Input for graph points / calculator</div>
+        <div className="box box-1">
+          <div className="inputs-container">
+            <input
+              className="points-input"
+              type="text"
+              value={pointsInput}
+              onChange={(e) => setPointsInput(e.target.value)}
+              placeholder="Input points, eg: [1, 5], [2, 3], [3, 6]"
+            />
+
+            <input
+              type="number"
+              className="degree-input"
+              value={userInput.degree}
+              onChange={(e) => {
+                let newDegree: number = 1;
+                if (e.target.value) {
+                  newDegree = Math.min(parseInt(e.target.value), 100);
+                }
+
+                setUserInput((prev) => ({
+                  points: prev.points,
+                  degree: newDegree,
+                }));
+              }}
+            />
+          </div>
+
+          <input
+            type="range"
+            className="degree-input-range"
+            min="1"
+            max="100"
+            value={userInput.degree}
+            onChange={(e) =>
+              setUserInput((prev) => ({
+                points: prev.points,
+                degree: parseInt(e.target.value),
+              }))
+            }
+          />
+        </div>
         <div className="box box-3">
           <SectionResults result={result} />
         </div>
