@@ -1,4 +1,4 @@
-.page-interpolation {
+.page-newton {
   flex: 1;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -27,7 +27,7 @@
       }
 
       &.box-4 {
-        background-color: firebrick;
+        background-color: rgb(12, 178, 255);
       }
     }
   }
