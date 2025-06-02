@@ -1,14 +1,13 @@
 import { LiaDAndD, LiaAtomSolid } from "react-icons/lia";
 
 import "./SectionResults.scss";
-import "./SectionResultsError.scss";
 
 import type { BisectionResult } from "../../../shared/types";
 
 const SectionResults = ({ result }: { result: BisectionResult | null }) => {
   if (!result)
     return (
-      <section className="section-results-skeleton">
+      <section className="section-results-skeleton-bisection">
         Provide data to see results
       </section>
     );
@@ -17,7 +16,7 @@ const SectionResults = ({ result }: { result: BisectionResult | null }) => {
 
   if (!success) {
     return (
-      <section className="section-results-error">
+      <section className="section-results-error-bisection">
         <LiaDAndD className="icon" />
         <p>{error || "Wrong input data"}</p>
         <p>Try inputing different set of data</p>
@@ -26,7 +25,7 @@ const SectionResults = ({ result }: { result: BisectionResult | null }) => {
   }
 
   return (
-    <section className="section-results">
+    <section className="section-results-bisection">
       <ul className="last-iterations">
         {steps.slice(-8, -1).map((step) => (
           <li className="iteration" key={step.iteration}>

@@ -13,7 +13,7 @@ const SectionResults = ({
 }) => {
   if (!result)
     return (
-      <section className="section-results-skeleton">
+      <section className="section-results-skeleton-approximation">
         Provide data to see results
       </section>
     );
@@ -22,7 +22,7 @@ const SectionResults = ({
 
   if (!success) {
     return (
-      <section className="section-results-error">
+      <section className="section-results-error-approximation">
         <LiaDAndD className="icon" />
         <p>{error || "Wrong input data"}</p>
         <p>Try inputing different set of data</p>
@@ -43,7 +43,7 @@ const SectionResults = ({
   const polynomialTerms = polynomialStringToLatex(polynomialString);
 
   return (
-    <section className="section-results">
+    <section className="section-results-approximation">
       <div className="polynomial-string">
         <h3 className="title">Polynomial String:</h3>
         <p className="polynomial">

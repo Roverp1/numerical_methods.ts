@@ -12,7 +12,7 @@
   border: .1rem solid $bdr-color;
 }
 
-.section-results {
+.section-results-approximation {
   @include section_results_skeleton("true");
 
   .polynomial-string {
@@ -45,7 +45,7 @@
   }
 }
 
-.section-results-skeleton {
+.section-results-skeleton-approximation {
   @include section_results_skeleton("true");
 
   display: flex;
@@ -53,7 +53,7 @@
   align-items: center;
 }
 
-.section-results-error {
+.section-results-error-approximation {
   @include section_results_skeleton("true", darkred);
 
   color: darkred;
