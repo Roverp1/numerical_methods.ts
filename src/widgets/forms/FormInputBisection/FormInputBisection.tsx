@@ -2,11 +2,11 @@ import type { InputChangeEvent } from "../../../shared/types";
 
 import "./FormInputBisection.scss";
 
-type FormInputBisectionProps = {
+type Props = {
   onHandleChange: (e: InputChangeEvent) => void;
 };
 
-const FormInputBisection: React.FC<FormInputBisectionProps> = ({ onHandleChange }) => {
+const FormInputBisection = ({ onHandleChange }: Props) => {
   return (
     <form className="form-input-bisection">
       <fieldset>
