@@ -131,12 +131,40 @@ const PageLeastSquaresApproximation = () => {
     <main className="page-least-squares-approximation">
       <div className="col col-1">
         <div className="box box-1">
+          <div className="inputs-container">
+            <input
+              className="points-input"
+              type="text"
+              value={pointsInput}
+              onChange={(e) => setPointsInput(e.target.value)}
+              placeholder="Input points, eg: [1, 5], [2, 3], [3, 6]"
+            />
+
+            <input
+              type="number"
+              className="degree-input"
+              value={userInput.degree}
+              onChange={(e) =>
+                setUserInput((prev) => ({
+                  points: prev.points,
+                  degree: parseInt(e.target.value),
+                }))
+              }
+            />
+          </div>
+
           <input
-            className="points-input"
-            type="text"
-            value={pointsInput}
-            onChange={(e) => setPointsInput(e.target.value)}
-            placeholder="Input points, eg: [1, 5], [2, 3], [3, 6]"
+            type="range"
+            className="degree-input-range"
+            min="1"
+            max="100"
+            value={userInput.degree}
+            onChange={(e) =>
+              setUserInput((prev) => ({
+                points: prev.points,
+                degree: parseInt(e.target.value),
+              }))
+            }
           />
         </div>
         <div className="box box-3">

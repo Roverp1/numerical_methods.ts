@@ -12,19 +12,44 @@
       grid-template-rows: 75% 25%;
 
       .box-1 {
+        display: flex;
+        flex-direction: column;
+        gap: 1.2rem;
 
-        .points-input {
-          display: flex;
-          gap: 1rem;
+        .inputs-container {
+          @mixin input-style {
+            display: flex;
+            gap: 1rem;
 
-          width: 100%;
-          height: 3.64rem;
-          font-size: 1.8rem;
-          line-height: 1.8;
-          padding-left: 0.8rem;
-          border: 2px solid #71717a;
+            height: 3.64rem;
+            font-size: 1.8rem;
+            line-height: 1.8;
+            padding-left: 0.8rem;
+            border: 2px solid #71717a;
+          }
+
+          display: grid;
+          grid-template-columns: 95% 5%;
+          gap: 0 1.4rem;
 
           margin: 1.8rem 0 0 0;
+
+          .points-input {
+            @include input-style();
+          }
+
+          .degree-input {
+            @include input-style();
+
+          }
+        }
+
+        .degree-container {
+          display: flex;
+
+          .degree-input-range {
+            width: 100%;
+          }
         }
       }
 
