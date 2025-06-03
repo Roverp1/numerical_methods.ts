@@ -1,0 +1,5 @@
+@use "../../../shared/styles/mixins" as *;
+
+.points-input {
+  @include input-style();
+}

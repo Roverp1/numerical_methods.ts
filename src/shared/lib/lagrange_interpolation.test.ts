@@ -1,4 +1,6 @@
-import lagrangePolynomial from "./lagrange_interpolation";
+import lagrangePolynomial, {
+  lagrangePolynomialString,
+} from "./lagrange_interpolation";
 
 test("interpolates basic points", () => {
   const points: [number, number][] = [
@@ -26,4 +28,22 @@ test("test lagrangePolynomial with M.A. examle", () => {
 
   expect(P(0.5)).toBeCloseTo(-0.5);
   expect(P(-0.5)).toBeCloseTo(-3);
+});
+
+describe("lagrangePolynomialString", () => {
+  it("should return the correct Lagrange polynomial string", () => {
+    const points: [number, number][] = [
+      [1, 2],
+      [2, 3],
+      [3, 4],
+    ];
+
+    const result = lagrangePolynomialString(points);
+
+    expect(result).toBe(
+      "2 * ((x - 2) / (1 - 2)) * ((x - 3) / (1 - 3)) + " +
+        "3 * ((x - 1) / (2 - 1)) * ((x - 3) / (2 - 3)) + " +
+        "4 * ((x - 1) / (3 - 1)) * ((x - 2) / (3 - 2))",
+    );
+  });
 });
