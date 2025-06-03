@@ -66,6 +66,8 @@ const PageLeastSquaresApproximation = () => {
   useEffect(() => {
     try {
       if (userInput.points.length <= 0) {
+        if (!result) return;
+
         setResult({
           polynomialString: "",
           coefficients: [],
