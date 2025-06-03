@@ -20,6 +20,12 @@ export type BisectionResult = {
   error?: string;
 };
 
+export type LagrangeInterpolationResult = {
+  polynomialString: string;
+  success: boolean;
+  error?: string;
+};
+
 export type LeastSquaresApproxResult = {
   polynomialString: string;
   coefficients: number[];

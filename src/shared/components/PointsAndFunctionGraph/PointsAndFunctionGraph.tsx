@@ -37,7 +37,7 @@ const PointsAndFunctionGraph = ({
             fnType: "points",
             graphType: "scatter",
             attr: {
-              r: 3,
+              r: 4,
             },
           },
           fn && {
