@@ -10,25 +10,14 @@
 
     &.col-1 {
       grid-template-rows: 75% 25%;
+
+      .box-1 {
+        margin: 1.8rem 0 0 0;
+      }
     }
 
     &.col-2 {
       grid-template-rows: 100%;
-    }
-
-    .box {
-      // background: peru;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      &.box-3 {
-        background-color: powderblue;
-      }
-
-      &.box-4 {
-        // background-color: firebrick;
-      }
     }
   }
 }
