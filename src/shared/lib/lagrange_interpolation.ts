@@ -1,6 +1,23 @@
 // P(x) = Σ [ Li(x) * yi ] for i = 0 to n
 // Li(x) = Π [ (x - xj) / (xi - xj) ] for all j ≠ i
 
+import type { xyPoints } from "../types";
+
+export const lagrangePolynomialString = (points: xyPoints): string => {
+  const outerString = points
+    .map(([xi, yi], i) => {
+      const innerString = points
+        .map(([xj], j) => (j !== i ? `((x - ${xj}) / (${xi} - ${xj}))` : null))
+        .filter(Boolean)
+        .join(" * ");
+
+      return `${yi} * ${innerString}`;
+    })
+    .join(" + ");
+
+  return outerString;
+};
+
 const lagrangeBasis = (
   i: number,
   xValues: number[],
