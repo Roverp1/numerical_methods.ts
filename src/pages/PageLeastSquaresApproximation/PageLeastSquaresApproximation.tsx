@@ -10,6 +10,7 @@ import type { LeastSquaresApproxResult, xyPoints } from "../../shared/types";
 
 import "./PageLeastSquaresApproximation.scss";
 import SectionResults from "./SectionResults/SectionResults";
+import PointsInput from "../../widgets/inputs/PointsInput/PointsInput";
 
 type UserInput = {
   points: xyPoints;
@@ -121,12 +122,9 @@ const PageLeastSquaresApproximation = () => {
       <div className="col col-1">
         <div className="box box-1">
           <div className="inputs-container">
-            <input
-              className="points-input"
-              type="text"
-              value={pointsInput}
-              onChange={(e) => setPointsInput(e.target.value)}
-              placeholder="Input points, eg: [1, 5], [2, 3], [3, 6]"
+            <PointsInput
+              pointsInput={pointsInput}
+              setPointsInput={setPointsInput}
             />
 
             <input

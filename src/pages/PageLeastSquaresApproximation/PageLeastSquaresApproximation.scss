@@ -1,3 +1,5 @@
+@use "../../shared/styles/mixins" as *;
+
 .page-least-squares-approximation {
   flex: 1;
   display: grid;
@@ -17,23 +19,12 @@
         gap: 1.2rem;
 
         .inputs-container {
-          @mixin input-style {
-            height: 3.64rem;
-            font-size: 1.8rem;
-            line-height: 1.8;
-            border: 2px solid #71717a;
-            padding: 0 0.8rem;
-          }
 
           display: grid;
           grid-template-columns: 1fr auto;
           gap: 0 1.4rem;
 
           margin: 1.8rem 0 0 0;
-
-          .points-input {
-            @include input-style();
-          }
 
           .degree-input {
             @include input-style();

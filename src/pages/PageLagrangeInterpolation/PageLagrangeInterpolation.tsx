@@ -5,6 +5,7 @@ import PointsAndFunctionGraph from "../../shared/components/PointsAndFunctionGra
 import type { xyPoints } from "../../shared/types";
 
 import "./PageLagrangeInterpolation.scss";
+import PointsInput from "../../widgets/inputs/PointsInput/PointsInput";
 
 type UserInput = {
   points: xyPoints;
@@ -38,7 +39,9 @@ const PageLagrangeInterpolation = () => {
   return (
     <main className="page-lagrange-interpolation">
       <div className="col col-1">
-        <div className="box box-1">Input for graph points / calculator</div>
+        <div className="box box-1">
+          <PointsInput />
+        </div>
         <div className="box box-3">Results</div>
       </div>
       <div className="col col-2">
