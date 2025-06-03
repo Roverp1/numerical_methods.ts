@@ -1,16 +1,33 @@
+import { evaluate } from "mathjs";
+
 import type { NewtonUserInput } from "../../types";
 
-const newtonMethod = (userInput: NewtonUserInput) => {
+type NewtonMethodParams = {
+  userInput: NewtonUserInput;
+  formula: string;
+};
+
+const newtonMethod = ({ userInput, formula }: NewtonMethodParams) => {
   if (!userInput || userInput.dokladnosc <= 0) {
     return {
       result: NaN,
       iterations: [],
     };
   }
+
+  // console.log(formula);
   // console.log(userInput);
   const { dokladnosc, maxIterations } = userInput;
 
-  const f = (x: number): number => x * x - 2;
+  // const f = (x: number): number => x * x - 2;
+  const f = (x: number): number => {
+    try {
+      return evaluate(formula, { x });
+    } catch (err) {
+      console.error("Помилка при обчисленні формули:", err);
+      return NaN;
+    }
+  };
   let x = 2; // початкове наближення
 
   const f_pochodna = (x: number): number => {
@@ -22,7 +39,7 @@ const newtonMethod = (userInput: NewtonUserInput) => {
 
   const iterations: { x: number; y: number }[] = [{ x, y: f(x) }]; // iterations[].png
   let x_new = x - f(x) / f_pochodna(x);
-  console.log("x after 1 step: ", x_new);
+  // console.log("x after 1 step: ", x_new);
 
   let currentIteration = 1; // один, тому що ми вже один раз знайшли x_new до циклу
 

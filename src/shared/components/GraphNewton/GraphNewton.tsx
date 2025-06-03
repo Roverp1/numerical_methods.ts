@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import functionPlot from "function-plot";
 
 import newtonMethod from "../../lib/newton_method/newton_method";
+import { isValidFormula } from "../../lib/isValidFormula/isValidFormula";
 
 import type { NewtonUserInput } from "../../types";
 
@@ -9,15 +10,18 @@ import "./GraphNewton.scss";
 
 type Props = {
   userInput: NewtonUserInput;
+  formula: string;
 };
 
-const GraphNewton = ({ userInput }: Props) => {
+const GraphNewton = ({ userInput, formula }: Props) => {
   const graphRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    const { iterations } = newtonMethod(userInput);
-
+    if (!formula.trim()) return;
+    if (!isValidFormula(formula)) return;
     if (!graphRef.current) return;
+
+    const { iterations } = newtonMethod({ userInput, formula });
 
     functionPlot({
       target: graphRef.current as HTMLElement,
@@ -27,7 +31,7 @@ const GraphNewton = ({ userInput }: Props) => {
       xAxis: { domain: [0, 3] },
       data: [
         {
-          fn: "x^2 - 2",
+          fn: formula,
           graphType: "polyline",
         },
         {
@@ -38,7 +42,7 @@ const GraphNewton = ({ userInput }: Props) => {
         },
       ],
     });
-  }, [userInput]);
+  }, [userInput, formula]);
 
   return <div className="graph-newton" ref={graphRef} />;
 };

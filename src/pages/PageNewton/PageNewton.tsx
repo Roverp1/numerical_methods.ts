@@ -7,7 +7,7 @@ import GraphNewton from "../../shared/components/GraphNewton/GraphNewton";
 import { convertLatexToExpression } from "../../shared/lib/latex/convertLatexToExpression";
 import newtonMethod from "../../shared/lib/newton_method/newton_method";
 
-import type { BisectionResult, NewtonUserInput } from "../../shared/types";
+import type { NewtonUserInput } from "../../shared/types";
 import type { InputChangeEvent } from "../../shared/types";
 import type { NewtonResult } from "../../shared/types";
 
@@ -18,12 +18,13 @@ const PageNewton = () => {
     dokladnosc: 0,
     maxIterations: 10000,
   });
-  console.log(userInput);
+  // console.log(userInput);
 
   const [result, setResult] = useState<NewtonResult | null>(null);
 
   // for FunctionEditor
   const [formula, setFormula] = useState<string>("");
+  // console.log(formula);
 
   // for FormInputNewton
   const onHandleChange = (e: InputChangeEvent) => {
@@ -49,10 +50,10 @@ const PageNewton = () => {
   // for newtonMethod
   useEffect(() => {
     if (userInput.dokladnosc > 0 && userInput.maxIterations > 0) {
-      const res = newtonMethod(userInput);
+      const res = newtonMethod({ userInput, formula });
       setResult(res);
     }
-  }, [userInput]);
+  }, [userInput, formula]);
 
   // for Calculator
   const onChangeLatex = (latex: string) => {
@@ -74,7 +75,7 @@ const PageNewton = () => {
             <FormInputNewton onHandleChange={onHandleChange} />
           </div>
           <div className="box box-4">
-            <GraphNewton userInput={userInput} />
+            <GraphNewton userInput={userInput} formula={formula} />
           </div>
         </div>
       </main>
