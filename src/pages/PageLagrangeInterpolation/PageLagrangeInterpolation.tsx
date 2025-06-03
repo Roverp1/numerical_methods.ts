@@ -45,8 +45,6 @@ const PageLagrangeInterpolation = () => {
   };
 
   useEffect(() => {
-    console.log("parsePoints:", parsePoints(pointsInput));
-
     const parsedInput = parsePoints(pointsInput);
 
     if (!parsedInput) return;

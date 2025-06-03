@@ -52,8 +52,6 @@ const PageLeastSquaresApproximation = () => {
   };
 
   useEffect(() => {
-    console.log("parsePoints:", parsePoints(pointsInput));
-
     const parsedInput = parsePoints(pointsInput);
 
     if (!parsedInput) return;
