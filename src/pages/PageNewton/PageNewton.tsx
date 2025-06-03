@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 import Calculator from "../../features/calculator/Calculator";
 import FormInputNewton from "./FormInputNewton/FormInputNewton";
+import SectionResultsNewton from "./SectionResultsNewton/SectionResultsNewton";
 import GraphNewton from "../../shared/components/GraphNewton/GraphNewton";
 
 import { convertLatexToExpression } from "../../shared/lib/latex/convertLatexToExpression";
@@ -18,13 +19,12 @@ const PageNewton = () => {
     dokladnosc: 0,
     maxIterations: 10000,
   });
-  // console.log(userInput);
 
+  // for SectionResultsNewton
   const [result, setResult] = useState<NewtonResult | null>(null);
 
   // for FunctionEditor
   const [formula, setFormula] = useState<string>("");
-  // console.log(formula);
 
   // for FormInputNewton
   const onHandleChange = (e: InputChangeEvent) => {
@@ -68,7 +68,9 @@ const PageNewton = () => {
           <div className="box box-1">
             <Calculator onChangeLatex={onChangeLatex} />
           </div>
-          <div className="box box-3">test3</div>
+          <div className="box box-3">
+            <SectionResultsNewton result={result} />
+          </div>
         </div>
         <div className="col col-2">
           <div className="box box-2">

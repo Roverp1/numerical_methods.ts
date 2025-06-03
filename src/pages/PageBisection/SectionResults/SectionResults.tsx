@@ -6,12 +6,8 @@ import "./SectionResultsError.scss";
 import type { BisectionResult } from "../../../shared/types";
 
 const SectionResults = ({ result }: { result: BisectionResult | null }) => {
-  if (!result)
-    return (
-      <section className="section-results-skeleton">
-        Provide data to see results
-      </section>
-    );
+  if (!result) return;
+  <section className="section-results-skeleton">Provide data to see results</section>;
 
   const { success, root, iterations, steps, error } = result;
 

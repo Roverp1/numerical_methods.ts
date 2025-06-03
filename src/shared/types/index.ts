@@ -30,6 +30,12 @@ export type InputFunction = (x: number) => number;
 export type xyPoints = [number, number][];
 
 export type NewtonResult = {
-  result: number;
+  root: number;
   iterations: { x: number; y: number }[];
+  steps: StepsNewton;
 };
+
+export type StepsNewton = {
+  currentIteration: number;
+  x_new: number;
+}[];
