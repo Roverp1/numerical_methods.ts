@@ -8,7 +8,7 @@ type Props = {
 
 const FormInputNewton = ({ onHandleChange }: Props) => {
   return (
-    <form className="form-input-bisection">
+    <form className="form-input-newton">
       <fieldset>
         <legend>Wprowadź swoje dane</legend>
 
