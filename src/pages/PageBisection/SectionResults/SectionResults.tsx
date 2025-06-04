@@ -5,8 +5,13 @@ import "./SectionResults.scss";
 import type { BisectionResult } from "../../../shared/types";
 
 const SectionResults = ({ result }: { result: BisectionResult | null }) => {
+  // prettier-ignore
   if (!result)
-    return <section className="section-results-skeleton">Provide data to see results</section>;
+    return (
+      <section className="section-results-skeleton">
+        Provide data to see results
+      </section>
+    );
 
   const { success, root, iterations, steps, error } = result;
 
