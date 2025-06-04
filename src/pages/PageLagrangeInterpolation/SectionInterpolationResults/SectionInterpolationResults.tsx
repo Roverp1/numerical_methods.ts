@@ -20,7 +20,9 @@ const SectionInterpolationResults = ({
       </section>
     );
 
-  const { polynomialString, success, error } = result;
+  const { polynomialString, y, success, error } = result;
+
+  if (y) console.log("y:", y);
 
   if (!success) {
     return (

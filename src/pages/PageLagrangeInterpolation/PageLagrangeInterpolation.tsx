@@ -6,13 +6,23 @@ import type { LagrangeInterpolationResult, xyPoints } from "../../shared/types";
 
 import "./PageLagrangeInterpolation.scss";
 import PointsInput from "../../widgets/inputs/PointsInput/PointsInput";
-import { lagrangePolynomialString } from "../../shared/lib/lagrange_interpolation";
+import lagrangePolynomial, {
+  lagrangePolynomialString,
+} from "../../shared/lib/lagrange_interpolation";
 import SectionInterpolationResults from "./SectionInterpolationResults/SectionInterpolationResults";
+
+type UserInput = {
+  points: xyPoints;
+  x?: number;
+};
 
 const PageLagrangeInterpolation = () => {
   const [pointsInput, setPointsInput] = useState<string>("");
 
-  const [points, setPoints] = useState<xyPoints>([]);
+  const [userInput, setUserInput] = useState<UserInput>({
+    points: [],
+    x: 0.5,
+  });
   const [result, setResult] = useState<LagrangeInterpolationResult | null>(
     null,
   );
@@ -47,12 +57,16 @@ const PageLagrangeInterpolation = () => {
 
     if (!parsedInput) return;
 
-    setPoints(parsedInput);
+    setUserInput((prev) => ({
+      points: parsedInput,
+      x: prev.x,
+    }));
   }, [pointsInput]);
 
+  // set userInput.points
   useEffect(() => {
     try {
-      if (points.length <= 0) {
+      if (userInput.points.length <= 0) {
         if (!result) return;
 
         setResult({
@@ -64,7 +78,7 @@ const PageLagrangeInterpolation = () => {
         return;
       }
 
-      if (points.length < 2) {
+      if (userInput.points.length < 2) {
         setResult({
           polynomialString: "",
           success: false,
@@ -74,16 +88,23 @@ const PageLagrangeInterpolation = () => {
         return;
       }
 
-      const polynomialString = lagrangePolynomialString(points);
+      const polynomialString = lagrangePolynomialString(userInput.points);
+
+      let y: number | undefined = undefined;
+      if (userInput.x) {
+        const P_x = lagrangePolynomial(userInput.points);
+        y = P_x(userInput.x);
+      }
 
       setResult({
         polynomialString,
+        y,
         success: true,
       });
     } catch (err) {
       console.log("err:", err);
     }
-  }, [points]);
+  }, [userInput]);
 
   return (
     <main className="page-lagrange-interpolation">
@@ -101,7 +122,7 @@ const PageLagrangeInterpolation = () => {
       <div className="col col-2">
         <div className="box box-4">
           <PointsAndFunctionGraph
-            points={points}
+            points={userInput.points}
             fn={result?.polynomialString}
           />
         </div>
