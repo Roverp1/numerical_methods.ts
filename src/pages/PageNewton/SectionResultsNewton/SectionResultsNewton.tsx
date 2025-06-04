@@ -13,7 +13,9 @@ const SectionResultsNewton = ({ result }: Props) => {
   if (!result)
     return (
       <>
-        <section className="section-results-newton-skeleton">Provide data to see results</section>
+        <section className="section-results-newton-skeleton">
+          Podaj dane, aby zobaczyć wyniki
+        </section>
       </>
     );
 
