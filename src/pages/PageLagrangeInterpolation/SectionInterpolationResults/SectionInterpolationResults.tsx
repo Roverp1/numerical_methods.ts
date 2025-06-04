@@ -22,8 +22,6 @@ const SectionInterpolationResults = ({
 
   const { polynomialString, y, success, error } = result;
 
-  if (y) console.log("y:", y);
-
   if (!success) {
     return (
       <section className="section-results-error-interpolation">
@@ -63,13 +61,11 @@ const SectionInterpolationResults = ({
           )}
         </p>
       </div>
-      {/* <p className="coefficients"> */}
-      {/*   {coefficients.map((coef, i) => ( */}
-      {/*     <span className="coefficient"> */}
-      {/*       <StaticMathField>{`a_{${i}} = ${coef.toFixed(3)}`}</StaticMathField> */}
-      {/*     </span> */}
-      {/*   ))} */}
-      {/* </p> */}
+      {y !== undefined && (
+        <p className="y">
+          <StaticMathField>{`P(x) = ${y}`}</StaticMathField>
+        </p>
+      )}
     </section>
   );
 };

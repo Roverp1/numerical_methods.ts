@@ -21,7 +21,6 @@ const PageLagrangeInterpolation = () => {
 
   const [userInput, setUserInput] = useState<UserInput>({
     points: [],
-    x: 0.5,
   });
   const [result, setResult] = useState<LagrangeInterpolationResult | null>(
     null,
@@ -91,9 +90,9 @@ const PageLagrangeInterpolation = () => {
       const polynomialString = lagrangePolynomialString(userInput.points);
 
       let y: number | undefined = undefined;
-      if (userInput.x) {
+      if (userInput.x || userInput.x === 0) {
         const P_x = lagrangePolynomial(userInput.points);
-        y = P_x(userInput.x);
+        y = P_x(userInput.x).toFixed(3);
       }
 
       setResult({
@@ -110,10 +109,25 @@ const PageLagrangeInterpolation = () => {
     <main className="page-lagrange-interpolation">
       <div className="col col-1">
         <div className="box box-1">
-          <PointsInput
-            pointsInput={pointsInput}
-            setPointsInput={setPointsInput}
-          />
+          <div className="inputs-container">
+            <PointsInput
+              pointsInput={pointsInput}
+              setPointsInput={setPointsInput}
+            />
+
+            <input
+              className="x-input"
+              type="number"
+              placeholder="x"
+              value={userInput.x}
+              onChange={(e) =>
+                setUserInput((prev) => ({
+                  points: prev.points,
+                  x: parseFloat(e.target.value),
+                }))
+              }
+            />
+          </div>
         </div>
         <div className="box box-3">
           <SectionInterpolationResults result={result} />
