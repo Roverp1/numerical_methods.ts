@@ -1,3 +1,5 @@
+@use "../../shared/styles/mixins" as *;
+
 .page-lagrange-interpolation {
   flex: 1;
   display: grid;
@@ -12,7 +14,26 @@
       grid-template-rows: 1fr auto;
 
       .box-1 {
+        display: flex;
+        flex-direction: column;
+        gap: 1.2rem;
+
         margin: 1.8rem 0 0 0;
+
+        .inputs-container {
+
+          display: grid;
+          grid-template-columns: 1fr auto;
+          gap: 0 1.4rem;
+
+          margin: 1.8rem 0 0 0;
+
+          .x-input {
+            @include input-style();
+            width: fit-content;
+            max-width: 5rem;
+          }
+        }
       }
 
       .box-3 {

@@ -27,6 +27,7 @@ export type BisectionResult = {
 
 export type LagrangeInterpolationResult = {
   polynomialString: string;
+  y?: number;
   success: boolean;
   error?: string;
 };
