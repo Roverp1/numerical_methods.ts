@@ -1,6 +1,6 @@
 export interface BisectionUserInput {
-  xp?: number;
-  xk?: number;
+  xp: number;
+  xk: number;
   dokladnosc: number;
   maxIter: number;
 }
