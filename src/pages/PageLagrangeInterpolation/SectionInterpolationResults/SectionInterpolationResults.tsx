@@ -63,7 +63,7 @@ const SectionInterpolationResults = ({
       </div>
       {y !== undefined && (
         <p className="y">
-          <StaticMathField>{`P(x) = ${y}`}</StaticMathField>
+          <StaticMathField>{`P(x) = ${y.toFixed(3)}`}</StaticMathField>
         </p>
       )}
     </section>

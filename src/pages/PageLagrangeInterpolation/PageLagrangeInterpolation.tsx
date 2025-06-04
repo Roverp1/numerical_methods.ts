@@ -92,7 +92,7 @@ const PageLagrangeInterpolation = () => {
       let y: number | undefined = undefined;
       if (userInput.x || userInput.x === 0) {
         const P_x = lagrangePolynomial(userInput.points);
-        y = P_x(userInput.x).toFixed(3);
+        y = P_x(userInput.x);
       }
 
       setResult({
