@@ -16,19 +16,10 @@
       grid-template-rows: 25% 75%;
     }
 
-    // .box {
-    //   background: peru;
-    //   display: flex;
-    //   align-items: center;
-    //   justify-content: center;
-
-    &.box-1 {
-      background-color: powderblue;
+    .box {
+      &.box-3 {
+        margin-bottom: 1.5rem;
+      }
     }
-
-    &.box-4 {
-      background-color: rgb(12, 178, 255);
-    }
-    // }
   }
 }
