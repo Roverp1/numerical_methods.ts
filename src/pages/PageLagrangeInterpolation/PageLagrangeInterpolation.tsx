@@ -7,6 +7,7 @@ import type { LagrangeInterpolationResult, xyPoints } from "../../shared/types";
 import "./PageLagrangeInterpolation.scss";
 import PointsInput from "../../widgets/inputs/PointsInput/PointsInput";
 import { lagrangePolynomialString } from "../../shared/lib/lagrange_interpolation";
+import SectionInterpolationResults from "./SectionInterpolationResults/SectionInterpolationResults";
 
 const PageLagrangeInterpolation = () => {
   const [pointsInput, setPointsInput] = useState<string>("");
@@ -93,7 +94,9 @@ const PageLagrangeInterpolation = () => {
             setPointsInput={setPointsInput}
           />
         </div>
-        <div className="box box-3">Results</div>
+        <div className="box box-3">
+          <SectionInterpolationResults result={result} />
+        </div>
       </div>
       <div className="col col-2">
         <div className="box box-4">
