@@ -26,8 +26,6 @@
           grid-template-columns: 1fr auto;
           gap: 0 1.4rem;
 
-          margin: 1.8rem 0 0 0;
-
           .x-input {
             @include input-style();
             width: fit-content;
