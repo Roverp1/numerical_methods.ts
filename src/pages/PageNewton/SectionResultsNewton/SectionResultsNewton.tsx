@@ -3,7 +3,6 @@ import type { NewtonResult } from "../../../shared/types";
 import { LiaAtomSolid } from "react-icons/lia";
 
 import "./SectionResultsNewton.scss";
-import "./SectionResultsNewtonError.scss";
 
 type Props = {
   result: NewtonResult | null;
