@@ -10,6 +10,8 @@ type FunctionGraphProps = {
 const FunctionGraph = ({ fn }: FunctionGraphProps) => {
   const graphRef = useRef<HTMLDivElement>(null);
 
+  console.log(fn);
+
   const drawGraph = useCallback(() => {
     if (!graphRef.current) return;
 

@@ -5,6 +5,7 @@ import "./SectionResults.scss";
 import type { BisectionResult } from "../../../shared/types";
 
 const SectionResults = ({ result }: { result: BisectionResult | null }) => {
+  // prettier-ignore
   if (!result)
     return (
       <section className="section-results-skeleton-bisection">

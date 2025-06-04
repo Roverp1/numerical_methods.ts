@@ -3,7 +3,7 @@ import type { BisectionResult } from "../types";
 
 const bisectionMethod = (
   fn: InputFunction | null,
-  userInput: BisectionUserInput,
+  userInput: BisectionUserInput
 ): BisectionResult => {
   if (!fn || fn.length === 0 || typeof fn(1) !== "number" || isNaN(fn(1)))
     return {
