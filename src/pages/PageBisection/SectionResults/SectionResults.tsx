@@ -9,7 +9,7 @@ const SectionResults = ({ result }: { result: BisectionResult | null }) => {
   if (!result)
     return (
       <section className="section-results-skeleton-bisection">
-        Provide data to see results
+        Podaj dane, aby zobaczyć wyniki
       </section>
     );
 

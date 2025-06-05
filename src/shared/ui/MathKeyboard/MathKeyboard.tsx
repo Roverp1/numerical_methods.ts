@@ -59,7 +59,7 @@ const MathKeyboard: React.FC<Props> = ({ onInsert, editorRef }) => {
     { label: "-", cmd: "-" },
     { label: "0", cmd: "0" },
     { label: ",", cmd: "." },
-    { label: "anc", cmd: "anc" },
+    { label: "x", cmd: "x" },
     { label: "+", cmd: "+" },
   ];
 
@@ -88,11 +88,11 @@ const MathKeyboard: React.FC<Props> = ({ onInsert, editorRef }) => {
           </button>
         ))}
       </div>
-      <div className="math-keyboard__control-panel">
+      {/* <div className="math-keyboard__control-panel">
         <button className="button">{"-->"}</button>
         <button className="button">{"-->"}</button>
         <button className="button">delete</button>
-      </div>
+      </div> */}
     </div>
   );
 };
