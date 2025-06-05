@@ -27,6 +27,7 @@ const newtonMethod = ({ userInput, formula }: NewtonMethodParams) => {
       return NaN;
     }
   };
+
   let x = 2; // початкове наближення
 
   const f_pochodna = (x: number): number => {
@@ -35,6 +36,7 @@ const newtonMethod = ({ userInput, formula }: NewtonMethodParams) => {
     return (f(x + h) - f(x - h)) / (2 * h);
     // 2 * h --> це ширина між двома точками
   };
+
   const steps: StepsNewton = [];
 
   const iterations: { x: number; y: number }[] = [{ x, y: f(x) }]; // iterations[].png
