@@ -1,14 +1,15 @@
 import { evaluate } from "mathjs";
 
-import type { NewtonUserInput } from "../../types";
+import type { NewtonIterationPoints, NewtonUserInput } from "../../types";
 import type { StepsNewton } from "../../types";
+import type { NewtonResult } from "../../types";
 
 type NewtonMethodParams = {
   userInput: NewtonUserInput;
   formula: string;
 };
 
-const newtonMethod = ({ userInput, formula }: NewtonMethodParams) => {
+const newtonMethod = ({ userInput, formula }: NewtonMethodParams): NewtonResult => {
   if (!userInput || userInput.dokladnosc <= 0) {
     return {
       root: NaN,
@@ -18,6 +19,7 @@ const newtonMethod = ({ userInput, formula }: NewtonMethodParams) => {
   }
 
   const { dokladnosc, maxIterations } = userInput;
+  let { xPoczatkowy } = userInput;
 
   const f = (x: number): number => {
     try {
@@ -28,7 +30,7 @@ const newtonMethod = ({ userInput, formula }: NewtonMethodParams) => {
     }
   };
 
-  let x = 2; // початкове наближення
+  // const xPoczafrftkowy = 2; // початкове наближення
 
   const f_pochodna = (x: number): number => {
     const h = 0.0001; // крок вліво і вправо
@@ -37,10 +39,23 @@ const newtonMethod = ({ userInput, formula }: NewtonMethodParams) => {
     // 2 * h --> це ширина між двома точками
   };
 
+  const fx = f(xPoczatkowy);
+  const dfx = f_pochodna(xPoczatkowy);
+
+  if (isNaN(fx) || isNaN(dfx)) {
+    console.error("Invalid f(x) or f'(x):", fx, dfx);
+    return {
+      root: NaN,
+      iterations: [],
+      steps: [],
+    };
+  }
+
   const steps: StepsNewton = [];
 
-  const iterations: { x: number; y: number }[] = [{ x, y: f(x) }]; // iterations[].png
-  let x_new = x - f(x) / f_pochodna(x);
+  const iterations: NewtonIterationPoints[] = [{ x: xPoczatkowy, y: f(xPoczatkowy) }]; // iterations[].png
+  // let x_new = xPoczatkowy - f(xPoczatkowy) / f_pochodna(xPoczatkowy);
+  let x_new = xPoczatkowy - fx / dfx;
 
   let currentIteration = 1; // один, тому що ми вже один раз знайшли x_new до циклу
 
@@ -49,11 +64,12 @@ const newtonMethod = ({ userInput, formula }: NewtonMethodParams) => {
     x_new: x_new,
   });
 
-  while (Math.abs(x - x_new) > dokladnosc && currentIteration <= maxIterations) {
-    x = x_new;
-    x_new = x - f(x) / f_pochodna(x);
+  while (Math.abs(xPoczatkowy - x_new) > dokladnosc && currentIteration <= maxIterations) {
+    xPoczatkowy = x_new;
+    x_new = xPoczatkowy - f(xPoczatkowy) / f_pochodna(xPoczatkowy);
     currentIteration = currentIteration + 1;
-    iterations.push({ x, y: f(x) });
+
+    iterations.push({ x: xPoczatkowy, y: f(xPoczatkowy) });
 
     steps.push({
       currentIteration: currentIteration,

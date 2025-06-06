@@ -1,52 +1,52 @@
 const dataBisection = [
   {
     title:
-      "Метод бисекции (или метод деления отрезка пополам) — это простой и надёжный численный метод для нахождения корней уравнения вида: f(x)=0",
+      "Metoda bisekcji (czyli metoda dzielenia przedziału na pół) to prosty i niezawodny numeryczny sposób znajdowania pierwiastków równania postaci: f(x)=0",
   },
   {
     title: "",
     textBlock: "",
-    question: "Для чего нужен метод бисекции?",
+    question: "Do czego służy metoda bisekcji?",
     explanation:
-      "Метод бисекции используется, чтобы найти значение f(x) равна нулю — другими словами, найти корень уравнения. Это особенно полезно, когда аналитически (вручную) решить уравнение невозможно.",
+      "Metoda bisekcji służy do znajdowania takiego x, dla którego f(x) = 0 — innymi słowy, do znajdowania pierwiastka równania. Jest szczególnie przydatna, gdy nie da się rozwiązać równania analitycznie (ręcznie).",
   },
   {
     title: "",
     textBlock: "",
-    question: "Когда используется?",
+    question: "Kiedy się ją stosuje?",
     explanation:
-      "1. Функция f(x) непрерывна на отрезке [a, b]\n2. Значения функции на концах отрезка имеют разные знаки: f(a)⋅f(b) < 0\nЭто значит, что корень точно находится внутри отрезка (по теореме Больцано).",
+      "1. Funkcja f(x) jest ciągła na przedziale [a, b]\n2. Wartości funkcji na końcach przedziału mają różne znaki: f(a)⋅f(b) < 0\nTo oznacza, że pierwiastek znajduje się wewnątrz przedziału (zgodnie z twierdzeniem Bolzano).",
   },
 
   {
-    title: "Как работает метод?",
+    title: "Jak działa metoda?",
     textBlock: "",
-    question: "Как использовать метод бисекции?",
+    question: "Jak stosować metodę bisekcji?",
     explanation:
-      "1. Берём отрезок [a, b], на концах которого f(a) и f(b) имеют разные знаки\n2. Вычисляем середину: c = (a + b) / 2\n3. Если f(a)⋅f(c) < 0 → корень в [a, c]; иначе в [c, b]\n4. Повторяем шаги, пока отрезок не станет достаточно маленьким (достигается нужная точность)",
+      "1. Bierzemy przedział [a, b], na którego końcach f(a) i f(b) mają różne znaki\n2. Obliczamy środek: c = (a + b) / 2\n3. Jeśli f(a)⋅f(c) < 0 → pierwiastek jest w [a, c]; w przeciwnym razie w [c, b]\n4. Powtarzamy kroki, aż przedział stanie się wystarczająco mały (osiągnięta zostaje żądana dokładność)",
   },
 
   {
-    title: "Пример",
+    title: "Przykład",
     textBlock: "",
-    question: "Как выглядит пример метода бисекции?",
+    question: "Jak wygląda przykład metody bisekcji?",
     explanation:
-      "Найти корень уравнения f(x) = x^2 - 4\n1. Выбираем отрезок [1, 3]: f(1) = -3, f(3) = 5 → можно применять метод\n2. Середина: c = (1 + 3) / 2 = 2, f(2) = 0 → корень найден точно",
+      "Znaleźć pierwiastek równania f(x) = x^2 - 4\n1. Wybieramy przedział [1, 3]: f(1) = -3, f(3) = 5 → można zastosować metodę\n2. Środek: c = (1 + 3) / 2 = 2, f(2) = 0 → pierwiastek znaleziony dokładnie",
   },
 
   {
-    title: "Преимущества метода",
+    title: "Zalety metody",
     textBlock: "",
-    question: "Какие плюсы у метода бисекции?",
+    question: "Jakie są zalety metody bisekcji?",
     explanation:
-      "1. Простой и надёжный метод\n2. Гарантированная сходимость при выполнении условий\n3. Не требует производной функции",
+      "1. Prosta i niezawodna metoda\n2. Gwarantowana zbieżność przy spełnieniu warunków\n3. Nie wymaga pochodnej funkcji",
   },
   {
-    title: "Недостатки метода",
+    title: "Wady metody",
     textBlock: "",
-    question: "Какие минусы у метода бисекции?",
+    question: "Jakie są wady metody bisekcji?",
     explanation:
-      "1. Относительно медленный по сравнению с другими методами (например, методом Ньютона)\n2. Требует, чтобы f(a) и f(b) имели разные знаки\n3. Работает только при наличии одного корня на отрезке",
+      "1. Stosunkowo wolna w porównaniu do innych metod (np. metody Newtona)\n2. Wymaga, aby f(a) i f(b) miały różne znaki\n3. Działa tylko przy jednym pierwiastku w przedziale",
   },
 ];
 

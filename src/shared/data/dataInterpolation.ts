@@ -1,50 +1,53 @@
-const dataInterpolation = [
+const dataLagrange = [
   {
     title:
-      "Метод интерполяции — это способ нахождения промежуточных значений функции по известным точкам.",
+      "Interpolacja Lagrange’a to metoda znajdowania wielomianu, który przechodzi dokładnie przez dane punkty (x₀, y₀), (x₁, y₁), ..., (xₙ, yₙ).",
   },
   {
     title: "",
     textBlock: "",
-    question: "Для чего нужен метод интерполяции?",
+    question: "Do czego służy interpolacja Lagrange’a?",
     explanation:
-      "Интерполяция используется, чтобы оценить значение функции в точках, для которых прямые вычисления невозможны или отсутствуют данные. Это важно в инженерии, физике, экономике и других науках.",
+      "Służy do znalezienia funkcji (wielomianu), która dokładnie przechodzi przez zadany zbiór punktów. Jest używana w analizie danych, aproksymacji i grafice komputerowej.",
   },
   {
     title: "",
     textBlock: "",
-    question: "Когда используется?",
+    question: "Kiedy się ją stosuje?",
     explanation:
-      "1. Известны значения функции в нескольких точках (x₀, x₁, ..., xₙ)\n2. Нужно найти значение функции в промежуточной точке x, не вычисляя её напрямую\n3. Функция считается достаточно гладкой между известными точками",
+      "1. Gdy mamy skończony zbiór punktów (x, y)\n2. Gdy chcemy uzyskać funkcję, która dokładnie przechodzi przez te punkty\n3. Gdy nie mamy wzoru funkcji, ale mamy jej wartości w określonych miejscach",
+  },
+
+  {
+    title: "Jak działa metoda?",
+    textBlock: "",
+    question: "Jak stosować interpolację Lagrange’a?",
+    explanation:
+      "1. Dla każdego punktu tworzony jest tzw. wielomian podstawowy Lₖ(x), który przyjmuje wartość 1 w xₖ i 0 w pozostałych punktach\n2. Cała funkcja to suma: P(x) = Σ [yₖ * Lₖ(x)] dla k = 0 do n\n3. Wielomiany Lₖ(x) mają postać: Lₖ(x) = Π[(x - xⱼ) / (xₖ - xⱼ)], gdzie j ≠ k",
+  },
+
+  {
+    title: "Przykład",
+    textBlock: "",
+    question: "Jak wygląda przykład interpolacji Lagrange’a?",
+    explanation:
+      "Dane punkty: (1, 2), (2, 3), (4, 1)\n1. Tworzymy L₀(x), L₁(x), L₂(x) według wzoru\n2. Obliczamy P(x) = 2·L₀(x) + 3·L₁(x) + 1·L₂(x)\n3. Otrzymujemy wielomian, który przechodzi przez wszystkie trzy punkty",
+  },
+
+  {
+    title: "Zalety metody",
+    textBlock: "",
+    question: "Jakie są zalety interpolacji Lagrange’a?",
+    explanation:
+      "1. Nie wymaga obliczania pochodnych\n2. Zapewnia dokładne przejście przez dane punkty\n3. Łatwa do zaimplementowania dla małej liczby punktów",
   },
   {
-    title: "Как работает метод?",
+    title: "Wady metody",
     textBlock: "",
-    question: "Как использовать метод интерполяции?",
+    question: "Jakie są wady interpolacji Lagrange’a?",
     explanation:
-      "Существуют разные методы интерполяции:\n1. Линейная интерполяция: используется 2 точки, соединяются прямой линией\n2. Полиномиальная интерполяция: используется n+1 точек, строится многочлен\n3. Сплайн-интерполяция: используется кусочная аппроксимация (обычно кубическими функциями), гладкая и точная",
-  },
-  {
-    title: "Пример",
-    textBlock: "",
-    question: "Как выглядит пример интерполяции?",
-    explanation:
-      "Пусть известны точки: (1, 2) и (3, 6)\nХотим найти значение функции при x = 2\nЛинейная интерполяция:\nF(2) = 2 + ((6 - 2) / (3 - 1)) * (2 - 1) = 4",
-  },
-  {
-    title: "Преимущества метода",
-    textBlock: "",
-    question: "Какие плюсы у метода интерполяции?",
-    explanation:
-      "1. Позволяет заполнять пропущенные значения\n2. Может быть очень точным при правильном выборе метода\n3. Не требует знания аналитического выражения функции",
-  },
-  {
-    title: "Недостатки метода",
-    textBlock: "",
-    question: "Какие минусы у метода интерполяции?",
-    explanation:
-      "1. При большом количестве точек полиномиальная интерполяция может быть нестабильной (эффект Рунге)\n2. Интерполяция — это только приближение, не даёт точного значения\n3. Метод не работает, если данные сильно зашумлены",
+      "1. Dla dużej liczby punktów wielomian może być niestabilny (oscylacje)\n2. Trudna do aktualizacji — dodanie nowego punktu wymaga przeliczenia całego wielomianu\n3. Może być obliczeniowo kosztowna przy wielu punktach",
   },
 ];
 
-export default dataInterpolation;
+export default dataLagrange;
