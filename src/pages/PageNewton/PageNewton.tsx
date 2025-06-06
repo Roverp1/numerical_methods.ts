@@ -18,6 +18,7 @@ const PageNewton = () => {
   const [userInput, setUserInput] = useState<NewtonUserInput>({
     dokladnosc: 0,
     maxIterations: 10000,
+    xPoczatkowy: 0,
   });
 
   // for SectionResultsNewton
@@ -39,6 +40,8 @@ const PageNewton = () => {
       } else {
         parsedValue = parseFloat(value);
       }
+
+      parsedValue = isNaN(parsedValue) ? 0 : parsedValue;
 
       return {
         ...prev,

@@ -8,6 +8,7 @@ export interface BisectionUserInput {
 export interface NewtonUserInput {
   dokladnosc: number;
   maxIterations: number;
+  xPoczatkowy: number;
 }
 
 export type InputChangeEvent = React.ChangeEvent<HTMLInputElement>;
@@ -43,9 +44,14 @@ export type InputFunction = (x: number) => number;
 
 export type xyPoints = [number, number][];
 
+export type NewtonIterationPoints = {
+  x: number;
+  y: number;
+};
+
 export type NewtonResult = {
   root: number;
-  iterations: { x: number; y: number }[];
+  iterations: NewtonIterationPoints[];
   steps: StepsNewton;
 };
 

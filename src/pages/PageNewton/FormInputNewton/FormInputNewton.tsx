@@ -13,6 +13,11 @@ const FormInputNewton = ({ onHandleChange }: Props) => {
         <legend>Wprowadź swoje dane</legend>
 
         <label>
+          <span>x początkowy:</span>
+          <input onChange={onHandleChange} name="xPoczatkowy" type="number" step="any" />
+        </label>
+
+        <label>
           <span>dokładność:</span>
           <input onChange={onHandleChange} name="dokladnosc" type="number" step="any" />
         </label>
