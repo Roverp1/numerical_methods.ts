@@ -40,6 +40,12 @@ The user inputs a set of points (x, y). The app builds the Lagrange polynomial s
 
 The user enters a set of points and selects the degree of the polynomial. The app uses the Least Squares Method to compute the best-fitting polynomial. It shows the generated formula and plots both the curve and the original data points.
 
+### Functional Programming
+
+While implementing numerical methods I've tried making code as most functional as possible without sacrificing to much readability by trying to get rid of mutability. All of the following examples come from `src/shared/lib/least_squares_approximation.ts` - implementation of least squares algorithm and `src/shared/lib/lagrange_interpolation.ts` - implementation of Lagrange interpolation.
+
+#### FP Examples
+
 ## Summary and Conclusions
 
 The application successfully demonstrates how selected numerical methods work in practice. It allows users to input custom data, view step-by-step calculations, and observe the output both in text and graph form.
