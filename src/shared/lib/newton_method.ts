@@ -22,6 +22,9 @@ const newtonMethod = (
 
     xc = xn;
   }
+
   console.error("Root not found");
   return NaN;
 };
+
+export default newtonMethod;
