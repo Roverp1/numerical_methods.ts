@@ -42,7 +42,12 @@ The user enters a set of points and selects the degree of the polynomial. The ap
 
 ### Functional Programming
 
-While implementing numerical methods I've tried making code as most functional as possible without sacrificing to much readability by trying to get rid of mutability. All of the following examples come from `src/shared/lib/least_squares_approximation.ts` - implementation of least squares algorithm and `src/shared/lib/lagrange_interpolation.ts` - implementation of Lagrange interpolation.
+While implementing numerical methods, I aimed to keep the code as functional as possible without sacrificing too much readability. In particular, I focused on reducing mutability, using pure functions, and applying common functional patterns like `map`, `reduce`, and recursion.
+
+All of the following examples come from the files:
+
+- `src/shared/lib/least_squares_approximation.ts` – implementation of the Least Squares algorithm
+- `src/shared/lib/lagrange_interpolation.ts` – implementation of Lagrange Interpolation
 
 #### FP Examples
 
