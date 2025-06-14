@@ -1,8 +1,8 @@
 import { evaluate } from "mathjs";
 
-import type { NewtonIterationPoints, NewtonUserInput } from "../../types";
-import type { StepsNewton } from "../../types";
 import type { NewtonResult } from "../../types";
+import type { NewtonUserInput } from "../../types";
+import type { NewtonSteps } from "../../types";
 
 type NewtonMethodParams = {
   userInput: NewtonUserInput;
@@ -38,6 +38,7 @@ const newtonMethod = ({ userInput, formula }: NewtonMethodParams): NewtonResult 
     return (f(x + h) - f(x - h)) / (2 * h);
     // 2 * h --> це ширина між двома точками
   };
+<<<<<<< HEAD
 
   const fx = f(xPoczatkowy);
   const dfx = f_pochodna(xPoczatkowy);
@@ -52,6 +53,9 @@ const newtonMethod = ({ userInput, formula }: NewtonMethodParams): NewtonResult 
   }
 
   const steps: StepsNewton = [];
+=======
+  const steps: NewtonSteps = [];
+>>>>>>> 9140705 (feat(newton_method): write newtonMethodWithTracking for UI)
 
   const iterations: NewtonIterationPoints[] = [{ x: xPoczatkowy, y: f(xPoczatkowy) }]; // iterations[].png
   // let x_new = xPoczatkowy - f(xPoczatkowy) / f_pochodna(xPoczatkowy);
@@ -64,9 +68,18 @@ const newtonMethod = ({ userInput, formula }: NewtonMethodParams): NewtonResult 
     x_new: x_new,
   });
 
+<<<<<<< HEAD
   while (Math.abs(xPoczatkowy - x_new) > dokladnosc && currentIteration <= maxIterations) {
     xPoczatkowy = x_new;
     x_new = xPoczatkowy - f(xPoczatkowy) / f_pochodna(xPoczatkowy);
+=======
+  while (
+    Math.abs(x - x_new) > dokladnosc &&
+    currentIteration <= maxIterations
+  ) {
+    x = x_new;
+    x_new = x - f(x) / f_pochodna(x);
+>>>>>>> 9140705 (feat(newton_method): write newtonMethodWithTracking for UI)
     currentIteration = currentIteration + 1;
 
     iterations.push({ x: xPoczatkowy, y: f(xPoczatkowy) });
