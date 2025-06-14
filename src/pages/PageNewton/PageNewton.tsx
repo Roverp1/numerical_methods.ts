@@ -6,7 +6,7 @@ import SectionResultsNewton from "./SectionResultsNewton/SectionResultsNewton";
 import GraphNewton from "../../shared/components/GraphNewton/GraphNewton";
 
 import { convertLatexToExpression } from "../../shared/lib/latex/convertLatexToExpression";
-import newtonMethod from "../../shared/lib/newton_method/newton_method";
+import newtonMethod from "../../shared/lib/newton_method_deprecated/newton_method";
 
 import type { NewtonUserInput } from "../../shared/types";
 import type { InputChangeEvent } from "../../shared/types";

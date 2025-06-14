@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import functionPlot from "function-plot";
 
-import newtonMethod from "../../lib/newton_method/newton_method";
+import newtonMethod from "../../lib/newton_method_deprecated/newton_method";
 import { isValidFormula } from "../../lib/isValidFormula/isValidFormula";
 
 import type { NewtonUserInput } from "../../types";
@@ -38,7 +38,9 @@ const GraphNewton = ({ userInput, formula }: Props) => {
     if (!graphRef.current) return;
 
     const isFormulaValid = formula.trim() && isValidFormula(formula);
-    const iterations = isFormulaValid ? newtonMethod({ userInput, formula }).iterations : [];
+    const iterations = isFormulaValid
+      ? newtonMethod({ userInput, formula }).iterations
+      : [];
 
     const data: (ScatterPoint | FormulaGraph)[] = isFormulaValid
       ? [
