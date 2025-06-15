@@ -4,7 +4,7 @@ import { compile } from "mathjs";
 import Calculator from "../../features/calculator/Calculator";
 import FormInputNewton from "./FormInputNewton/FormInputNewton";
 import SectionResultsNewton from "./SectionResultsNewton/SectionResultsNewton";
-import GraphNewton from "../../shared/components/GraphNewton/GraphNewton";
+import PointsAndFunctionGraph from "../../shared/components/PointsAndFunctionGraph/PointsAndFunctionGraph";
 
 import { convertLatexToExpression } from "../../shared/lib/latex/convertLatexToExpression";
 import { newtonMethodWithTracking } from "../../shared/lib/newton_method";
@@ -102,7 +102,7 @@ const PageNewton = () => {
             <FormInputNewton onHandleChange={onHandleChange} />
           </div>
           <div className="box box-4">
-            {/* <GraphNewton userInput={userInput} formula={formula} /> */}
+            <PointsAndFunctionGraph fn={formula} points={result?.steps} />
           </div>
         </div>
       </main>
