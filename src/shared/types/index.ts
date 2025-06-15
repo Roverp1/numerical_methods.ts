@@ -6,9 +6,9 @@ export interface BisectionUserInput {
 }
 
 export interface NewtonUserInput {
-  dokladnosc: number;
-  maxIterations: number;
-  xPoczatkowy: number;
+  tolerance: number;
+  maxIter: number;
+  xp: number;
 }
 
 export type InputChangeEvent = React.ChangeEvent<HTMLInputElement>;

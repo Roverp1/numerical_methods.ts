@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { compile } from "mathjs";
 
 import Calculator from "../../features/calculator/Calculator";
 import FormInputNewton from "./FormInputNewton/FormInputNewton";
@@ -6,9 +7,9 @@ import SectionResultsNewton from "./SectionResultsNewton/SectionResultsNewton";
 import GraphNewton from "../../shared/components/GraphNewton/GraphNewton";
 
 import { convertLatexToExpression } from "../../shared/lib/latex/convertLatexToExpression";
-import newtonMethod from "../../shared/lib/newton_method_deprecated/newton_method";
+import { newtonMethodWithTracking } from "../../shared/lib/newton_method";
 
-import type { NewtonUserInput } from "../../shared/types";
+import type { InputFunction, NewtonUserInput } from "../../shared/types";
 import type { InputChangeEvent } from "../../shared/types";
 import type { NewtonResult } from "../../shared/types";
 
@@ -16,16 +17,29 @@ import "./PageNewton.scss";
 
 const PageNewton = () => {
   const [userInput, setUserInput] = useState<NewtonUserInput>({
-    dokladnosc: 0,
-    maxIterations: 10000,
-    xPoczatkowy: 0,
+    tolerance: 0,
+    maxIter: 1000,
+    xp: 0,
   });
 
-  // for SectionResultsNewton
+  const [formula, setFormula] = useState<string>("");
+  const [compiledEvaluatedFn, setCompiledEvaluatedFn] =
+    useState<InputFunction | null>(null);
   const [result, setResult] = useState<NewtonResult | null>(null);
 
-  // for FunctionEditor
-  const [formula, setFormula] = useState<string>("");
+  useEffect(() => {
+    try {
+      const compiledFunc = compile(formula);
+
+      // needed to throw an error if evaluate fails while in try block
+      const testValue = compiledFunc.evaluate({ x: 1 });
+
+      const wrapperFunc = (x: number) => compiledFunc.evaluate({ x });
+      setCompiledEvaluatedFn(() => wrapperFunc);
+    } catch (err) {
+      setCompiledEvaluatedFn(null);
+    }
+  }, [formula]);
 
   // for FormInputNewton
   const onHandleChange = (e: InputChangeEvent) => {
@@ -52,11 +66,19 @@ const PageNewton = () => {
 
   // for newtonMethod
   useEffect(() => {
-    if (userInput.dokladnosc > 0 && userInput.maxIterations > 0) {
-      const res = newtonMethod({ userInput, formula });
+    const { xp, tolerance, maxIter } = userInput;
+
+    if (xp && tolerance > 0 && maxIter > 0 && compiledEvaluatedFn) {
+      const res = newtonMethodWithTracking(
+        compiledEvaluatedFn,
+        xp,
+        tolerance,
+        maxIter,
+      );
+
       setResult(res);
     }
-  }, [userInput, formula]);
+  }, [userInput, compiledEvaluatedFn]);
 
   // for Calculator
   const onChangeLatex = (latex: string) => {
@@ -80,7 +102,7 @@ const PageNewton = () => {
             <FormInputNewton onHandleChange={onHandleChange} />
           </div>
           <div className="box box-4">
-            <GraphNewton userInput={userInput} formula={formula} />
+            {/* <GraphNewton userInput={userInput} formula={formula} /> */}
           </div>
         </div>
       </main>

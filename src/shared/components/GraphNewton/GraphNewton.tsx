@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import functionPlot from "function-plot";
 
-import newtonMethod from "../../lib/newton_method_deprecated/newton_method";
+// import newtonMethod from "../../lib/newton_method_deprecated/newton_method";
 import { isValidFormula } from "../../lib/isValidFormula/isValidFormula";
 
 import type { NewtonUserInput } from "../../types";

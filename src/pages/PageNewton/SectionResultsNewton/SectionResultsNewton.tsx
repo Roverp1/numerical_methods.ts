@@ -25,12 +25,12 @@ const SectionResultsNewton = ({ result }: Props) => {
       <ul className="last-iterations">
         {steps.map((step, i) => (
           <li key={i}>
-            Iteration {step.currentIteration}: x = {step.x_new.toFixed(5)}
+            Iteration {i}: x = {step[0].toFixed(5)}
           </li>
         ))}
       </ul>
       <div className="answer">
-        <p className="number-of-iter">Number of iterations: {iterations.length}</p>
+        <p className="number-of-iter">Number of iterations: {iterations}</p>
         <p className="root">
           <LiaAtomSolid className="icon" />
           Root: {root}
