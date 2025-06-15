@@ -6,7 +6,7 @@ import "./PointsAndFunctionGraph.scss";
 import type { xyPoints } from "../../types";
 
 type PointsAndFunctionGraphProps = {
-  points: xyPoints;
+  points?: xyPoints;
   fn?: string;
 };
 
@@ -32,17 +32,18 @@ const PointsAndFunctionGraph = ({
         grid: true,
 
         data: [
-          points.length > 0 && {
-            points,
-            fnType: "points",
-            graphType: "scatter",
-            attr: {
-              r: 4,
-            },
-          },
           fn && {
             fn: fn,
           },
+          points &&
+            points.length > 0 && {
+              points,
+              fnType: "points",
+              graphType: "scatter",
+              attr: {
+                r: 4,
+              },
+            },
         ].filter(Boolean) as FunctionPlotDatum[],
       });
     } catch (err) {

@@ -203,7 +203,6 @@ test("construct a string from approximated polynomial", () => {
   const expected = `0.464 * x^0 + (-0.247) * x^1 + 0.093 * x^2`;
 
   const result = approximatedPolynomialString(points, 2);
-  console.log("result:", result);
 
   expect(result).toContain("x^0");
   expect(result).toContain("x^1");
