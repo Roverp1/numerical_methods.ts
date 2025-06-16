@@ -49,7 +49,7 @@ const PageNewton = () => {
     setUserInput((prev) => {
       let parsedValue: number;
 
-      if (changedField === "maxIterations") {
+      if (changedField === "maxIter") {
         parsedValue = parseInt(value);
       } else {
         parsedValue = parseFloat(value);
@@ -67,6 +67,19 @@ const PageNewton = () => {
   // for newtonMethod
   useEffect(() => {
     const { xp, tolerance, maxIter } = userInput;
+
+    if (!formula || !compiledEvaluatedFn) {
+      if (!result) return;
+
+      setResult({
+        root: NaN,
+        iterations: 0,
+        steps: [],
+        success: false,
+        error: "No function provided",
+      });
+      return;
+    }
 
     if (xp && tolerance > 0 && maxIter > 0 && compiledEvaluatedFn) {
       const res = newtonMethodWithTracking(
@@ -102,7 +115,7 @@ const PageNewton = () => {
             <FormInputNewton onHandleChange={onHandleChange} />
           </div>
           <div className="box box-4">
-            <PointsAndFunctionGraph fn={formula} points={result?.steps} />
+            <PointsAndFunctionGraph fn={formula} points={result?.steps || []} />
           </div>
         </div>
       </main>
