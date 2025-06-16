@@ -1,24 +1,34 @@
 import type { NewtonResult } from "../../../shared/types";
 
-import { LiaAtomSolid } from "react-icons/lia";
+import { LiaAtomSolid, LiaDAndD } from "react-icons/lia";
 
-import "./SectionResultsNewton.scss";
+import "./SectionNewtonResults.scss";
 
-type Props = {
+type SectionNewtonResultsProps = {
   result: NewtonResult | null;
 };
 
-const SectionResultsNewton = ({ result }: Props) => {
+const SectionNewtonResults = ({ result }: SectionNewtonResultsProps) => {
   if (!result)
     return (
       <>
         <section className="section-results-newton-skeleton">
-          Podaj dane, aby zobaczyć wyniki
+          Provide data to see results
         </section>
       </>
     );
 
-  const { root, iterations, steps } = result;
+  const { root, iterations, steps, success, error } = result;
+
+  if (!success) {
+    return (
+      <section className="section-results-error-newton">
+        <LiaDAndD className="icon" />
+        <p>{error || "Wrong input data"}</p>
+        <p>Try inputing different set of data</p>
+      </section>
+    );
+  }
 
   return (
     <section className="section-results-newton">
@@ -40,4 +50,4 @@ const SectionResultsNewton = ({ result }: Props) => {
   );
 };
 
-export default SectionResultsNewton;
+export default SectionNewtonResults;

@@ -3,7 +3,7 @@ import { compile } from "mathjs";
 
 import Calculator from "../../features/calculator/Calculator";
 import FormInputNewton from "./FormInputNewton/FormInputNewton";
-import SectionResultsNewton from "./SectionResultsNewton/SectionResultsNewton";
+import SectionNewtonResults from "./SectionNewtonResults/SectionNewtonResults";
 import PointsAndFunctionGraph from "../../shared/components/PointsAndFunctionGraph/PointsAndFunctionGraph";
 
 import { convertLatexToExpression } from "../../shared/lib/latex/convertLatexToExpression";
@@ -49,7 +49,7 @@ const PageNewton = () => {
     setUserInput((prev) => {
       let parsedValue: number;
 
-      if (changedField === "maxIterations") {
+      if (changedField === "maxIter") {
         parsedValue = parseInt(value);
       } else {
         parsedValue = parseFloat(value);
@@ -67,6 +67,19 @@ const PageNewton = () => {
   // for newtonMethod
   useEffect(() => {
     const { xp, tolerance, maxIter } = userInput;
+
+    if (!formula || !compiledEvaluatedFn) {
+      if (!result) return;
+
+      setResult({
+        root: NaN,
+        iterations: 0,
+        steps: [],
+        success: false,
+        error: "No function provided",
+      });
+      return;
+    }
 
     if (xp && tolerance > 0 && maxIter > 0 && compiledEvaluatedFn) {
       const res = newtonMethodWithTracking(
@@ -94,7 +107,7 @@ const PageNewton = () => {
             <Calculator onChangeLatex={onChangeLatex} />
           </div>
           <div className="box box-3">
-            <SectionResultsNewton result={result} />
+            <SectionNewtonResults result={result} />
           </div>
         </div>
         <div className="col col-2">
@@ -102,7 +115,7 @@ const PageNewton = () => {
             <FormInputNewton onHandleChange={onHandleChange} />
           </div>
           <div className="box box-4">
-            <PointsAndFunctionGraph fn={formula} points={result?.steps} />
+            <PointsAndFunctionGraph fn={formula} points={result?.steps || []} />
           </div>
         </div>
       </main>
