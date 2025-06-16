@@ -2,13 +2,13 @@ import type { NewtonResult } from "../../../shared/types";
 
 import { LiaAtomSolid } from "react-icons/lia";
 
-import "./SectionResultsNewton.scss";
+import "./SectionNewtonResults.scss";
 
-type Props = {
+type SectionNewtonResultsProps = {
   result: NewtonResult | null;
 };
 
-const SectionResultsNewton = ({ result }: Props) => {
+const SectionNewtonResults = ({ result }: SectionNewtonResultsProps) => {
   if (!result)
     return (
       <>
@@ -18,7 +18,7 @@ const SectionResultsNewton = ({ result }: Props) => {
       </>
     );
 
-  const { root, iterations, steps } = result;
+  const { root, iterations, steps, success, error } = result;
 
   return (
     <section className="section-results-newton">
@@ -40,4 +40,4 @@ const SectionResultsNewton = ({ result }: Props) => {
   );
 };
 
-export default SectionResultsNewton;
+export default SectionNewtonResults;

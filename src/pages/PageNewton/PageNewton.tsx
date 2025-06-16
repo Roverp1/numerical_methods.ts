@@ -3,7 +3,7 @@ import { compile } from "mathjs";
 
 import Calculator from "../../features/calculator/Calculator";
 import FormInputNewton from "./FormInputNewton/FormInputNewton";
-import SectionResultsNewton from "./SectionResultsNewton/SectionResultsNewton";
+import SectionNewtonResults from "./SectionNewtonResults/SectionNewtonResults";
 import PointsAndFunctionGraph from "../../shared/components/PointsAndFunctionGraph/PointsAndFunctionGraph";
 
 import { convertLatexToExpression } from "../../shared/lib/latex/convertLatexToExpression";
@@ -107,7 +107,7 @@ const PageNewton = () => {
             <Calculator onChangeLatex={onChangeLatex} />
           </div>
           <div className="box box-3">
-            <SectionResultsNewton result={result} />
+            <SectionNewtonResults result={result} />
           </div>
         </div>
         <div className="col col-2">
